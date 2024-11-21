@@ -1,6 +1,6 @@
 # Kill Me For My Power
 
-Showcase link: https://www.youtube.com/watch?v=
+Showcase link: https://www.youtube.com/watch?v=Mg5w6QN9Fzk
 
 [ENG]
 
