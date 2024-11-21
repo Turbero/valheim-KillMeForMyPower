@@ -6,20 +6,23 @@ Showcase link: https://www.youtube.com/watch?v=Mg5w6QN9Fzk
 
 The Kill Me For My Power mod blocks new players that want to obtain the forsaken powers without killing them first. Useful in servers to force new players to have the full experience without shortcuts!
 
-[ESP]
-
-El mod Kill Me For My Power bloquea a los nuevos jugadores de un servidor la obtención de los poderes de los guardianes que no han matado. ¡Así se les fuerza a hacer el recorrido entero del juego!
-
-## Main features
-
-[ENG]
+![](https://i.imgur.com/AfvqcVx.jpeg)
 
 * Scare the cheeky players that attempt to obtain the powers of enemies not killed yet by them.
 * Custom the message
 
+[ESP]
+
+El mod Kill Me For My Power bloquea a los nuevos jugadores de un servidor la obtención de los poderes de los guardianes que no han matado. ¡Así se les fuerza a hacer el recorrido entero del juego!
+
+* Castiga a los jugadores que no hayan obtenido los poderes que quieren usar.
+* Personaliza el mensaje a mostrar
+
 # About myself
 
 DISCORD: Turbero (Turbero#3465)
+
+My mods: https://thunderstore.io/c/valheim/p/turbero/
 
 STEAM: https://steamcommunity.com/id/turbero
 
@@ -36,9 +39,6 @@ For any concerns or doubts, find me in the Hijos de Freyja Team Discord or in my
 
 
 [ESP]
-
-* Castiga a los jugadores que no hayan obtenido los poderes que quieren usar.
-* Personaliza el mensaje a mostrar
 
 Si quieres disfrutar de este mod y muchos más, únete a la comunidad de Hijos de Freyja =) : https://discord.gg/hijos-de-freyja-818547021777993748
 
