@@ -1,0 +1,9 @@
+{
+    "name": "KillMeForMyPower",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/Turbero/valheim-DetailedLevels",
+    "description": "Mod to block new players that want to obtain the forsaken powers without killing them first. Useful in servers to force new players to have the full experience without shortcuts.",
+    "dependencies": [
+        "denikson-BepInExPack_Valheim-5.4.2202"
+    ]
+}
