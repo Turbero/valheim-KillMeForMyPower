@@ -1,5 +1,7 @@
 # Kill Me For My Power
 
+Showcase link: https://www.youtube.com/watch?v=
+
 [ENG]
 
 The Kill Me For My Power mod blocks new players that want to obtain the forsaken powers without killing them first. Useful in servers to force new players to have the full experience without shortcuts!
@@ -44,19 +46,3 @@ O pregúntame en mis canales personales:
 
 * Turbeheim: https://discord.gg/JKQR3EWRbU
 * Más Turbero: https://discord.gg/y67YeVw62K
-
-[ENG]
-
-![](https://i.imgur.com/NZL01R2.png)
-
-![](https://i.imgur.com/njEVO6d.jpeg)
-
-![](https://i.imgur.com/e1vTjP5.jpeg)
-
-[ESP]
-
-![](https://i.imgur.com/CZ934ga.png)
-
-![](https://i.imgur.com/kYeq0QW.jpeg)
-
-![](https://i.imgur.com/UmQoBo1.png)
