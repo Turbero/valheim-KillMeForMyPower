@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.0.2
+
+* Small issue in version number
+
 ## 1.0.1
 
 * Fixed issue when being poisoned for infinite time when learning bonemass or queen power without killing them
