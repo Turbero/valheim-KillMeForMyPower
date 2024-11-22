@@ -61,5 +61,31 @@
             else
                 return false;
         }
+
+        public static int GetCurrentDay()
+        {
+            var method = typeof(EnvMan).GetMethod("GetCurrentDay", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            return (int)method.Invoke(EnvMan.instance, null);
+        }
+
+        public static int GetBossMinimumDayForPower(string bossName)
+        {
+            if (bossName == "Eikthyr")
+                return ConfigurationFile.daysBossEikthyr.Value;
+            else if (bossName == "TheElder")
+                return ConfigurationFile.daysBossElder.Value;
+            else if (bossName == "Bonemass")
+                return ConfigurationFile.daysBossBonemass.Value;
+            else if (bossName == "Moder")
+                return ConfigurationFile.daysBossModer.Value;
+            else if (bossName == "Yagluth")
+                return ConfigurationFile.daysBossYagluth.Value;
+            else if (bossName == "Queen")
+                return ConfigurationFile.daysBossQueen.Value;
+            else if (bossName == "Fader")
+                return ConfigurationFile.daysBossFader.Value;
+            else
+                return 0;
+        }
     }
 }

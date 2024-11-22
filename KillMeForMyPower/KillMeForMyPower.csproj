@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +41,10 @@
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\..\..\Libs\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="ServerSync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Libs\External\ServerSync.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,8 +74,12 @@
     <None Include="MODGEN\CHANGELOG.md" />
     <None Include="MODGEN\manifest.json" />
     <None Include="MODGEN\README.md" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ILRepack.Config.props" />
+    <Content Include="ILRepack.targets" />
+    <Content Include="Libs\ServerSync.dll" />
     <Content Include="MODGEN\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -81,4 +91,11 @@ if "$(ConfigurationName)" == "Debug" del "$(SolutionDir)MODGEN\*.dll"
 if "$(ConfigurationName)" == "Debug" xcopy "$(TargetPath)" "$(SolutionDir)MODGEN"
 </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="packages\ILRepack.Lib.MSBuild.Task.2.0.34.2\build\ILRepack.Lib.MSBuild.Task.targets" Condition="Exists('packages\ILRepack.Lib.MSBuild.Task.2.0.34.2\build\ILRepack.Lib.MSBuild.Task.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\ILRepack.Lib.MSBuild.Task.2.0.34.2\build\ILRepack.Lib.MSBuild.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ILRepack.Lib.MSBuild.Task.2.0.34.2\build\ILRepack.Lib.MSBuild.Task.targets'))" />
+  </Target>
 </Project>

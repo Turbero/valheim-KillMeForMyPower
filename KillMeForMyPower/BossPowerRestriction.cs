@@ -13,7 +13,8 @@ namespace KillMeForMyPower
                 string selectedPower = __instance.GetGuardianPowerName().Replace("GP_", "");
                 Logger.Log("Guardian power name: " + selectedPower);
                 
-                if (!KillMeForMyPowerUtils.HasDefeatedBoss(selectedPower))
+                if (!KillMeForMyPowerUtils.HasDefeatedBoss(selectedPower) &&
+                    KillMeForMyPowerUtils.GetBossMinimumDayForPower(selectedPower) < KillMeForMyPowerUtils.GetCurrentDay())
                 {
                     __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenMessage.Value);
                     ApplyBlockedEffect(selectedPower);
@@ -33,7 +34,8 @@ namespace KillMeForMyPower
             {
                 string guardianPowerName = __instance.m_guardianPower?.name.Replace("GP_", "");
                 Logger.Log("guardianPowerName: "+ guardianPowerName);
-                if (!KillMeForMyPowerUtils.HasDefeatedBoss(guardianPowerName))
+                if (!KillMeForMyPowerUtils.HasDefeatedBoss(guardianPowerName) &&
+                    KillMeForMyPowerUtils.GetBossMinimumDayForPower(guardianPowerName) < KillMeForMyPowerUtils.GetCurrentDay())
                 {
                     Player.m_localPlayer.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenMessage.Value);
                     ApplyBlockedEffect(guardianPowerName);
