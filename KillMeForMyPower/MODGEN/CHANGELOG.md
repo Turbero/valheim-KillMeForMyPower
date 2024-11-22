@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.0.3
+
+* ServerSync integration
+* Added configurable minimum necessary number of days for each boss to obtain power without killing him
+
 ## 1.0.2
 
 * Small issue in version number
