@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 
 namespace KillMeForMyPower
 {
@@ -70,12 +71,12 @@ namespace KillMeForMyPower
             else if (bossName == "TheElder")
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
-                se.AddFireDamage(Player.m_localPlayer.GetHealth() - 10f);
+                se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
             else if (bossName == "Bonemass")
             {
                 SE_Poison se = (SE_Poison)seMan?.AddStatusEffect("Poison".GetHashCode(), resetTime: false);
-                se.AddDamage(Player.m_localPlayer.GetHealth() - 10f);
+                se.AddDamage(Math.Max(1, Player.m_localPlayer.GetHealth() - 10f));
             }
             else if (bossName == "Moder")
             {
@@ -85,17 +86,17 @@ namespace KillMeForMyPower
             else if (bossName == "Yagluth")
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
-                se.AddFireDamage(Player.m_localPlayer.GetHealth() - 10f);
+                se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
             else if (bossName == "Queen")
             {
                 SE_Poison se = (SE_Poison)seMan?.AddStatusEffect("Poison".GetHashCode(), resetTime: false);
-                se.AddDamage(Player.m_localPlayer.GetHealth() - 10f);
+                se.AddDamage(Math.Max(1, Player.m_localPlayer.GetHealth() - 10f));
             }
             else if (bossName == "Fader")
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
-                se.AddFireDamage(Player.m_localPlayer.GetHealth() - 10f);
+                se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
         }
     }
