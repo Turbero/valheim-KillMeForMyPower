@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Target Name="ILRepacker" AfterTargets="Build">
+	<Target Name="ILRepacker" AfterTargets="Build">
         <ItemGroup>
             <InputAssemblies Include="MODGEN\KillMeForMyPower.dll" />
 			<InputAssemblies Include="Libs\ServerSync.dll" />
@@ -9,6 +9,7 @@
 	  <ILRepack Parallel="true" DebugInfo="true" Internalize="true" InputAssemblies="@(InputAssemblies)" 
 				OutputFile="$(TargetPath)"
 				TargetKind="SameAsPrimaryAssembly" LibraryPath="$(OutputPath)" />
+	  <Exec Command="del /F /Q &quot;$(ProjectDir)MODGEN\*.dll&quot;"/>
+	  <Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)MODGEN&quot;"/>
 	</Target>
-	
 </Project>
