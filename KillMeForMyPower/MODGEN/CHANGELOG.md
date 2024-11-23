@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.0.4
+
+* Fixed serverSync issue
+* Fixed minimum days calculation
+
 ## 1.0.3
 
 * ServerSync integration
