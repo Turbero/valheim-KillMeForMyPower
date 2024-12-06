@@ -1,4 +1,6 @@
-﻿namespace KillMeForMyPower
+﻿using System.Linq;
+
+namespace KillMeForMyPower
 {
     public class KillMeForMyPowerUtils
     {
@@ -12,7 +14,7 @@
             return hasUniqueKey("Eikthyr_Defeated");
         }
 
-        public static bool isElderForPlayer()
+        public static bool isElderDefeatedForPlayer()
         {
             return hasUniqueKey("gd_king_Defeated");
         }
@@ -47,7 +49,7 @@
             if (bossName == "Eikthyr")
                 return isEikthyrDefeatedForPlayer();
             else if (bossName == "TheElder")
-                return isElderForPlayer();
+                return isElderDefeatedForPlayer();
             else if (bossName == "Bonemass")
                 return isBonemassDefeatedForPlayer();
             else if (bossName == "Moder")
@@ -86,6 +88,11 @@
                 return ConfigurationFile.daysBossFader.Value;
             else
                 return 0;
+        }
+        
+        public static ItemDrop findItemDropByName(string prefabName)
+        {
+            return ZNetScene.instance.m_prefabs.First(p => p.name == prefabName).GetComponent<ItemDrop>();
         }
     }
 }
