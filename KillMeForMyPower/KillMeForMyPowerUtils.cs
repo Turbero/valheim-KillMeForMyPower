@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace KillMeForMyPower
+﻿namespace KillMeForMyPower
 {
     public class KillMeForMyPowerUtils
     {
@@ -48,20 +46,19 @@ namespace KillMeForMyPower
         {
             if (bossName == "Eikthyr")
                 return isEikthyrDefeatedForPlayer();
-            else if (bossName == "TheElder")
+            if (bossName == "TheElder")
                 return isElderDefeatedForPlayer();
-            else if (bossName == "Bonemass")
+            if (bossName == "Bonemass")
                 return isBonemassDefeatedForPlayer();
-            else if (bossName == "Moder")
+            if (bossName == "Moder")
                 return isModerDefeatedForPlayer();
-            else if (bossName == "Yagluth")
+            if (bossName == "Yagluth")
                 return isYagluthDefeatedForPlayer();
-            else if (bossName == "Queen")
+            if (bossName == "Queen")
                 return isQueenDefeatedForPlayer();
-            else if (bossName == "Fader")
+            if (bossName == "Fader")
                 return isFaderDefeatedForPlayer();
-            else
-                return false;
+            return false;
         }
 
         public static int GetCurrentDay()
@@ -74,25 +71,19 @@ namespace KillMeForMyPower
         {
             if (bossName == "Eikthyr")
                 return ConfigurationFile.daysBossEikthyr.Value;
-            else if (bossName == "TheElder")
+            if (bossName == "TheElder")
                 return ConfigurationFile.daysBossElder.Value;
-            else if (bossName == "Bonemass")
+            if (bossName == "Bonemass")
                 return ConfigurationFile.daysBossBonemass.Value;
-            else if (bossName == "Moder")
+            if (bossName == "Moder")
                 return ConfigurationFile.daysBossModer.Value;
-            else if (bossName == "Yagluth")
+            if (bossName == "Yagluth")
                 return ConfigurationFile.daysBossYagluth.Value;
-            else if (bossName == "Queen")
+            if (bossName == "Queen")
                 return ConfigurationFile.daysBossQueen.Value;
-            else if (bossName == "Fader")
+            if (bossName == "Fader")
                 return ConfigurationFile.daysBossFader.Value;
-            else
-                return 0;
-        }
-        
-        public static ItemDrop findItemDropByName(string prefabName)
-        {
-            return ZNetScene.instance.m_prefabs.First(p => p.name == prefabName).GetComponent<ItemDrop>();
+            return 0;
         }
     }
 }
