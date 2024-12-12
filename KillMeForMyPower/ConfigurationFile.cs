@@ -10,6 +10,9 @@ namespace KillMeForMyPower
         public static ConfigEntry<bool> debug;
         public static ConfigEntry<string> forbiddenMessage;
         public static ConfigEntry<bool> vendorLocalRestrictions;
+        public static ConfigEntry<string> vendorHaldorRestrictions;
+        public static ConfigEntry<string> vendorHildirRestrictions;
+        public static ConfigEntry<string> vendorBogWitchRestrictions;
         public static ConfigEntry<string> forbiddenVendorMessage;
         public static ConfigEntry<int> daysBossEikthyr;
         public static ConfigEntry<int> daysBossElder;
@@ -40,6 +43,9 @@ namespace KillMeForMyPower
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 vendorLocalRestrictions = config("2 - Config", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
+                vendorHaldorRestrictions = config("2 - Config", "VendorHaldorRestrictions", "", "Restricted items for Haldor split by comma. Ex: BeltStrength,Elder;BarrelRings,Bonemass. Available boss names: Eikthyr,Elder,Bonemass,Moder,Yagluth,SeekerQueen,Fader (empty = nothing to restrict)");
+                vendorHildirRestrictions = config("2 - Config", "VendorHildirRestrictions", "", "Restricted items for Hildir split by comma. Ex: Ironpit,Moder. Available boss names: Eikthyr,Elder,Bonemass,Moder,Yagluth,SeekerQueen,Fader (empty = nothing to restrict)");
+                vendorBogWitchRestrictions = config("2 - Config", "VendorBogWitchRestrictions", "", "Restricted items for BogWtich split by comma. Ex: MeadTrollPheromones,Elder;SpicePlains,Moder;SpiceAshlands,SeekerQueen. Available boss names: Eikthyr,Elder,Bonemass,Moder,Yagluth,SeekerQueen,Fader (empty = nothing to restrict)");
                 forbiddenVendorMessage = config("2 - Config", "ForbiddenVendorMessage", "You have not killed the required forsaken yet to buy my stuff!", "Message to show when you cannot buy from a NPC");
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 10000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 10000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
