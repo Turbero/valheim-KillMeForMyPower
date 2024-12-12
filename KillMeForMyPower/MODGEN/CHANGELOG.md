@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.1.1
+
+* Added options in .cfg to setup more items to allow buying in vendors or not after killing the indicated boss. Example: BarrelRings,Bonemass;BeltStrength,Elder
+
 ## 1.1.0
 
 * Added local progression to players for NPC vendors. This is translated into the next:
