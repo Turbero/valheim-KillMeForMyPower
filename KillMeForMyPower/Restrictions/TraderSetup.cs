@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 
-namespace KillMeForMyPower
+namespace KillMeForMyPower.Restrictions
 {
     public class TraderSetup
     {

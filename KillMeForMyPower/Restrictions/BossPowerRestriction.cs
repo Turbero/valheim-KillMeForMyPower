@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using System;
 
-namespace KillMeForMyPower
+namespace KillMeForMyPower.Restrictions
 {
     public class BossPowerRestriction
     {
