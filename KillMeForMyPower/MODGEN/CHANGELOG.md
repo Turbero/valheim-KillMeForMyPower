@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.1.2
+
+* Restricting crypt key, wishbone and demister items from being used or equipped until the corresponding boss is killed by the player, even if the item is traded by another player.
+
 ## 1.1.1
 
 * Added options in .cfg to setup more items to allow buying in vendors or not after killing the indicated boss. Example: BarrelRings,Bonemass;BeltStrength,Elder
