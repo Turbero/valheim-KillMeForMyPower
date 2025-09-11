@@ -1,5 +1,15 @@
 ### CHANGELOG
 
+## 1.2.0
+
+* Necessary boss to access NPC vendors can be configured in the config file now (easier to use with any other configuration manager mod this way). By default:
+  * you have to kill Eikthyr for Haldor and Hildir
+  * you have to kill The Elder for the Bog Witch
+* Mandatory boss name to access NPC vendors is now mentioned in the yellow alert when talking to them (keep the wildcard in the message if you customize it)
+* Removed hardcoded blocks for Thunderstone, Ymir meat and chicken egg items and moved to default configuration (customize/remove them if you want)
+* Recompiled with latest game version
+* Tip: Deleting old config file and let it generate again will be useful and cleaner but not mandatory
+
 ## 1.1.2
 
 * Restricting crypt key, wishbone and demister items from being used or equipped until the corresponding boss is killed by the player, even if the item is traded by another player.
@@ -12,7 +22,7 @@
 
 * Added local progression to players for NPC vendors. This is translated into the next:
   * Haldor: need to defeat Eikthyr before buying anything
-    * Thunderstore: need to defeat The Elder before showing up in the vending list
+    * Thunderstone: need to defeat The Elder before showing up in the vending list
     * Ymir meat: need to defeat The Elder before showing up in the vending list
     * Chicken egg: need to defeat Yagluth before showing up in the vending list
 * NPC restriction additions:
