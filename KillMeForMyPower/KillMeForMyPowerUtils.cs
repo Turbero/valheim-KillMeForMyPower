@@ -1,7 +1,42 @@
-﻿namespace KillMeForMyPower
+﻿using System;
+
+namespace KillMeForMyPower
 {
+    public enum BossNameEnum
+    {
+        Eikthyr,
+        TheElder,
+        Bonemass,
+        Moder,
+        Yagluth,
+        Queen,
+        Fader
+    }
     public class KillMeForMyPowerUtils
     {
+        private static BossNameEnum parseBossName(string value) {
+            return (BossNameEnum) Enum.Parse(typeof(BossNameEnum), value, true);
+        }
+
+        public static string getBossNameTranslation(BossNameEnum bossName)
+        {
+            if (bossName == BossNameEnum.Eikthyr)
+                return "$enemy_eikthyr";
+            if (bossName == BossNameEnum.TheElder)
+                return "$enemy_gdking";
+            if (bossName == BossNameEnum.Bonemass)
+                return "$enemy_bonemass";
+            if (bossName == BossNameEnum.Moder)
+                return "$enemy_dragon";
+            if (bossName == BossNameEnum.Yagluth)
+                return "$enemy_goblinking";
+            if (bossName == BossNameEnum.Queen)
+                return "$enemy_seekerqueen";
+            if (bossName == BossNameEnum.Fader)
+                return "$enemy_fader";
+            throw new ArgumentException("Unknown boss name");
+        }
+        
         private static bool hasUniqueKey(string key)
         {
             return Player.m_localPlayer.HaveUniqueKey(key);
@@ -43,20 +78,21 @@
         }
 
         public static bool HasDefeatedBoss(string bossName)
-        {
-            if (bossName == "Eikthyr")
+        { 
+            var parsedEnum = parseBossName(bossName);
+            if (parsedEnum == BossNameEnum.Eikthyr)
                 return isEikthyrDefeatedForPlayer();
-            if (bossName == "TheElder")
+            if (parsedEnum == BossNameEnum.TheElder)
                 return isElderDefeatedForPlayer();
-            if (bossName == "Bonemass")
+            if (parsedEnum == BossNameEnum.Bonemass)
                 return isBonemassDefeatedForPlayer();
-            if (bossName == "Moder")
+            if (parsedEnum == BossNameEnum.Moder)
                 return isModerDefeatedForPlayer();
-            if (bossName == "Yagluth")
+            if (parsedEnum == BossNameEnum.Yagluth)
                 return isYagluthDefeatedForPlayer();
-            if (bossName == "Queen")
+            if (parsedEnum == BossNameEnum.Queen)
                 return isQueenDefeatedForPlayer();
-            if (bossName == "Fader")
+            if (parsedEnum == BossNameEnum.Fader)
                 return isFaderDefeatedForPlayer();
             return false;
         }
@@ -69,21 +105,46 @@
 
         public static int GetBossMinimumDayForPower(string bossName)
         {
-            if (bossName == "Eikthyr")
+            var parsedEnum = parseBossName(bossName);
+            if (parsedEnum == BossNameEnum.Eikthyr)
                 return ConfigurationFile.daysBossEikthyr.Value;
-            if (bossName == "TheElder")
+            if (parsedEnum == BossNameEnum.TheElder)
                 return ConfigurationFile.daysBossElder.Value;
-            if (bossName == "Bonemass")
+            if (parsedEnum == BossNameEnum.Bonemass)
                 return ConfigurationFile.daysBossBonemass.Value;
-            if (bossName == "Moder")
+            if (parsedEnum == BossNameEnum.Moder)
                 return ConfigurationFile.daysBossModer.Value;
-            if (bossName == "Yagluth")
+            if (parsedEnum == BossNameEnum.Yagluth)
                 return ConfigurationFile.daysBossYagluth.Value;
-            if (bossName == "Queen")
+            if (parsedEnum == BossNameEnum.Queen)
                 return ConfigurationFile.daysBossQueen.Value;
-            if (bossName == "Fader")
+            if (parsedEnum == BossNameEnum.Fader)
                 return ConfigurationFile.daysBossFader.Value;
             return 0;
+        }
+
+        public static bool bossIsKilled(string bossToCheck)
+        {
+            return bossIsKilled(parseBossName(bossToCheck));
+        }
+
+        public static bool bossIsKilled(BossNameEnum bossToCheck)
+        {
+            if (bossToCheck == BossNameEnum.Eikthyr)
+                return isEikthyrDefeatedForPlayer();
+            if (bossToCheck == BossNameEnum.TheElder)
+                return isElderDefeatedForPlayer();
+            if (bossToCheck == BossNameEnum.Bonemass)
+                return isBonemassDefeatedForPlayer();
+            if (bossToCheck == BossNameEnum.Moder)
+                return isModerDefeatedForPlayer();
+            if (bossToCheck == BossNameEnum.Yagluth)
+                return isYagluthDefeatedForPlayer();
+            if (bossToCheck == BossNameEnum.Queen)
+                return isQueenDefeatedForPlayer();
+            if (bossToCheck == BossNameEnum.Fader)
+                return isFaderDefeatedForPlayer();
+            return false;
         }
     }
 }
