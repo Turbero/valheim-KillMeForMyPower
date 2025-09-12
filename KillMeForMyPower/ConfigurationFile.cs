@@ -1,5 +1,6 @@
 ﻿using BepInEx.Configuration;
 using BepInEx;
+using KillMeForMyPower.Restrictions;
 using ServerSync;
 
 namespace KillMeForMyPower

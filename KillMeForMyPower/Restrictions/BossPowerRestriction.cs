@@ -13,7 +13,7 @@ namespace KillMeForMyPower.Restrictions
                 string selectedPower = __instance.GetGuardianPowerName().Replace("GP_", "");
                 Logger.Log("Guardian power name: " + selectedPower);
                 
-                if (!KillMeForMyPowerUtils.HasDefeatedBoss(selectedPower) && 
+                if (!KillMeForMyPowerUtils.HasDefeatedBossNameStr(selectedPower) && 
                     KillMeForMyPowerUtils.GetCurrentDay() < KillMeForMyPowerUtils.GetBossMinimumDayForPower(selectedPower))
                 {
                     __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenMessage.Value);
@@ -34,7 +34,7 @@ namespace KillMeForMyPower.Restrictions
             {
                 string guardianPowerName = __instance.m_guardianPower?.name.Replace("GP_", "");
                 Logger.Log("guardianPowerName: "+ guardianPowerName);
-                if (!KillMeForMyPowerUtils.HasDefeatedBoss(guardianPowerName) &&
+                if (!KillMeForMyPowerUtils.HasDefeatedBossNameStr(guardianPowerName) &&
                     KillMeForMyPowerUtils.GetCurrentDay() < KillMeForMyPowerUtils.GetBossMinimumDayForPower(guardianPowerName))
                 {
                     Player.m_localPlayer.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenMessage.Value);

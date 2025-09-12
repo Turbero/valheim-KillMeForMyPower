@@ -79,6 +79,7 @@
     <Compile Include="Restrictions\BossPowerRestriction.cs" />
     <Compile Include="Restrictions\GameManager.cs" />
     <Compile Include="Restrictions\ItemsRestriction.cs" />
+    <Compile Include="Restrictions\BossNameEnum.cs" />
     <Compile Include="Restrictions\TraderSetup.cs" />
     <Compile Include="Restrictions\UITooltipPatch.cs" />
   </ItemGroup>
