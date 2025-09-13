@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.2.1
+
+* Now the boss restrictions to access the NPC vendors can be removed in the configuration file using 'None' value
+* Code refactor to unify bosses information
+
 ## 1.2.0
 
 * Necessary boss to access NPC vendors can be configured in the config file now (easier to use with any other configuration manager mod this way). By default:

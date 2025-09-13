@@ -16,8 +16,12 @@ namespace KillMeForMyPower.Restrictions
                 
                 if (!grantedVendor(__instance))
                 {
-                    character.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenVendorMessage.Value.Replace("{0}", getMandatoryBossToKill(__instance)));
-                    return false;
+                    string mandatoryBossToKill = getMandatoryBossToKill(__instance);
+                    if (mandatoryBossToKill != null)
+                    {
+                        character.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenVendorMessage.Value.Replace("{0}", mandatoryBossToKill));
+                        return false;
+                    }
                 }
 
                 return true;
@@ -25,13 +29,13 @@ namespace KillMeForMyPower.Restrictions
 
             private static string getMandatoryBossToKill(Trader trader)
             {
-                if (trader.gameObject.name.StartsWith("Haldor"))
+                if (trader.gameObject.name.StartsWith("Haldor") && ConfigurationFile.vendorHaldorBossToKill.Value != BossNameEnum.None)
                     return Localization.instance.Localize(KillMeForMyPowerUtils.getBossNameTranslation(ConfigurationFile.vendorHaldorBossToKill.Value));
-                if (trader.gameObject.name.StartsWith("Hildir"))
+                if (trader.gameObject.name.StartsWith("Hildir") && ConfigurationFile.vendorHildirBossToKill.Value != BossNameEnum.None)
                     return Localization.instance.Localize(KillMeForMyPowerUtils.getBossNameTranslation(ConfigurationFile.vendorHildirBossToKill.Value));
-                if (trader.gameObject.name.StartsWith("BogWitch"))
+                if (trader.gameObject.name.StartsWith("BogWitch") && ConfigurationFile.vendorBogWitchBossToKill.Value != BossNameEnum.None)
                     return Localization.instance.Localize(KillMeForMyPowerUtils.getBossNameTranslation(ConfigurationFile.vendorBogWitchBossToKill.Value));
-                return "";
+                return null;
             }
 
             private static bool grantedVendor(Trader trader)
@@ -61,8 +65,7 @@ namespace KillMeForMyPower.Restrictions
                 else if (__instance.name.Contains("Hildir"))
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictions.Value);
                 else if (__instance.name.Contains("BogWitch"))
-                    addCustomItemsToRemove(__result, customItemsToRemove,
-                        ConfigurationFile.vendorBogWitchRestrictions.Value);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictions.Value);
 
                 foreach (Trader.TradeItem tradeItem in customItemsToRemove)
                     __result.Remove(tradeItem);
@@ -78,12 +81,8 @@ namespace KillMeForMyPower.Restrictions
                 {
                     string[] itemParts = item.Split(',');
                     foreach (Trader.TradeItem tradeItem in __result)
-                    {
                         if (tradeItem.m_prefab.gameObject.name == itemParts[0] && !KillMeForMyPowerUtils.bossIsKilled(itemParts[1]))
-                        {
                             customItemsToRemove.Add(tradeItem);
-                        }
-                    }
                 }
             }
         }

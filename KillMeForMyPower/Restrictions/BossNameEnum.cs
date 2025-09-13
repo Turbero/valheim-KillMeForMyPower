@@ -11,7 +11,8 @@ namespace KillMeForMyPower.Restrictions
         [BossNameAttr("Dragon_Defeated",      "$enemy_dragon")]      Moder,
         [BossNameAttr("GoblinKing_Defeated",  "$enemy_goblinking")]  Yagluth,
         [BossNameAttr("SeekerQueen_Defeated", "$enemy_seekerqueen")] Queen,
-        [BossNameAttr("Fader_Defeated",       "$enemy_fader")]       Fader
+        [BossNameAttr("Fader_Defeated",       "$enemy_fader")]       Fader,
+        [BossNameAttr(null,                   null)]                 None
     }
     
     class BossNameAttr: Attribute
