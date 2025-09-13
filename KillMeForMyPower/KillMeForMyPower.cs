@@ -8,7 +8,7 @@ namespace KillMeForMyPower
     {
         public const string GUID = "Turbero.KillMeForMyPower";
         public const string NAME = "Kill Me For My Power";
-        public const string VERSION = "1.2.0";
+        public const string VERSION = "1.2.1";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
