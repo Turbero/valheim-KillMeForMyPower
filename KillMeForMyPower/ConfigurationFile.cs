@@ -20,6 +20,9 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> forbiddenVendorMessage;
         public static ConfigEntry<bool> restrictUsingKeyItems;
         public static ConfigEntry<string> restrictUsingKeyItemsMessage;
+        public static ConfigEntry<string> itemRestrictionAvailableTooltipMessage;
+        public static ConfigEntry<string> itemRestrictionAvailableTooltipYes;
+        public static ConfigEntry<string> itemRestrictionAvailableTooltipNo;
         public static ConfigEntry<int> daysBossEikthyr;
         public static ConfigEntry<int> daysBossElder;
         public static ConfigEntry<int> daysBossBonemass;
@@ -58,6 +61,9 @@ namespace KillMeForMyPower
                 forbiddenVendorMessage = config("2 - Config", "ForbiddenVendorMessage", "You have not killed {0} yet to buy my stuff!", "Message to show when you cannot buy from a NPC");
                 restrictUsingKeyItems = config("2 - Config", "RestrictUsingKeyItems", true, "Restricts using crypt key, wishbone and wisplight until you kill the previous boss even if you get them from someone else. (default = true)");
                 restrictUsingKeyItemsMessage = config("2 - Config", "RestrictUsingKeyItemsMessage", "You must kill {0} before doing that action!", "Message to show when you cannot equip or do an action with an important key item");
+                itemRestrictionAvailableTooltipMessage = config("2 - Config", "ItemRestrictionAvailableTooltipMessage", "Available to use", "Message to show in item descriptions to know when you can start using them");
+                itemRestrictionAvailableTooltipYes = config("2 - Config", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
+                itemRestrictionAvailableTooltipNo = config("2 - Config", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 10000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 10000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
                 daysBossBonemass = config("3 - Days", "DaysBossBonemass", 10000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");

@@ -81,7 +81,6 @@
     <Compile Include="Restrictions\ItemsRestriction.cs" />
     <Compile Include="Restrictions\BossNameEnum.cs" />
     <Compile Include="Restrictions\TraderSetup.cs" />
-    <Compile Include="Restrictions\UITooltipPatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MODGEN\CHANGELOG.md" />
