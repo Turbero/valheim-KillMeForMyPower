@@ -7,7 +7,7 @@ namespace KillMeForMyPower
 {
     internal class ConfigurationFile
     {
-        private static ConfigEntry<bool> _serverConfigLocked = null;
+        private static ConfigEntry<bool> _serverConfigLocked;
         public static ConfigEntry<bool> debug;
         public static ConfigEntry<string> forbiddenMessage;
         public static ConfigEntry<bool> vendorLocalRestrictions;
@@ -30,6 +30,13 @@ namespace KillMeForMyPower
         public static ConfigEntry<int> daysBossYagluth;
         public static ConfigEntry<int> daysBossQueen;
         public static ConfigEntry<int> daysBossFader;
+        public static ConfigEntry<float> maxLevelBeforeBoss1Eikthyr;
+        public static ConfigEntry<float> maxLevelBeforeBoss2TheElder;
+        public static ConfigEntry<float> maxLevelBeforeBoss3Bonemass;
+        public static ConfigEntry<float> maxLevelBeforeBoss4Moder;
+        public static ConfigEntry<float> maxLevelBeforeBoss5Yagluth;
+        public static ConfigEntry<float> maxLevelBeforeBoss6Queen;
+        public static ConfigEntry<float> maxLevelBeforeBoss7Fader;
 
         private static ConfigFile configFile;
 
@@ -71,6 +78,13 @@ namespace KillMeForMyPower
                 daysBossYagluth  = config("3 - Days", "DaysBossYagluth", 10000, "Minimum number of days until the Yagluth power cannot be obtained without killing him (default = 10000)");
                 daysBossQueen    = config("3 - Days", "DaysBossQueen", 10000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 10000)");
                 daysBossFader    = config("3 - Days", "DaysBossFader", 10000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 10000)");
+                maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100f, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
+                maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100f, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
+                maxLevelBeforeBoss3Bonemass = config("4 - Max levels", "MaxLevelBeforeBoss3Bonemass", 100f, "Maximum skill level that player can level up skills before killing Bonemass (default = 100)");
+                maxLevelBeforeBoss4Moder    = config("4 - Max levels", "MaxLevelBeforeBoss4Moder", 100f, "Maximum skill level that player can level up skills before killing Moder (default = 100)");
+                maxLevelBeforeBoss5Yagluth  = config("4 - Max levels", "MaxLevelBeforeBoss5Yagluth", 100f, "Maximum skill level that player can level up skills before killing Yagluth (default = 100)");
+                maxLevelBeforeBoss6Queen    = config("4 - Max levels", "MaxLevelBeforeBoss6Queen", 100f, "Maximum skill level that player can level up skills before killing The Queen (default = 100)");
+                maxLevelBeforeBoss7Fader    = config("4 - Max levels", "MaxLevelBeforeBoss7Fader", 100f, "Maximum skill level that player can level up skills before killing Fader (default = 100)");
             }
         }
 

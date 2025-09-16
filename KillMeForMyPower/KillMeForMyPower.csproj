@@ -80,6 +80,7 @@
     <Compile Include="Restrictions\GameManager.cs" />
     <Compile Include="Restrictions\ItemsRestriction.cs" />
     <Compile Include="Restrictions\BossNameEnum.cs" />
+    <Compile Include="Restrictions\SkillLevelRestriction.cs" />
     <Compile Include="Restrictions\TraderSetup.cs" />
   </ItemGroup>
   <ItemGroup>
