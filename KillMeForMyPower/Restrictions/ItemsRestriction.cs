@@ -5,6 +5,16 @@ using UnityEngine;
 
 namespace KillMeForMyPower.Restrictions
 {
+
+    public class Effects
+    {
+        public static void scareEffect()
+        {
+            SEMan seMan = Player.m_localPlayer.GetSEMan();
+            StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
+            se.m_ttl = 3; 
+        }
+    }
     [HarmonyPatch(typeof(Humanoid), "EquipItem")]
     public class PlayerEquipItemPatch
     {
@@ -18,12 +28,14 @@ namespace KillMeForMyPower.Restrictions
                 if (item.m_shared.m_name == "$item_wishbone" && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass))
                 {
                     __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Bonemass.GetTranslationKey()));
+                    Effects.scareEffect();
                     __result = false;
                     return false;
                 }
                 if (item.m_shared.m_name == "$item_demister" && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth))
                 {
                     __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Yagluth.GetTranslationKey()));
+                    Effects.scareEffect();
                     __result = false;
                     return false;
                 }
@@ -44,6 +56,7 @@ namespace KillMeForMyPower.Restrictions
             if (__instance.name.Contains("sunken_crypt_gate") && character is Player && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder))
             {
                 character.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.TheElder.GetTranslationKey()));
+                Effects.scareEffect();
                 __result = false;
                 return false;
             }
@@ -63,24 +76,32 @@ namespace KillMeForMyPower.Restrictions
                 Transform transform = Utils.FindChild(m_tooltip.transform, "Text");
                 if (transform != null)
                 {
+                    Logger.LogInfo("tooltip topic: "+__instance.m_topic);
                     if (__instance.m_topic == "$item_demister")
-                    {
-                        bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth);
-                        string text = ready 
-                            ? ConfigurationFile.itemRestrictionAvailableTooltipYes.Value 
-                            : ConfigurationFile.itemRestrictionAvailableTooltipNo.Value;
-                        string color = ready ? "green" : "red";
-                        
-                        string availabilityText = $"{ConfigurationFile.itemRestrictionAvailableTooltipMessage.Value}: <color={color}>{text}</color>";
-                        __instance.m_text = __instance.m_text.Replace("_description", "_description\n" + availabilityText);
-                        transform.GetComponent<TMP_Text>().text = Localization.instance.Localize(__instance.m_text);
-                        
-                        //Remove last repetition of extra text
-                        string[] parts = transform.GetComponent<TMP_Text>().text.Split('\n');
-                        transform.GetComponent<TMP_Text>().text = string.Join("\n", parts, 0, parts.Length - 1);
-                    }
+                        updateTooltipText(__instance, transform, BossNameEnum.Yagluth);
+                    else if (__instance.m_topic == "$item_wishbone")
+                        updateTooltipText(__instance, transform, BossNameEnum.Bonemass);
+                    else if (__instance.m_topic == "$item_cryptkey")
+                        updateTooltipText(__instance, transform, BossNameEnum.TheElder);
                 }
             }
+        }
+
+        private static void updateTooltipText(UITooltip __instance, Transform transform, BossNameEnum bossToCheck)
+        {
+            bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(bossToCheck);
+            string text = ready 
+                ? ConfigurationFile.itemRestrictionAvailableTooltipYes.Value 
+                : ConfigurationFile.itemRestrictionAvailableTooltipNo.Value;
+            string color = ready ? "green" : "red";
+            string availabilityText = $"{ConfigurationFile.itemRestrictionAvailableTooltipMessage.Value}: <color={color}>{text}</color>";
+                        
+            __instance.m_text = __instance.m_text.Replace("_description", "_description\n" + availabilityText);
+            transform.GetComponent<TMP_Text>().text = Localization.instance.Localize(__instance.m_text);
+                        
+            //Remove last repetition of extra text
+            string[] parts = transform.GetComponent<TMP_Text>().text.Split('\n');
+            transform.GetComponent<TMP_Text>().text = string.Join("\n", parts, 0, parts.Length - 1);
         }
     }
 }
