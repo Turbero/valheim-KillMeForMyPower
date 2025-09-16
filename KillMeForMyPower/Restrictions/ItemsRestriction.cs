@@ -74,9 +74,8 @@ namespace KillMeForMyPower.Restrictions
             if (m_tooltip != null)
             {
                 Transform transform = Utils.FindChild(m_tooltip.transform, "Text");
-                if (transform != null)
+                if (transform != null && __instance.m_topic != null)
                 {
-                    Logger.LogInfo("tooltip topic: "+__instance.m_topic);
                     if (__instance.m_topic == "$item_demister")
                         updateTooltipText(__instance, transform, BossNameEnum.Yagluth);
                     else if (__instance.m_topic == "$item_wishbone")
@@ -89,6 +88,7 @@ namespace KillMeForMyPower.Restrictions
 
         private static void updateTooltipText(UITooltip __instance, Transform transform, BossNameEnum bossToCheck)
         {
+            Logger.LogInfo("tooltip topic: "+__instance.m_topic);
             bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(bossToCheck);
             string text = ready 
                 ? ConfigurationFile.itemRestrictionAvailableTooltipYes.Value 
