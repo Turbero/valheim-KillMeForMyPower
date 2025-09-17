@@ -26,14 +26,16 @@ namespace KillMeForMyPower.Restrictions
         public static bool reviewAndUpdateSkill(Player player, Skills.SkillType skillType, string buffName, bool updateBuffTextIfDecisionFalse = true)
         {
             Skills.Skill playerSkill = player.GetSkills().GetSkillList().Find(s => s.m_info.m_skill == skillType);
-            float currentLevel = playerSkill.m_level + playerSkill.GetLevelPercentage();
+            int skillLevel = (int)playerSkill.m_level; //Remove possible decimals and round down at the same time
+            float currentLevel = skillLevel + playerSkill.GetLevelPercentage();
                 
             bool decision = canSkillUp(currentLevel);
-            Logger.Log($"Decision with skill {skillType}, level {playerSkill.m_level}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: {decision}");
+            Logger.Log($"Decision with skill {skillType}, skillLevel {skillLevel}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: {decision}");
             if (!decision && updateBuffTextIfDecisionFalse)
             {
+                playerSkill.m_level = skillLevel;
                 playerSkill.m_accumulator = 0;
-                Logger.Log($"{skillType} rounded to max allowed value: {playerSkill.m_level}");
+                Logger.Log($"{skillType} rounded to max allowed value: {skillLevel}");
 
                 //Reset buff for DetailedLevels mod
                 Logger.Log("Checking DetailedLevels buff");
@@ -97,20 +99,33 @@ namespace KillMeForMyPower.Restrictions
         static void Postfix(Character __instance, HitData hit)
         {
             Logger.Log("Checking blood magic here since it doesn't seem to go through Player.RaiseSkill...");
-            if (__instance != null && __instance.IsMonsterFaction(0f))
+            if (__instance != null)
             {
                 Character attacker = hit.GetAttacker();
-                if (attacker != null && attacker.IsTamed())
+                if (attacker != null)
                 {
-                    _ = WaitForSecondsAsync(0.1f); // Small delay in async method to wait for updating blood magic skill
+                    // Small delay in async method to wait for updating blood magic skill
+                    
+                    // if attacker is a pet/invocation and attacked is a monster there is a bloodmagic skillup!
+                    if (attacker.IsTamed() && __instance.IsMonsterFaction(0f))
+                        _ = WaitForSecondsAsync(null, 0.1f);
+                    // attacker is a monster and attacked is a player. If the magic barriers breaks, there is a bloodmagic skillup!
+                    else if  (attacker.IsMonsterFaction(0f) && __instance.GetType() == typeof(Player))
+                        _ = WaitForSecondsAsync(__instance as Player, 0.1f);
+                    // attacker is a Troll_Summoned and attacked is Player or Tamed
+                    else if (attacker.name.Contains("Troll_Summoned"))
+                        if (__instance.GetType() == typeof(Player))
+                            _ = WaitForSecondsAsync(__instance as Player, 0.1f);
+                        else if (__instance.IsTamed())
+                            _ = WaitForSecondsAsync(null, 0.1f);
                 }
             }
         }
-
-        private static async Task WaitForSecondsAsync(float seconds)
+        
+        private static async Task WaitForSecondsAsync(Player player, float seconds)
         {
             await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milliseconds
-            LevelCalculation.reviewAndUpdateSkill(Player.m_localPlayer, Skills.SkillType.BloodMagic, "$skill_bloodmagic");
+            LevelCalculation.reviewAndUpdateSkill(player == null ? Player.m_localPlayer : player, Skills.SkillType.BloodMagic, "$skill_bloodmagic");
         }
     }
 }
