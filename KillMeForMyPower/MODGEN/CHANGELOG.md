@@ -1,5 +1,18 @@
 ### CHANGELOG
 
+## 1.3.0
+
+* Added new feature to restrict leveling up more than the indicated level in the configuration before killing each boss. 
+  * Examples: 
+    * set up that before killing Eikthyr you can only level up skills until 20
+    * set up that before killing The Elder you can only level up skills until 35
+    * and so on. It's configurable for each existing boss
+  * If any issues or not interested, just leave them with the default value 100 and restrictions won't be applied
+* Added small message in tooltip of progression items (crypt key, wishbone and demister) to indicate in green or red if you can already use them
+* Added a small lightning effect when trying to use one of those progression item when you should not yet
+* Changed configuration names under category "3 - Days". 
+* Recommended to regenerate the config file if you're going to customize the new options!
+
 ## 1.2.1
 
 * Now the boss restrictions to access the NPC vendors can be removed in the configuration file using 'None' value
