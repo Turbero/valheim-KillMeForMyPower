@@ -1,5 +1,13 @@
 ### CHANGELOG
 
+## 1.3.1
+
+* Added new configuration option for server worlds that already started if this mod is installed mid-play. Please read carefully:
+  * Players that have already SELECTED at the spawn point (not killed) some power boss will not have to repeat that fight after installing the mod.
+  * Unfortunately the game only leaves player personal keys when you select the boss power.
+  * I'll put this configuration FALSE by default under "1 - General" category, change manually if you need for your mid-play game.
+  * it's all it can be done in this matter until the game code changes to better
+
 ## 1.3.0
 
 * Added new feature to restrict leveling up more than the indicated level in the configuration before killing each boss. 
