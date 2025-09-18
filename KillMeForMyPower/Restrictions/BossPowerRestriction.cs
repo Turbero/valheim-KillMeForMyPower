@@ -53,11 +53,9 @@ namespace KillMeForMyPower.Restrictions
             {
                 if (__instance != null && __instance.IsBoss())
                 {
-
                     string bossName = __instance.name.Replace("(Clone)", "");
-                    long playerId = Player.m_localPlayer.GetPlayerID();
-
-                    Player.m_localPlayer.AddUniqueKey(bossName + "_Defeated");
+                    Player player = Player.m_localPlayer;
+                    GameManager.updateKeyToKMFMPKey(KillMeForMyPowerUtils.parseBossName(bossName), player);
                 }
             }
         }

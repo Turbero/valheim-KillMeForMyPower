@@ -5,27 +5,29 @@ namespace KillMeForMyPower.Restrictions
 {
     public enum BossNameEnum
     {
-        [BossNameAttr("Eikthyr_Defeated",     "GP_Eikthyr",  "$enemy_eikthyr")]     Eikthyr,
-        [BossNameAttr("gd_king_Defeated",     "GP_TheElder", "$enemy_gdking")]      TheElder,
-        [BossNameAttr("Bonemass_Defeated",    "GP_Bonemass", "$enemy_bonemass")]    Bonemass,
-        [BossNameAttr("Dragon_Defeated",      "GP_Moder",    "$enemy_dragon")]      Moder,
-        [BossNameAttr("GoblinKing_Defeated",  "GP_Yagluth",  "$enemy_goblinking")]  Yagluth,
-        [BossNameAttr("SeekerQueen_Defeated", "GP_Queen",    "$enemy_seekerqueen")] Queen,
-        [BossNameAttr("Fader_Defeated",       "GP_Fader",    "$enemy_fader")]       Fader,
-        [BossNameAttr(null,                   null,          null)]                 None
+        [BossNameAttr("Eikthyr_Defeated",     "Eikthyr_Defeated_KMFMP",     "GP_Eikthyr",  "$enemy_eikthyr")]     Eikthyr,
+        [BossNameAttr("gd_king_Defeated",     "gd_king_Defeated_KMFMP",     "GP_TheElder", "$enemy_gdking")]      TheElder,
+        [BossNameAttr("Bonemass_Defeated",    "Bonemass_Defeated_KMFMP",    "GP_Bonemass", "$enemy_bonemass")]    Bonemass,
+        [BossNameAttr("Dragon_Defeated",      "Dragon_Defeated_KMFMP",      "GP_Moder",    "$enemy_dragon")]      Moder,
+        [BossNameAttr("GoblinKing_Defeated",  "GoblinKing_Defeated_KMFMP",  "GP_Yagluth",  "$enemy_goblinking")]  Yagluth,
+        [BossNameAttr("SeekerQueen_Defeated", "SeekerQueen_Defeated_KMFMP", "GP_Queen",    "$enemy_seekerqueen")] Queen,
+        [BossNameAttr("Fader_Defeated",       "Fader_Defeated_KMFMP",       "GP_Fader",    "$enemy_fader")]       Fader,
+        [BossNameAttr(null,                   null,                         null,          null)]                 None
     }
     
     class BossNameAttr: Attribute
     {
-        internal BossNameAttr(string uniqueKey, string powerKey, string translationKey)
+        internal BossNameAttr(string oldKey, string uniqueKey, string powerKey, string translationKey)
         {
+            this.oldKey = oldKey;
             this.uniqueKey = uniqueKey;
             this.powerKey = powerKey;
             this.translationKey = translationKey;
         }
+        
+        public string oldKey { get; private set; }
         public string uniqueKey { get; private set; }
         public string translationKey { get; private set; }
-        
         public string powerKey { get; private set; }
     }
 
@@ -35,6 +37,11 @@ namespace KillMeForMyPower.Restrictions
         {
             BossNameAttr attr = GetAttr(p);
             return attr.uniqueKey;
+        }
+        public static string GetOldKey(this BossNameEnum p)
+        {
+            BossNameAttr attr = GetAttr(p);
+            return attr.oldKey;
         }
 
         public static string GetTranslationKey(this BossNameEnum p)

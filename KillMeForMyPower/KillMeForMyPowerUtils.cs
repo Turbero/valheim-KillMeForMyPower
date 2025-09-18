@@ -5,7 +5,7 @@ namespace KillMeForMyPower
 {
     public class KillMeForMyPowerUtils
     {
-        private static BossNameEnum parseBossName(string value) {
+        public static BossNameEnum parseBossName(string value) {
             Logger.Log("Parsing value: " + value);
             return (BossNameEnum) Enum.Parse(typeof(BossNameEnum), value, true);
         }
@@ -31,14 +31,24 @@ namespace KillMeForMyPower
         
         public static bool HasDefeatedBossName(BossNameEnum bossNameEnum)
         {
-            return Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetUniqueKey()) ||
-                   (ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetPowerKey()));
+            bool hasDefeated = Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetUniqueKey());
+            if (!hasDefeated)
+            {
+                hasDefeated = ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetPowerKey());
+                if (hasDefeated)
+                {
+                    //Take the chance to update key
+                    Player player = Player.m_localPlayer;
+                    GameManager.updateKeyToKMFMPKey(bossNameEnum, player);
+                }
+            }
+
+            return hasDefeated;
         }
 
         public static int GetCurrentDay()
         {
-            var method = typeof(EnvMan).GetMethod("GetCurrentDay", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-            return (int)method.Invoke(EnvMan.instance, null);
+            return (int) GameManager.GetPrivateMethod(EnvMan.instance, "GetCurrentDay");
         }
 
         public static int GetBossMinimumDayForPower(string bossName)
