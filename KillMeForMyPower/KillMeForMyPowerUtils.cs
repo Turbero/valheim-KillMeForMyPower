@@ -20,7 +20,7 @@ namespace KillMeForMyPower
             try
             {
                 var parsedEnum = parseBossName(bossName);
-                return Player.m_localPlayer.HaveUniqueKey(parsedEnum.GetUniqueKey());
+                return HasDefeatedBossName(parsedEnum);
             }
             catch (Exception e)
             {
@@ -30,8 +30,9 @@ namespace KillMeForMyPower
         }
         
         public static bool HasDefeatedBossName(BossNameEnum bossNameEnum)
-        { 
-            return Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetUniqueKey());
+        {
+            return Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetUniqueKey()) ||
+                   (ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetPowerKey()));
         }
 
         public static int GetCurrentDay()

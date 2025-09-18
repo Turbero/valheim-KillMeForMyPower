@@ -9,6 +9,7 @@ namespace KillMeForMyPower
     {
         private static ConfigEntry<bool> _serverConfigLocked;
         public static ConfigEntry<bool> debug;
+        public static ConfigEntry<bool> activateMidPlayDetection;
         public static ConfigEntry<string> forbiddenMessage;
         public static ConfigEntry<bool> vendorLocalRestrictions;
         public static ConfigEntry<BossNameEnum> vendorHaldorBossToKill;
@@ -57,6 +58,7 @@ namespace KillMeForMyPower
                 _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
+                activateMidPlayDetection = config("1 - General", "ActivateMidPlayDetection", false, "Adds boss power detection to identify if the player had used the power before installing the mod in a mid-play (default = false)");
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 vendorLocalRestrictions = config("2 - Config", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
                 vendorHaldorBossToKill = config("2 - Config", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
