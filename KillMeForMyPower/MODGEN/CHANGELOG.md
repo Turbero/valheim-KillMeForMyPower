@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.3.2
+
+* Fixed exception when defeating certain bosses with different names after being instantiated in battle.
+
 ## 1.3.1
 
 * Added new configuration option for server worlds that already started if this mod is installed mid-play. Please read carefully:
