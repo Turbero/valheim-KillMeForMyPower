@@ -55,7 +55,7 @@ namespace KillMeForMyPower.Restrictions
                 {
                     string bossName = __instance.name.Replace("(Clone)", "");
                     Player player = Player.m_localPlayer;
-                    GameManager.updateKeyToKMFMPKey(KillMeForMyPowerUtils.parseBossName(bossName), player);
+                    GameManager.updateKeyToKMFMPKey(KillMeForMyPowerUtils.parseFightBossName(bossName), player);
                 }
             }
         }

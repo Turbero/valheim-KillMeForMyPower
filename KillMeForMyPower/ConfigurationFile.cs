@@ -53,8 +53,7 @@ namespace KillMeForMyPower
             {
                 configFile = plugin.Config;
 
-                _serverConfigLocked = config("1 - General", "Lock Configuration", true,
-                "If on, the configuration is locked and can be changed by server admins only.");
+                _serverConfigLocked = config("1 - General", "Lock Configuration", true, "If on, the configuration is locked and can be changed by server admins only.");
                 _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
