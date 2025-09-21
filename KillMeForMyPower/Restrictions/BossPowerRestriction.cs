@@ -10,7 +10,10 @@ namespace KillMeForMyPower.Restrictions
         {
             public static bool Prefix(Player __instance, ref bool __result)
             {
-                string selectedPower = __instance.GetGuardianPowerName().Replace("GP_", "");
+                string power = __instance.GetGuardianPowerName();
+                if (power == null || power.Equals("")) return true;
+                
+                string selectedPower = power.Replace("GP_", "");
                 Logger.Log("Guardian power name: " + selectedPower);
                 
                 if (!KillMeForMyPowerUtils.HasDefeatedBossNameStr(selectedPower) && 
