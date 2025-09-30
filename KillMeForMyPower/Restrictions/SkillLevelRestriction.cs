@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
+using TMPro;
 using UnityEngine;
 
 namespace KillMeForMyPower.Restrictions
@@ -98,7 +99,6 @@ namespace KillMeForMyPower.Restrictions
     {
         static void Postfix(Character __instance, HitData hit)
         {
-            Logger.Log("Checking blood magic here since it doesn't seem to go through Player.RaiseSkill...");
             if (__instance != null)
             {
                 Character attacker = hit.GetAttacker();
@@ -124,8 +124,27 @@ namespace KillMeForMyPower.Restrictions
         
         private static async Task WaitForSecondsAsync(Player player, float seconds)
         {
+            Logger.Log("Checking blood magic here since it doesn't seem to go through Player.RaiseSkill...");
             await Task.Delay((int)(Math.Max(0f, seconds) * 1000)); // to milliseconds
             LevelCalculation.reviewAndUpdateSkill(player == null ? Player.m_localPlayer : player, Skills.SkillType.BloodMagic, "$skill_bloodmagic");
+        }
+    }
+    
+    [HarmonyPatch(typeof(SkillsDialog), nameof(SkillsDialog.Setup))]
+    [HarmonyPriority(Priority.VeryHigh)]
+    public class SkillsDialogAdditions_Patch
+    {
+        static void Postfix(SkillsDialog __instance, ref Player player, ref List<GameObject> ___m_elements)
+        {
+            List<Skills.Skill> skillList = player.GetSkills().GetSkillList();
+            for (int j = 0; j < skillList.Count; j++)
+            {
+                GameObject obj = ___m_elements[j];
+                Skills.Skill skill = skillList[j];
+
+                Color skillNumberColor = LevelCalculation.canSkillUp((int)skill.m_level) ? Color.white : Color.red;
+                Utils.FindChild(obj.transform, "leveltext", (Utils.IterativeSearchType)0).GetComponent<TMP_Text>().color = skillNumberColor;
+            }
         }
     }
 }
