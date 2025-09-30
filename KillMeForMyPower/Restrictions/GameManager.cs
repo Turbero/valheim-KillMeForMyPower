@@ -16,13 +16,17 @@ namespace KillMeForMyPower.Restrictions
 
         public static void updateKeyToKMFMPKey(BossNameEnum bossNameEnum, Player player)
         {
-            string oldKey = bossNameEnum.GetOldKey();
-            if (player.HaveUniqueKey(oldKey))
+            if (bossNameEnum != BossNameEnum.None)
             {
-                player.RemoveUniqueKey(oldKey);
+                string oldKey = bossNameEnum.GetOldKey();
+                if (player.HaveUniqueKey(oldKey))
+                {
+                    player.RemoveUniqueKey(oldKey);
+                }
+
+                player.AddUniqueKey(bossNameEnum.GetUniqueKey());
+                Logger.LogInfo($"player {player.GetPlayerName()} defeated {bossNameEnum}. Added personal KMFMP key!");
             }
-            player.AddUniqueKey(bossNameEnum.GetUniqueKey());
-            Logger.LogInfo($"player {player.GetPlayerName()} defeated {bossNameEnum}. Added personal KMFMP key!");
         }
     }
 }

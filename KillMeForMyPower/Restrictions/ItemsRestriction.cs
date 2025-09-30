@@ -88,7 +88,7 @@ namespace KillMeForMyPower.Restrictions
 
         private static void updateTooltipText(UITooltip __instance, Transform transform, BossNameEnum bossToCheck)
         {
-            Logger.LogInfo("tooltip topic: "+__instance.m_topic);
+            Logger.Log("tooltip topic: "+__instance.m_topic);
             bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(bossToCheck);
             string text = ready 
                 ? ConfigurationFile.itemRestrictionAvailableTooltipYes.Value 

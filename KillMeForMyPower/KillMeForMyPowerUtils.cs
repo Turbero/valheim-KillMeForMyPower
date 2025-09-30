@@ -19,7 +19,7 @@ namespace KillMeForMyPower
                     return bossNameEnum;
             }
 
-            Logger.LogWarning($"{value} not found as fightBossName.");
+            Logger.LogWarning($"{value} not a vanilla boss name.");
             return BossNameEnum.None;
         }
 
