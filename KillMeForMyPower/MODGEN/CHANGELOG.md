@@ -1,12 +1,17 @@
 ### CHANGELOG
 
+## 1.3.4
+
+* Added red color to the skill level in the skills dialog if it reaches its limit and the player has to kill the next boss to continue to skill up.
+* Added fix for compatibility with modded bosses to avoid exceptions in the log (thanks, Sunkalsna)
+
 ## 1.3.3
 
-* Fixed exception when player tried to activate power without having learnt any before.
+* Fixed exception when player tried to activate power without having learnt any before (thanks, bytorphoto)
 
 ## 1.3.2
 
-* Fixed exception when defeating certain bosses with different names after being instantiated in battle.
+* Fixed exception when defeating certain bosses with different names after being instantiated in battle (thanks, bytorphoto)
 
 ## 1.3.1
 
