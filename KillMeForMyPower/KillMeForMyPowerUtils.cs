@@ -5,13 +5,13 @@ namespace KillMeForMyPower
 {
     public class KillMeForMyPowerUtils
     {
-        public static BossNameEnum parseBossName(string value) {
+        private static BossNameEnum parseBossName(string value) {
             Logger.Log("Parsing value: " + value);
             return (BossNameEnum) Enum.Parse(typeof(BossNameEnum), value, true);
         }
         
-        public static BossNameEnum parseFightBossName(string value) {
-            Logger.Log($"Parsing fighting bossName {value} into Enum");
+        public static BossNameEnum findBossNameByPrefabName(string value) {
+            Logger.Log($"Parsing prefab bossName {value} into Enum");
             
             foreach (BossNameEnum bossNameEnum in Enum.GetValues(typeof(BossNameEnum)))
             {
@@ -19,7 +19,7 @@ namespace KillMeForMyPower
                     return bossNameEnum;
             }
 
-            Logger.LogWarning($"{value} not a vanilla boss name.");
+            Logger.LogWarning($"{value} not a vanilla/monstrum boss name.");
             return BossNameEnum.None;
         }
 
@@ -55,7 +55,7 @@ namespace KillMeForMyPower
                     GameManager.updateKeyToKMFMPKey(bossNameEnum, player);
                 }
             }
-
+            Logger.Log("HasDefeatedBossName: " + hasDefeated);
             return hasDefeated;
         }
 
@@ -81,7 +81,7 @@ namespace KillMeForMyPower
                 return ConfigurationFile.daysBossQueen.Value;
             if (parsedEnum == BossNameEnum.Fader)
                 return ConfigurationFile.daysBossFader.Value;
-            return 0;
+            return ConfigurationFile.daysBossModded.Value;
         }
 
         public static bool bossIsKilled(string bossToCheck)
