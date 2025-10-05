@@ -31,6 +31,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<int> daysBossYagluth;
         public static ConfigEntry<int> daysBossQueen;
         public static ConfigEntry<int> daysBossFader;
+        public static ConfigEntry<int> daysBossModded;
         public static ConfigEntry<float> maxLevelBeforeBoss1Eikthyr;
         public static ConfigEntry<float> maxLevelBeforeBoss2TheElder;
         public static ConfigEntry<float> maxLevelBeforeBoss3Bonemass;
@@ -79,6 +80,7 @@ namespace KillMeForMyPower
                 daysBossYagluth  = config("3 - Days", "DaysBossYagluth", 10000, "Minimum number of days until the Yagluth power cannot be obtained without killing him (default = 10000)");
                 daysBossQueen    = config("3 - Days", "DaysBossQueen", 10000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 10000)");
                 daysBossFader    = config("3 - Days", "DaysBossFader", 10000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 10000)");
+                daysBossModded   = config("3 - Days", "DaysBossModded", 10000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 10000)");
                 maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100f, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
                 maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100f, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
                 maxLevelBeforeBoss3Bonemass = config("4 - Max levels", "MaxLevelBeforeBoss3Bonemass", 100f, "Maximum skill level that player can level up skills before killing Bonemass (default = 100)");
