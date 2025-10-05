@@ -6,12 +6,12 @@ namespace KillMeForMyPower.Restrictions
     {
         public static object GetPrivateValue(object obj, string name, BindingFlags bindingAttr = BindingFlags.Instance | BindingFlags.NonPublic)
         {
-            return obj.GetType().GetField(name, bindingAttr).GetValue(obj);
+            return obj.GetType().GetField(name, bindingAttr)?.GetValue(obj);
         }
         
         public static object GetPrivateMethod(object obj, string name, BindingFlags bindingAttr = BindingFlags.Instance | BindingFlags.NonPublic)
         {
-            return obj.GetType().GetMethod(name, bindingAttr).Invoke(obj, null);
+            return obj.GetType().GetMethod(name, bindingAttr)?.Invoke(obj, null);
         }
 
         public static void updateKeyToKMFMPKey(BossNameEnum bossNameEnum, Player player)
