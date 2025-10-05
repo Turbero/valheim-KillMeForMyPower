@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\Valheim\profiles\Default\BepInEx\plugins\turbero-KillMeForMyPower\</OutputPath>
+    <OutputPath>..\..\..\..\AppData\Roaming\Thunderstore Mod Manager\DataFolder\Valheim\profiles\MONSTRUM\BepInEx\plugins\turbero-KillMeForMyPower\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -76,6 +76,7 @@
     <Compile Include="KillMeForMyPower.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restrictions\BossPowerGrant.cs" />
     <Compile Include="Restrictions\BossPowerRestriction.cs" />
     <Compile Include="Restrictions\GameManager.cs" />
     <Compile Include="Restrictions\ItemsRestriction.cs" />
