@@ -30,9 +30,9 @@ namespace KillMeForMyPower.Restrictions
             int skillLevel = (int)playerSkill.m_level; //Remove possible decimals and round down at the same time
             float currentLevel = skillLevel + playerSkill.GetLevelPercentage();
                 
-            bool decision = canSkillUp(currentLevel);
-            Logger.Log($"Decision with skill {skillType}, skillLevel {skillLevel}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: {decision}");
-            if (!decision && updateBuffTextIfDecisionFalse)
+            bool skillUpAllowed = canSkillUp(currentLevel);
+            Logger.Log($"Decision with skill {skillType}, skillLevel {skillLevel}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: {skillUpAllowed}");
+            if (!skillUpAllowed && updateBuffTextIfDecisionFalse)
             {
                 playerSkill.m_level = skillLevel;
                 playerSkill.m_accumulator = 0;
@@ -40,8 +40,7 @@ namespace KillMeForMyPower.Restrictions
 
                 //Reset buff for DetailedLevels mod
                 Logger.Log("Checking DetailedLevels buff");
-                List<StatusEffect> statusEffects =
-                    (List<StatusEffect>)GameManager.GetPrivateValue(Player.m_localPlayer.GetSEMan(), "m_statusEffects");
+                List<StatusEffect> statusEffects = (List<StatusEffect>)GameManager.GetPrivateValue(Player.m_localPlayer.GetSEMan(), "m_statusEffects");
                 StatusEffect buffEffect = statusEffects.Find(effect => effect.m_name.Contains(buffName));
                 if (buffEffect != null)
                 {
@@ -50,7 +49,7 @@ namespace KillMeForMyPower.Restrictions
                 }
             }
 
-            return decision;
+            return skillUpAllowed;
         }
     }
     
