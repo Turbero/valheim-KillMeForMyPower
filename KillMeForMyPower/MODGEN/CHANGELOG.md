@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.3.6
+
+* Added fix for compatibility with other mods which adds new abilities such as NorseDemigod (thanks, bytorphoto)
+
 ## 1.3.5
 
 * Added usage restrictions for MonstrumDeepAndNorth mod monsters from Therzie (https://thunderstore.io/c/valheim/p/Therzie/MonstrumDeepNorth/):
