@@ -1,5 +1,11 @@
 ### CHANGELOG
 
+## 1.3.5
+
+* Added usage restrictions for MonstrumDeepAndNorth mod monsters from Therzie (https://thunderstore.io/c/valheim/p/Therzie/MonstrumDeepNorth/):
+  * Gorr, Brutalis, StormHerald and Sythrak can no longer be used/activated before killing them
+  * not necessary to install MonstrumDeepAndNorth to keep using this mod. This is just in case you use that other mod.
+
 ## 1.3.4
 
 * Added red color to the skill level in the skills dialog if it reaches its limit and the player has to kill the next boss to continue to skill up.
