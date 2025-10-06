@@ -88,6 +88,26 @@ namespace KillMeForMyPower.Restrictions
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
+            else if (parsedBossName == BossNameEnum.SE_Boss_Gorr)
+            {
+                SE_Frost se = (SE_Frost)seMan?.AddStatusEffect("Frost".GetHashCode(), resetTime: false);
+                se.m_ttl = 5;
+            }
+            else if (parsedBossName == BossNameEnum.SE_Boss_Brutalis)
+            {
+                SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
+                se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
+            }
+            else if (parsedBossName == BossNameEnum.SE_Boss_Sythrak)
+            {
+                SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
+                se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
+            }
+            else if (parsedBossName == BossNameEnum.SE_Boss_StormHerald)
+            {
+                StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
+                se.m_ttl = 5;
+            }
         }
     }
 }
