@@ -27,6 +27,8 @@ namespace KillMeForMyPower.Restrictions
         public static bool reviewAndUpdateSkill(Player player, Skills.SkillType skillType, string buffName, bool updateBuffTextIfDecisionFalse = true)
         {
             Skills.Skill playerSkill = player.GetSkills().GetSkillList().Find(s => s.m_info.m_skill == skillType);
+            if (playerSkill == null) return true; //Other mods can use SkillType.None as dummy for skill/abilities. If so, skip this
+            
             int skillLevel = (int)playerSkill.m_level; //Remove possible decimals and round down at the same time
             float currentLevel = skillLevel + playerSkill.GetLevelPercentage();
                 
