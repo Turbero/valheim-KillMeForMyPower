@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 1.3.7
+
+* Hildir's map table also locked by the same mandatory monster to kill to talk to her
+
 ## 1.3.6
 
 * Added fix for compatibility with other mods which adds new abilities such as NorseDemigod (thanks, bytorphoto)
