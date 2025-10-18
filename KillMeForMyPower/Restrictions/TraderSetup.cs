@@ -86,5 +86,27 @@ namespace KillMeForMyPower.Restrictions
                 }
             }
         }
+
+        [HarmonyPatch(typeof(Vegvisir), "Interact")]
+        public class HildirMapTablePatch
+        {
+            public static bool Prefix(Vegvisir __instance, Humanoid character, bool hold, bool alt, ref bool __result)
+            {
+                if (character is Player &&
+                    __instance.m_locations.FindAll(loc => 
+                        loc.m_pinType == Minimap.PinType.Hildir1 ||
+                        loc.m_pinType == Minimap.PinType.Hildir2 ||
+                        loc.m_pinType == Minimap.PinType.Hildir3).Count > 0 &&
+                    !KillMeForMyPowerUtils.HasDefeatedBossName(ConfigurationFile.vendorHildirBossToKill.Value))
+                {
+                    character.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", ConfigurationFile.vendorHildirBossToKill.Value.GetTranslationKey()));
+                    Effects.scareEffect();
+                    __result = false;
+                    return false;
+                }
+
+                return true;
+            }
+        }
     }
 }
