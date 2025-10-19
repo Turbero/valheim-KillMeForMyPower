@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.3.8
+
+* Added that kill counts also for players participating in the boss battle, not only for the player giving the last hit.
+* This can be activated or deactivated in the config file (active by default)
+
 ## 1.3.7
 
 * Hildir's map table also locked by the same mandatory monster to kill to talk to her
