@@ -24,6 +24,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> itemRestrictionAvailableTooltipMessage;
         public static ConfigEntry<string> itemRestrictionAvailableTooltipYes;
         public static ConfigEntry<string> itemRestrictionAvailableTooltipNo;
+        public static ConfigEntry<bool> grantKillToNearbyPlayers;
         public static ConfigEntry<int> daysBossEikthyr;
         public static ConfigEntry<int> daysBossElder;
         public static ConfigEntry<int> daysBossBonemass;
@@ -73,6 +74,7 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipMessage = config("2 - Config", "ItemRestrictionAvailableTooltipMessage", "Available to use", "Message to show in item descriptions to know when you can start using them");
                 itemRestrictionAvailableTooltipYes = config("2 - Config", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
                 itemRestrictionAvailableTooltipNo = config("2 - Config", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
+                grantKillToNearbyPlayers = config("2 - Config", "GrantKillToNearbyPlayers", true, "Allows nearby players to grant the boss kill (default = true)");
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 10000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 10000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
                 daysBossBonemass = config("3 - Days", "DaysBossBonemass", 10000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");
