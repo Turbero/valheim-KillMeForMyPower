@@ -55,7 +55,6 @@ namespace KillMeForMyPower
                     GameManager.updateKeyToKMFMPKey(bossNameEnum, player);
                 }
             }
-            Logger.Log("HasDefeatedBossName: " + hasDefeated);
             return hasDefeated;
         }
 

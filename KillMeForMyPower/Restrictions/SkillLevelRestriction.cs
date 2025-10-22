@@ -24,7 +24,26 @@ namespace KillMeForMyPower.Restrictions
             return decision;
         }
 
-        public static bool reviewAndUpdateSkill(Player player, Skills.SkillType skillType, string buffName, bool updateBuffTextIfDecisionFalse = true)
+        private static float currentMaxSkillLevel()
+        {
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader))
+                return float.MaxValue;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen))
+                return ConfigurationFile.maxLevelBeforeBoss7Fader.Value;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth))
+                return ConfigurationFile.maxLevelBeforeBoss6Queen.Value;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder))
+                return ConfigurationFile.maxLevelBeforeBoss5Yagluth.Value;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass))
+                return ConfigurationFile.maxLevelBeforeBoss4Moder.Value;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder))
+                return ConfigurationFile.maxLevelBeforeBoss3Bonemass.Value;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr))
+                return ConfigurationFile.maxLevelBeforeBoss2TheElder.Value;
+            return ConfigurationFile.maxLevelBeforeBoss1Eikthyr.Value;
+        }
+
+        public static bool reviewAndUpdateSkill(Player player, Skills.SkillType skillType, string buffName)
         {
             Skills.Skill playerSkill = player.GetSkills().GetSkillList().Find(s => s.m_info.m_skill == skillType);
             if (playerSkill == null) return true; //Other mods can use SkillType.None as dummy for skill/abilities. If so, skip this
@@ -32,22 +51,25 @@ namespace KillMeForMyPower.Restrictions
             int skillLevel = (int)playerSkill.m_level; //Remove possible decimals and round down at the same time
             float currentLevel = skillLevel + playerSkill.GetLevelPercentage();
                 
-            bool skillUpAllowed = canSkillUp(currentLevel);
+            float maxSkillLevel = currentMaxSkillLevel();
+            bool skillUpAllowed = currentLevel < maxSkillLevel;
             Logger.Log($"Decision with skill {skillType}, skillLevel {skillLevel}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: {skillUpAllowed}");
-            if (!skillUpAllowed && updateBuffTextIfDecisionFalse)
+            if (!skillUpAllowed)
             {
-                playerSkill.m_level = skillLevel;
+                playerSkill.m_level = Math.Min(skillLevel, maxSkillLevel);
                 playerSkill.m_accumulator = 0;
-                Logger.Log($"{skillType} rounded to max allowed value: {skillLevel}");
-
-                //Reset buff for DetailedLevels mod
-                Logger.Log("Checking DetailedLevels buff");
-                List<StatusEffect> statusEffects = (List<StatusEffect>)GameManager.GetPrivateValue(Player.m_localPlayer.GetSEMan(), "m_statusEffects");
-                StatusEffect buffEffect = statusEffects.Find(effect => effect.m_name.Contains(buffName));
-                if (buffEffect != null)
+                Logger.Log($"{skillType} rounded to max allowed value: {playerSkill.m_level}");
+                if (GameManager.isDetailedLevelsInstalled())
                 {
-                    Logger.Log("Fixing value in buff");
-                    buffEffect.m_name = $"{buffName}: {playerSkill.m_level}";
+                    //Reset buff for DetailedLevels mod
+                    Logger.Log("Checking DetailedLevels buff...");
+                    List<StatusEffect> statusEffects = (List<StatusEffect>)GameManager.GetPrivateValue(Player.m_localPlayer.GetSEMan(), "m_statusEffects");
+                    StatusEffect buffEffect = statusEffects.Find(effect => effect.m_name.Contains(buffName));
+                    if (buffEffect != null)
+                    {
+                        Logger.Log("Fixing value in buff");
+                        buffEffect.m_name = $"{buffName}: {playerSkill.m_level}";
+                    }
                 }
             }
 
@@ -66,7 +88,7 @@ namespace KillMeForMyPower.Restrictions
                 Logger.Log($"Checking skill level availability {skill} with {levelBeforeAddingSkillUp}...");
                 if (levelBeforeAddingSkillUp < Skills.c_MaxSkillLevel)
                 {
-                    return LevelCalculation.reviewAndUpdateSkill(__instance, skill, $"$skill_{skill.ToString().ToLower()}", false);
+                    return LevelCalculation.reviewAndUpdateSkill(__instance, skill, $"$skill_{skill.ToString().ToLower()}");
                 }
             }
 
@@ -132,7 +154,7 @@ namespace KillMeForMyPower.Restrictions
     }
     
     [HarmonyPatch(typeof(SkillsDialog), nameof(SkillsDialog.Setup))]
-    [HarmonyPriority(Priority.VeryHigh)]
+    [HarmonyPriority(Priority.VeryLow)]
     public class SkillsDialogAdditions_Patch
     {
         static void Postfix(SkillsDialog __instance, ref Player player, ref List<GameObject> ___m_elements)

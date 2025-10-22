@@ -13,6 +13,11 @@ namespace KillMeForMyPower.Restrictions
         {
             return obj.GetType().GetMethod(name, bindingAttr)?.Invoke(obj, null);
         }
+        
+        public static bool isDetailedLevelsInstalled()
+        {
+            return BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Turbero.DetailedLevels");
+        }
 
         public static void updateKeyToKMFMPKey(BossNameEnum bossNameEnum, Player player)
         {
