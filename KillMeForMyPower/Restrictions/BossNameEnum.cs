@@ -21,8 +21,6 @@ namespace KillMeForMyPower.Restrictions
     
     class BossNameAttr: Attribute
     {
-        public string oldKey;
-        public string uniqueKey;
         internal BossNameAttr(string prefabBossName, string powerKey, string translationKey)
         {
             this.prefabBossName = prefabBossName;
@@ -33,18 +31,22 @@ namespace KillMeForMyPower.Restrictions
         }
         
         public string prefabBossName { get; private set; }
+        public string oldKey { get; private set; }
+        public string uniqueKey { get; private set; }
         public string translationKey { get; private set; }
         public string powerKey { get; private set; }
     }
 
     public static class BossNameUtils
     {
-        public static string GetFightBossname(this BossNameEnum p)
+        public static BossNameEnum findBossNameByPrefabName(string prefabName)
         {
-            BossNameAttr attr = GetAttr(p);
-            return attr.prefabBossName;
-        }
+            foreach (BossNameEnum name in Enum.GetValues(typeof(BossNameEnum)))
+                if (GetFightBossname(name) == prefabName)
+                    return name;
 
+            return BossNameEnum.None;
+        }
         public static string GetOldKey(this BossNameEnum p)
         {
             BossNameAttr attr = GetAttr(p);
@@ -56,6 +58,13 @@ namespace KillMeForMyPower.Restrictions
             BossNameAttr attr = GetAttr(p);
             return attr.uniqueKey;
         }
+        
+        public static string GetFightBossname(this BossNameEnum p)
+        {
+            BossNameAttr attr = GetAttr(p);
+            return attr.prefabBossName;
+        }
+        
         public static string GetTranslationKey(this BossNameEnum p)
         {
             BossNameAttr attr = GetAttr(p);
