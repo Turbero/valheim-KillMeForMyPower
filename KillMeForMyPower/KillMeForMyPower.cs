@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using KillMeForMyPower.Commands;
 
 namespace KillMeForMyPower
 {
@@ -15,6 +16,7 @@ namespace KillMeForMyPower
         void Awake()
         {
             ConfigurationFile.LoadConfig(this);
+            CheckBossesCommand.RegisterConsoleCommand();
 
             harmony.PatchAll();
         }
