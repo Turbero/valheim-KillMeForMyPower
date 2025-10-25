@@ -1,5 +1,16 @@
 ### CHANGELOG
 
+## 1.3.9
+
+* Now the boss kill should also be granted to players nearby as intended.
+
+
+* Added command "/bosses_permissions" to check which bosses the player has killed in the world.
+
+
+* For worlds already started after the mod is installed, if players are already beyond the boss cap level, it will automatically be set at the max level allowed for it when using the skill next time.
+
+
 ## 1.3.8
 
 * Added that kill counts also for players participating in the boss battle, not only for the player giving the last hit.
