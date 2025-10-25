@@ -76,6 +76,8 @@ namespace KillMeForMyPower.Restrictions
                 List<Trader.TradeItem> customItemsToRemove,
                 string vendorRestrictions)
             {
+                if (string.IsNullOrEmpty(vendorRestrictions)) return;
+                
                 string[] items = vendorRestrictions.Split(';');
                 foreach (string item in items)
                 {
