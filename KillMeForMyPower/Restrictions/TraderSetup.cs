@@ -80,9 +80,23 @@ namespace KillMeForMyPower.Restrictions
                 foreach (string item in items)
                 {
                     string[] itemParts = item.Split(',');
+                    Logger.Log($"Checking vendor item {itemParts[0]} against {itemParts[1]}");
                     foreach (Trader.TradeItem tradeItem in __result)
-                        if (tradeItem.m_prefab.gameObject.name == itemParts[0] && !KillMeForMyPowerUtils.bossIsKilled(itemParts[1]))
-                            customItemsToRemove.Add(tradeItem);
+                    {
+                        Logger.Log($"- Checking {tradeItem.m_prefab.gameObject.name} from the vendor list...");
+                        if (tradeItem.m_prefab.gameObject.name == itemParts[0])
+                        {
+                            if (!KillMeForMyPowerUtils.bossIsKilled(itemParts[1]))
+                            {
+                                customItemsToRemove.Add(tradeItem);
+                                Logger.Log($"{itemParts[1]} will be excluded.");
+                            }
+                            else
+                                Logger.Log($"{itemParts[1]} will NOT be excluded.");
+
+                            break;
+                        }
+                    }
                 }
             }
         }
