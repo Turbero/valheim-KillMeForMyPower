@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using KillMeForMyPower.Commands;
+using KillMeForMyPower.Restrictions;
 
 namespace KillMeForMyPower
 {
@@ -17,6 +18,7 @@ namespace KillMeForMyPower
         {
             ConfigurationFile.LoadConfig(this);
             CheckBossesCommand.RegisterConsoleCommand();
+            RegisterBossDefeatPatch.RegisterRPC();
 
             harmony.PatchAll();
         }

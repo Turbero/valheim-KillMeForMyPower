@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -6,8 +7,14 @@ using UnityEngine;
 namespace KillMeForMyPower.Restrictions
 {
     [HarmonyPatch(typeof(Character), "OnDeath")]
-    public static class RegisterBossDefeatPatch
+    public class RegisterBossDefeatPatch
     {
+        private const string RPC_SET_KILL_TO_PLAYER_CLIENT = "KillMeForMyPowerRPC_SetKillToPlayer_Client";
+
+        public static void RegisterRPC()
+        {
+            ZRoutedRpc.instance.Register(RPC_SET_KILL_TO_PLAYER_CLIENT, new Action<long, string>(RPC_SetKillToPlayerClient));
+        }
         public static void Postfix(Character __instance)
         {
             if (__instance != null && __instance.IsBoss())
@@ -27,18 +34,43 @@ namespace KillMeForMyPower.Restrictions
 
                     Vector3 bossPosition = __instance.transform.position;
                     List<Player> nearbyPlayers = Player.GetAllPlayers();
+                    var peers = ZNet.instance.GetConnectedPeers(); //all remote players
                     foreach (Player player in nearbyPlayers)
                     {
                         if (player == null) continue;
+                        if (player.GetPlayerName() == mLocalPlayer.GetPlayerName()) continue;
+                        
                         if (Vector3.Distance(player.transform.position, bossPosition) <= aggroRange)
                         {
-                            //Add also to the player nearby
-                            Logger.Log($"Also adding key of {boss.name} to {player.GetPlayerName()}...");
-                            GameManager.updateKeyToKMFMPKey(KillMeForMyPowerUtils.findBossNameByPrefabName(bossName), player);
+                            //Add also to the nearby player
+                            string playerName = player.GetPlayerName();
+                            Logger.LogInfo($"Sending RPC kill for {boss.name} to {playerName}...");
+                            
+                            //Send RPC message
+                            var peer = peers.FirstOrDefault(p => p.m_playerName.Equals(playerName, StringComparison.OrdinalIgnoreCase));
+                            if (peer == null)
+                            {
+                                Logger.LogError($"Player '{playerName}' not found among connected peers.");
+                                continue;
+                            }
+                            ZRoutedRpc.instance.InvokeRoutedRPC(peer.m_uid, RPC_SET_KILL_TO_PLAYER_CLIENT, bossName);
                         }
                     }
                 }
             }
+        }
+        
+        private static void RPC_SetKillToPlayerClient(long sender, string bossName)
+        {
+            Logger.LogInfo("RPC_SetKillToPlayerClient message from "+sender+" with "+bossName);
+            //I'm the client here
+            if (Player.m_localPlayer == null)
+                return;
+
+            BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossName);
+            GameManager.updateKeyToKMFMPKey(bossNameEnum, Player.m_localPlayer);
+            Logger.LogInfo(bossNameEnum.GetUniqueKey() + " kill granted!");
+            Player.m_localPlayer.Message(MessageHud.MessageType.TopLeft, bossNameEnum.GetUniqueKey() + " kill granted!"); //TODO Improve with sprite of boss in message
         }
     }
     
