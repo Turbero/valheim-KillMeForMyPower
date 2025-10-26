@@ -2,6 +2,7 @@
 using HarmonyLib;
 using KillMeForMyPower.Commands;
 using KillMeForMyPower.Restrictions;
+using UnityEngine;
 
 namespace KillMeForMyPower
 {
@@ -17,10 +18,27 @@ namespace KillMeForMyPower
         void Awake()
         {
             ConfigurationFile.LoadConfig(this);
-            CheckBossesCommand.RegisterConsoleCommand();
-            RegisterBossDefeatPatch.RegisterRPC();
-
             harmony.PatchAll();
+        }
+
+        private void Start()
+        {
+            StartCoroutine(WaitForNetworking());
+        }
+
+        private System.Collections.IEnumerator WaitForNetworking()
+        {
+            // Wait until full networking initialization
+            while (ZRoutedRpc.instance == null || ZNet.instance == null)
+                yield return new WaitForSeconds(1f);
+
+            // RPCs registration
+            RPCs.RegisterRPC();
+            
+            // Commands registration
+            CheckBossesCommand.RegisterConsoleCommand();
+            
+            Logger.LogInfo($"RPCs and console commands registered successfully. IsServer: {ZNet.instance.IsServer().ToString().ToUpperInvariant()}");
         }
 
         void onDestroy()
