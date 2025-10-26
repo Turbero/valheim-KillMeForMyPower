@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 1.3.10
+
+* Fixed mod, sorry I broke it by accident. Now it works!
+* "Now the boss kill should also be granted to players nearby as intended." --> tested and confirmed it works.
+
 ## 1.3.9
 
 * Now the boss kill should also be granted to players nearby as intended.

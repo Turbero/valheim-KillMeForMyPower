@@ -1,6 +1,6 @@
 {
     "name": "KillMeForMyPower",
-    "version_number": "1.3.9",
+    "version_number": "1.3.10",
     "website_url": "https://github.com/Turbero/valheim-KillMeForMyPower",
     "description": "Mod to block new players in servers that want to obtain the forsaken powers without killing them first and NPC vendors advanced items. Force new players to have the full experience without shortcuts.",
     "dependencies": [
