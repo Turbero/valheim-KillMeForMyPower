@@ -11,7 +11,7 @@ namespace KillMeForMyPower
     {
         public const string GUID = "Turbero.KillMeForMyPower";
         public const string NAME = "Kill Me For My Power";
-        public const string VERSION = "1.3.10";
+        public const string VERSION = "2.0.0";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
@@ -31,14 +31,11 @@ namespace KillMeForMyPower
             // Wait until full networking initialization
             while (ZRoutedRpc.instance == null || ZNet.instance == null)
                 yield return new WaitForSeconds(1f);
-
-            // RPCs registration
-            RPCs.RegisterRPC();
             
             // Commands registration
             CheckBossesCommand.RegisterConsoleCommand();
             
-            Logger.LogInfo($"RPCs and console commands registered successfully. IsServer: {ZNet.instance.IsServer().ToString().ToUpperInvariant()}");
+            Logger.LogInfo($"Console command registered successfully. IsServer: {ZNet.instance.IsServer().ToString().ToUpperInvariant()}");
         }
 
         void onDestroy()

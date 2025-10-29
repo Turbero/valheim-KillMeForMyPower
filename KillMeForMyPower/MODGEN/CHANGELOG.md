@@ -1,5 +1,19 @@
 ### CHANGELOG
 
+## 2.0.0
+
+I gave up on setting up the special key when killing boss mechanism. It worked for some people, for others not. But fear not!!!
+New implementation done!
+  * Now the names of the people that can use a boss power will be added to a list in the configuration file (server-synced ofc)
+  * The list is automatically updated with the names of the people nearby, no need to send RPC messages or other s**t
+  * For people that installs or updates the mod in an existing world, remember you must activate "activateMidPlayDetection" to allow players who already selected the boss power anytime before the mod installation to have the grant. I'll toggle it ON by default this time.
+
+Other restriction mechanisms remain untouched and still operational: special items, vendors, minimum days and max skill levels
+
+---
+
+<details><summary><b>Old releases notes (click to expand)</b></summary>
+
 ## 1.3.10
 
 * Fixed mod, sorry I broke it by accident. Now it works!
@@ -126,3 +140,5 @@
 ## 1.0.0
 
 Initial version
+
+</details>
