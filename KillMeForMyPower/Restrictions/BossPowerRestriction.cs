@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using KillMeForMyPower.Restrictions.BossNameManagement;
 
 namespace KillMeForMyPower.Restrictions
 {

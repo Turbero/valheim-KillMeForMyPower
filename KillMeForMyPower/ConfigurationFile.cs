@@ -1,6 +1,6 @@
 ﻿using BepInEx.Configuration;
 using BepInEx;
-using KillMeForMyPower.Restrictions;
+using KillMeForMyPower.Restrictions.BossNameManagement;
 using ServerSync;
 
 namespace KillMeForMyPower
@@ -40,6 +40,17 @@ namespace KillMeForMyPower
         public static ConfigEntry<float> maxLevelBeforeBoss5Yagluth;
         public static ConfigEntry<float> maxLevelBeforeBoss6Queen;
         public static ConfigEntry<float> maxLevelBeforeBoss7Fader;
+        public static ConfigEntry<string> playerListForBoss1EikthyrPower;
+        public static ConfigEntry<string> playerListForBoss2TheElderPower;
+        public static ConfigEntry<string> playerListForBoss3BonemassPower;
+        public static ConfigEntry<string> playerListForBoss4ModerPower;
+        public static ConfigEntry<string> playerListForBoss5YagluthPower;
+        public static ConfigEntry<string> playerListForBoss6QueenPower;
+        public static ConfigEntry<string> playerListForBoss7FaderPower;
+        public static ConfigEntry<string> playerListForBoss8TherzieGorrPower;
+        public static ConfigEntry<string> playerListForBoss8TherzieBrutalisPower;
+        public static ConfigEntry<string> playerListForBoss8StormHeraldPower;
+        public static ConfigEntry<string> playerListForBoss8TherzieSythrakPower;
 
         private static ConfigFile configFile;
 
@@ -60,6 +71,7 @@ namespace KillMeForMyPower
 
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
                 activateMidPlayDetection = config("1 - General", "ActivateMidPlayDetection", false, "Adds boss power detection to identify if the player had used the power before installing the mod in a mid-play (default = false)");
+                
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 vendorLocalRestrictions = config("2 - Config", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
                 vendorHaldorBossToKill = config("2 - Config", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
@@ -75,6 +87,7 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipYes = config("2 - Config", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
                 itemRestrictionAvailableTooltipNo = config("2 - Config", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
                 grantKillToNearbyPlayers = config("2 - Config", "GrantKillToNearbyPlayers", true, "Allows nearby players to grant the boss kill (default = true)");
+                
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 10000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 10000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
                 daysBossBonemass = config("3 - Days", "DaysBossBonemass", 10000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");
@@ -83,6 +96,7 @@ namespace KillMeForMyPower
                 daysBossQueen    = config("3 - Days", "DaysBossQueen", 10000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 10000)");
                 daysBossFader    = config("3 - Days", "DaysBossFader", 10000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 10000)");
                 daysBossModded   = config("3 - Days", "DaysBossModded", 10000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 10000)");
+                
                 maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100f, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
                 maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100f, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
                 maxLevelBeforeBoss3Bonemass = config("4 - Max levels", "MaxLevelBeforeBoss3Bonemass", 100f, "Maximum skill level that player can level up skills before killing Bonemass (default = 100)");
@@ -90,6 +104,18 @@ namespace KillMeForMyPower
                 maxLevelBeforeBoss5Yagluth  = config("4 - Max levels", "MaxLevelBeforeBoss5Yagluth", 100f, "Maximum skill level that player can level up skills before killing Yagluth (default = 100)");
                 maxLevelBeforeBoss6Queen    = config("4 - Max levels", "MaxLevelBeforeBoss6Queen", 100f, "Maximum skill level that player can level up skills before killing The Queen (default = 100)");
                 maxLevelBeforeBoss7Fader    = config("4 - Max levels", "MaxLevelBeforeBoss7Fader", 100f, "Maximum skill level that player can level up skills before killing Fader (default = 100)");
+                
+                playerListForBoss1EikthyrPower = config("5 - Power Granted player lists", "Player List for Boss 1 - Eikthyr power", "", "List of player names that can use Eikthyr power after defeating him");
+                playerListForBoss2TheElderPower = config("5 - Power Granted player lists", "Player List for Boss 2 - The Elder power", "", "List of player names that can use The Elder power after defeating him");
+                playerListForBoss3BonemassPower = config("5 - Power Granted player lists", "Player List for Boss 3 - Bonemass power", "", "List of player names that can use Bonemass power after defeating him");
+                playerListForBoss4ModerPower = config("5 - Power Granted player lists", "Player List for Boss 4 - Moder power", "", "List of player names that can use Moder power after defeating her");
+                playerListForBoss5YagluthPower = config("5 - Power Granted player lists", "Player List for Boss 5 - Yagluth power", "", "List of player names that can use Yagluth power after defeating him");
+                playerListForBoss6QueenPower = config("5 - Power Granted player lists", "Player List for Boss 6 - Queen power", "", "List of player names that can use Queen power after defeating her");
+                playerListForBoss7FaderPower = config("5 - Power Granted player lists", "Player List for Boss 7 - Fader power", "", "List of player names that can use Fader power after defeating him");
+                playerListForBoss8TherzieGorrPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Gorr power", "", "List of player names that can use Gorr power after defeating him");
+                playerListForBoss8TherzieBrutalisPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Brutalis power", "", "List of player names that can use Brutalis power after defeating him");
+                playerListForBoss8StormHeraldPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - StormHerald power", "", "List of player names that can use StormHerald power after defeating him");
+                playerListForBoss8TherzieSythrakPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Sythrak power", "", "List of player names that can use Sythrak power after defeating him");
             }
         }
 

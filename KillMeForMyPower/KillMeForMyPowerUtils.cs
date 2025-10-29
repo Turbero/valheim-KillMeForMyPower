@@ -1,5 +1,6 @@
 ﻿using System;
 using KillMeForMyPower.Restrictions;
+using KillMeForMyPower.Restrictions.BossNameManagement;
 
 namespace KillMeForMyPower
 {
@@ -30,21 +31,22 @@ namespace KillMeForMyPower
         
         public static bool HasDefeatedBossNameStr(string bossName)
         {
+            BossNameEnum parsedEnum;
             try
             {
-                var parsedEnum = parseBossName(bossName);
-                return HasDefeatedBossName(parsedEnum);
+                parsedEnum = parseBossName(bossName);
             }
             catch (Exception e)
             {
-                Logger.LogError("Error in HasDefeatedBossName with "+bossName+", possibly parseBossName. "+e);
+                Logger.LogError("Error in HasDefeatedBossName with "+bossName+" in parseBossName. "+e);
                 return false;
             }
+            return HasDefeatedBossName(parsedEnum);
         }
         
         public static bool HasDefeatedBossName(BossNameEnum bossNameEnum)
         {
-            bool hasDefeated = Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetUniqueKey());
+            bool hasDefeated = BossNameUtils.IsBossPowerGrantedForPlayer(bossNameEnum, Player.m_localPlayer);
             if (!hasDefeated)
             {
                 hasDefeated = ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetPowerKey());
@@ -52,7 +54,7 @@ namespace KillMeForMyPower
                 {
                     //Take the chance to update key
                     Player player = Player.m_localPlayer;
-                    GameManager.updateKeyToKMFMPKey(bossNameEnum, player);
+                    BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, player);
                 }
             }
             return hasDefeated;

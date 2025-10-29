@@ -18,20 +18,5 @@ namespace KillMeForMyPower.Restrictions
         {
             return BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("Turbero.DetailedLevels");
         }
-
-        public static void updateKeyToKMFMPKey(BossNameEnum bossNameEnum, Player player)
-        {
-            if (bossNameEnum != BossNameEnum.None)
-            {
-                string oldKey = bossNameEnum.GetOldKey();
-                if (player.HaveUniqueKey(oldKey))
-                {
-                    player.RemoveUniqueKey(oldKey);
-                }
-
-                player.AddUniqueKey(bossNameEnum.GetUniqueKey());
-                Logger.LogInfo($"player {player.GetPlayerName()} defeated {bossNameEnum}. Added personal KMFMP key!");
-            }
-        }
     }
 }
