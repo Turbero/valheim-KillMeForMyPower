@@ -70,7 +70,7 @@ namespace KillMeForMyPower
                 _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
-                activateMidPlayDetection = config("1 - General", "ActivateMidPlayDetection", false, "Adds boss power detection to identify if the player had used the power before installing the mod in a mid-play (default = false)");
+                activateMidPlayDetection = config("1 - General", "ActivateMidPlayDetection", true, "Adds boss power detection to identify if the player had used the power before installing the mod in a mid-play (default = false)");
                 
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 vendorLocalRestrictions = config("2 - Config", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
