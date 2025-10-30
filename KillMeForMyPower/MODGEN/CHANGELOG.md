@@ -2,7 +2,7 @@
 
 ## 2.0.1
 
-* Fix for .cfg file (temporary)
+* Fix for .cfg file (temporary) while solving sync-issues
 
 ## 2.0.0
 
