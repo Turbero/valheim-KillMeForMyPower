@@ -47,11 +47,14 @@ namespace KillMeForMyPower
         public static bool HasDefeatedBossName(BossNameEnum bossNameEnum)
         {
             bool hasDefeated = BossNameUtils.IsBossPowerGrantedForPlayer(bossNameEnum, Player.m_localPlayer);
+            Logger.Log($"hasDefeated(1) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
             if (!hasDefeated)
             {
                 hasDefeated = ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetPowerKey());
+                Logger.Log($"hasDefeated(2) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
                 if (hasDefeated)
                 {
+                    Logger.Log("Learned the power before. Granting!");
                     //Take the chance to update key
                     Player player = Player.m_localPlayer;
                     BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, player);
