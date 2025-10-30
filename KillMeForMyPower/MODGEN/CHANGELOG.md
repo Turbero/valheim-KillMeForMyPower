@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 2.0.1
+
+* Fix for .cfg file (temporary)
+
 ## 2.0.0
 
 I gave up on setting up the special key when killing boss mechanism. It worked for some people, for others not. But fear not!!!

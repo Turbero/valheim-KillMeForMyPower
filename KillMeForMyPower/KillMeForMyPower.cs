@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using KillMeForMyPower.Commands;
-using KillMeForMyPower.Restrictions;
 using UnityEngine;
 
 namespace KillMeForMyPower
@@ -11,7 +10,7 @@ namespace KillMeForMyPower
     {
         public const string GUID = "Turbero.KillMeForMyPower";
         public const string NAME = "Kill Me For My Power";
-        public const string VERSION = "2.0.0";
+        public const string VERSION = "2.0.1";
 
         private readonly Harmony harmony = new Harmony(GUID);
 
