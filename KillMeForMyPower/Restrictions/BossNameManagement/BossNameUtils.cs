@@ -5,12 +5,12 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
 {
     public static class BossNameUtils
     {
-        public static void GrantBossPowerToPlayer(BossNameEnum bossNameEnum, Player player)
+        public static void GrantBossPowerToPlayer(BossNameEnum bossNameEnum, string playerName, bool isAdd)
         {
             if (bossNameEnum != BossNameEnum.None)
             {
-                AddToConfigurationGrantedPlayersList(bossNameEnum, player);
-                Logger.LogInfo($"Player {player.GetPlayerName()} defeated {bossNameEnum}.");
+                UpdateConfigurationGrantedPlayersList(bossNameEnum, playerName, isAdd);
+                Logger.LogInfo($"Player {playerName} "+(isAdd ? "defeated" : "removed")+$" {bossNameEnum}.");
             }
         }
 
@@ -21,27 +21,29 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)] //one by one to update file, not all at once!
-        public static void AddToConfigurationGrantedPlayersList(BossNameEnum bossNameEnum, Player player)
+        public static void UpdateConfigurationGrantedPlayersList(BossNameEnum bossNameEnum, string playerName, bool isAdd)
         {
             string playersListConfig = bossNameEnum.GetGrantedPlayerNamesList();
-            if (playersListConfig.Contains(player.GetPlayerName())) return;
+            //avoid duplicates
+            if (isAdd && playersListConfig.Contains(playerName)) return;
+            if (!isAdd && !playersListConfig.Contains(playerName)) return;
 
-            List<string> list = new List<string>();
             string result;
                 
             if (!string.IsNullOrEmpty(playersListConfig))
             {
                 string[] playersList = playersListConfig.Split(',');
-                list = new List<string>(playersList);
-                list.Add(player.GetPlayerName());
+                var list = new List<string>(playersList);
+                if (isAdd)
+                    list.Add(playerName);
+                else
+                    list.Remove(playerName);
                 list.Sort();
 
                 result = string.Join(",", list.ToArray());
             } else
-                result = player.GetPlayerName();
-
-            list.Add(player.GetPlayerName());
-            list.Sort();
+                result = isAdd ? playerName : "";
+            Logger.Log("Result to save: "+result);
 
             //Save player (can't use reflection here)
             switch (bossNameEnum)
@@ -74,7 +76,7 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
                     ConfigurationFile.playerListForBoss8TherzieBrutalisPower.Value = result;
                     break;
                 case BossNameEnum.SE_Boss_StormHerald:
-                    ConfigurationFile.playerListForBoss8StormHeraldPower.Value = result;
+                    ConfigurationFile.playerListForBoss8TherzieStormHeraldPower.Value = result;
                     break;
                 case BossNameEnum.SE_Boss_Sythrak:
                     ConfigurationFile.playerListForBoss8TherzieSythrakPower.Value = result;

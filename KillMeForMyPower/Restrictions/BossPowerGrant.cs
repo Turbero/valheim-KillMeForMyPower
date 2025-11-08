@@ -10,15 +10,16 @@ namespace KillMeForMyPower.Restrictions
     public class RegisterBossDefeatPatch
     {
 
+        // This will be executed in the player that hits last when the boss dies
         public static void Postfix(Character __instance)
         {
             if (__instance != null && __instance.IsBoss())
             {
                 string bossName = __instance.name.Replace("(Clone)", "");
                 Player mLocalPlayer = Player.m_localPlayer;
-                BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossName);
-                BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, mLocalPlayer);
-                Logger.LogInfo($"Power granted to {mLocalPlayer.GetPlayerName()}.");
+                
+                List<string> playersToGrant = new List<string>();
+                playersToGrant.Add(mLocalPlayer.GetPlayerName());
                 
                 //Detect players around
                 if (ConfigurationFile.grantKillToNearbyPlayers.Value)
@@ -37,13 +38,12 @@ namespace KillMeForMyPower.Restrictions
                         if (player.GetPlayerName() == mLocalPlayer.GetPlayerName()) continue;
                         
                         if (Vector3.Distance(player.transform.position, bossPosition) <= aggroRange)
-                        {
-                            //Grant also to the nearby player
-                            BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, player);
-                            Logger.LogInfo($"Power granted to {player.GetPlayerName()}.");
-                        }
+                            playersToGrant.Add(player.GetPlayerName());
                     }
                 }
+                
+                //Send RPC to host with all fighters names
+                ZRoutedRpc.instance.InvokeRoutedRPC(0L, "RPC_BossPowerGrantServer", bossName, string.Join(",", playersToGrant));
             }
         }
     }
@@ -62,6 +62,35 @@ namespace KillMeForMyPower.Restrictions
             {
                 Logger.LogWarning($"Removing null key from player {__instance.GetPlayerName()}");
                 __instance.RemoveUniqueKey(key);
+            }
+        }
+    }
+
+    public class RPC_BossPowerGrantCalls
+    {
+        public static void RPC_BossPowerGrantServer(long sender, string bossEnumStr, string playersToGrant)
+        {
+            //Message to the host to sync powers list
+            Logger.Log($"[RPC_BossPowerGrantServer] RPC sent from sender {sender} with {bossEnumStr} and {playersToGrant}");
+            BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossEnumStr);
+            string[] players = playersToGrant.Split(',');
+            foreach (string player in players)
+            {
+                BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, player, true);
+                //TODO RPC para avisar al player
+            }
+        }
+        
+        public static void RPC_BossPowerRemoveGrantServer(long sender, string bossEnumStr, string playersToRemoveGrant)
+        {
+            //Message to the host to sync powers list
+            Logger.Log($"[RPC_BossPowerRemoveGrantServer] RPC sent from sender {sender} with {bossEnumStr} and {playersToRemoveGrant}");
+            BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossEnumStr);
+            string[] players = playersToRemoveGrant.Split(',');
+            foreach (string player in players)
+            {
+                BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, player, false);
+                //TODO RPC para avisar al player
             }
         }
     }

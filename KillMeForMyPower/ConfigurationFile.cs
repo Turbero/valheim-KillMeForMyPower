@@ -10,6 +10,7 @@ namespace KillMeForMyPower
         private static ConfigEntry<bool> _serverConfigLocked;
         public static ConfigEntry<bool> debug;
         public static ConfigEntry<bool> activateMidPlayDetection;
+        public static ConfigEntry<string> powerCommandsAdminPlayersList;
         public static ConfigEntry<string> forbiddenMessage;
         public static ConfigEntry<bool> vendorLocalRestrictions;
         public static ConfigEntry<BossNameEnum> vendorHaldorBossToKill;
@@ -49,7 +50,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> playerListForBoss7FaderPower;
         public static ConfigEntry<string> playerListForBoss8TherzieGorrPower;
         public static ConfigEntry<string> playerListForBoss8TherzieBrutalisPower;
-        public static ConfigEntry<string> playerListForBoss8StormHeraldPower;
+        public static ConfigEntry<string> playerListForBoss8TherzieStormHeraldPower;
         public static ConfigEntry<string> playerListForBoss8TherzieSythrakPower;
 
         private static ConfigFile configFile;
@@ -71,6 +72,7 @@ namespace KillMeForMyPower
 
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
                 activateMidPlayDetection = config("1 - General", "ActivateMidPlayDetection", true, "Adds boss power detection to identify if the player had used the power before installing the mod in a mid-play (default = false)");
+                powerCommandsAdminPlayersList = config("1 - General", "Power Commands Admin Players List", "", "List of additional player names that can help admin servers to assign powers to other players or themselves using the mod commands.");
                 
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 vendorLocalRestrictions = config("2 - Config", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
@@ -105,17 +107,17 @@ namespace KillMeForMyPower
                 maxLevelBeforeBoss6Queen    = config("4 - Max levels", "MaxLevelBeforeBoss6Queen", 100f, "Maximum skill level that player can level up skills before killing The Queen (default = 100)");
                 maxLevelBeforeBoss7Fader    = config("4 - Max levels", "MaxLevelBeforeBoss7Fader", 100f, "Maximum skill level that player can level up skills before killing Fader (default = 100)");
                 
-                playerListForBoss1EikthyrPower = config("5 - Power Granted player lists", "Player List for Boss 1 - Eikthyr power", "", "List of player names that can use Eikthyr power after defeating him", false);
-                playerListForBoss2TheElderPower = config("5 - Power Granted player lists", "Player List for Boss 2 - The Elder power", "", "List of player names that can use The Elder power after defeating him", false);
-                playerListForBoss3BonemassPower = config("5 - Power Granted player lists", "Player List for Boss 3 - Bonemass power", "", "List of player names that can use Bonemass power after defeating him", false);
-                playerListForBoss4ModerPower = config("5 - Power Granted player lists", "Player List for Boss 4 - Moder power", "", "List of player names that can use Moder power after defeating her", false);
-                playerListForBoss5YagluthPower = config("5 - Power Granted player lists", "Player List for Boss 5 - Yagluth power", "", "List of player names that can use Yagluth power after defeating him", false);
-                playerListForBoss6QueenPower = config("5 - Power Granted player lists", "Player List for Boss 6 - Queen power", "", "List of player names that can use Queen power after defeating her", false);
-                playerListForBoss7FaderPower = config("5 - Power Granted player lists", "Player List for Boss 7 - Fader power", "", "List of player names that can use Fader power after defeating him", false);
-                playerListForBoss8TherzieGorrPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Gorr power", "", "List of player names that can use Gorr power after defeating him", false);
-                playerListForBoss8TherzieBrutalisPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Brutalis power", "", "List of player names that can use Brutalis power after defeating him", false);
-                playerListForBoss8StormHeraldPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - StormHerald power", "", "List of player names that can use StormHerald power after defeating him", false);
-                playerListForBoss8TherzieSythrakPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Sythrak power", "", "List of player names that can use Sythrak power after defeating him", false);
+                playerListForBoss1EikthyrPower = config("5 - Power Granted player lists", "Player List for Boss 1 - Eikthyr power", "", "List of player names that can use Eikthyr power after defeating him");
+                playerListForBoss2TheElderPower = config("5 - Power Granted player lists", "Player List for Boss 2 - The Elder power", "", "List of player names that can use The Elder power after defeating him");
+                playerListForBoss3BonemassPower = config("5 - Power Granted player lists", "Player List for Boss 3 - Bonemass power", "", "List of player names that can use Bonemass power after defeating him");
+                playerListForBoss4ModerPower = config("5 - Power Granted player lists", "Player List for Boss 4 - Moder power", "", "List of player names that can use Moder power after defeating her");
+                playerListForBoss5YagluthPower = config("5 - Power Granted player lists", "Player List for Boss 5 - Yagluth power", "", "List of player names that can use Yagluth power after defeating him");
+                playerListForBoss6QueenPower = config("5 - Power Granted player lists", "Player List for Boss 6 - Queen power", "", "List of player names that can use Queen power after defeating her");
+                playerListForBoss7FaderPower = config("5 - Power Granted player lists", "Player List for Boss 7 - Fader power", "", "List of player names that can use Fader power after defeating him");
+                playerListForBoss8TherzieGorrPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Gorr power", "", "List of player names that can use Gorr power after defeating him");
+                playerListForBoss8TherzieBrutalisPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Brutalis power", "", "List of player names that can use Brutalis power after defeating him");
+                playerListForBoss8TherzieStormHeraldPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - StormHerald power", "", "List of player names that can use StormHerald power after defeating him");
+                playerListForBoss8TherzieSythrakPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Sythrak power", "", "List of player names that can use Sythrak power after defeating him");
             }
         }
 

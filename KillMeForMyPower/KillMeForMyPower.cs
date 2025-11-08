@@ -32,9 +32,10 @@ namespace KillMeForMyPower
                 yield return new WaitForSeconds(1f);
             
             // Commands registration
+            PowerManagementCommands.RegisterConsoleCommand();
             CheckBossesCommand.RegisterConsoleCommand();
             
-            Logger.LogInfo($"Console command registered successfully. IsServer: {ZNet.instance.IsServer().ToString().ToUpperInvariant()}");
+            Logger.LogInfo($"Console commands registered successfully. IsServer: {ZNet.instance.IsServer().ToString().ToUpperInvariant()}");
         }
 
         void onDestroy()

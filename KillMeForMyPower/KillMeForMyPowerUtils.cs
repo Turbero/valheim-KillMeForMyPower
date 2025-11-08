@@ -1,5 +1,5 @@
 ﻿using System;
-using KillMeForMyPower.Restrictions;
+using KillMeForMyPower.Managers;
 using KillMeForMyPower.Restrictions.BossNameManagement;
 
 namespace KillMeForMyPower
@@ -55,9 +55,8 @@ namespace KillMeForMyPower
                 if (hasDefeated)
                 {
                     Logger.Log("Learned the power before. Granting!");
-                    //Take the chance to update key
-                    Player player = Player.m_localPlayer;
-                    BossNameUtils.GrantBossPowerToPlayer(bossNameEnum, player);
+                    //Take the chance to add the player name
+                    ZRoutedRpc.instance.InvokeRoutedRPC(0L, "RPC_BossPowerGrantServer", bossNameEnum.ToString(), Player.m_localPlayer.GetPlayerName());
                 }
             }
             return hasDefeated;

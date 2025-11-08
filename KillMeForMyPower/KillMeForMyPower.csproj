@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Libs\External\ServerSync.dll</HintPath>
     </Reference>
+    <Reference Include="Splatform">
+      <HintPath>..\..\..\Libs\Splatform.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,18 +77,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\PowerManagementCommands.cs" />
     <Compile Include="Commands\CheckBossesCommand.cs" />
     <Compile Include="KillMeForMyPowerUtils.cs" />
     <Compile Include="ConfigurationFile.cs" />
     <Compile Include="KillMeForMyPower.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restrictions\BossNameManagement\BossNameEnum.cs" />
     <Compile Include="Restrictions\BossNameManagement\BossNameUtils.cs" />
+    <Compile Include="Restrictions\BossNameManagement\RPC_Register.cs" />
     <Compile Include="Restrictions\BossPowerGrant.cs" />
     <Compile Include="Restrictions\BossPowerRestriction.cs" />
     <Compile Include="Restrictions\DungeonRestriction.cs" />
-    <Compile Include="Restrictions\GameManager.cs" />
     <Compile Include="Restrictions\ItemsRestriction.cs" />
     <Compile Include="Restrictions\SkillLevelRestriction.cs" />
     <Compile Include="Restrictions\TraderSetup.cs" />
