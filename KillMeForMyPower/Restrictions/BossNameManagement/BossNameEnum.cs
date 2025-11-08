@@ -16,7 +16,7 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
         [BossNameAttr(null,                  null,                  null,                 null)]                                        None,
         [BossNameAttr("BossGorr_TW",         "SE_Boss_Gorr",        "Gorr",               "playerListForBoss8TherzieGorrPower")]        SE_Boss_Gorr,
         [BossNameAttr("BossBrutalis_TW",     "SE_Boss_Brutalis",    "Brutalis",           "playerListForBoss8TherzieBrutalisPower")]    SE_Boss_Brutalis,
-        [BossNameAttr("BossStormHerald_TW",  "SE_Boss_StormHerald", "StormHerald",        "playerListForBoss8TherzieStormHeralsPower")] SE_Boss_StormHerald,
+        [BossNameAttr("BossStormHerald_TW",  "SE_Boss_StormHerald", "StormHerald",        "playerListForBoss8TherzieStormHeraldPower")] SE_Boss_StormHerald,
         [BossNameAttr("BossSythrak_TW",      "SE_Boss_Sythrak",     "Sythrak",            "playerListForBoss8TherzieSythrakPower")]     SE_Boss_Sythrak
     }
     
