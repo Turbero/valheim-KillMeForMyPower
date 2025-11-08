@@ -1,8 +1,21 @@
 ### CHANGELOG
 
+## 2.1.0
+
+* Re-done implementation to assign powers permissions once a boss is killed:
+  * The list of players who can use the power is correctly updated in the server config file (server-synced)
+  * created admin commands "/add_power [player] [boss_prefabId]" and "/remove_power [player] [boss_prefabId]" if something goes off (boss_prefabIds: Eikthyr, gd_king, Bonemass, Dragon, GoblinKing, SeekerQueen, Fader, BossGorr_TW, BossBrutalis_TW, BossStormHerald_TW, BossSythrak_TW)
+* Added new admin option in the config file to have extra admin players to help assigning powers if needed. Empty by default. (server-synced)
+* Fixed typo in grant boss for Therzie StormHerald boss in Deep North
+* Fixed granting boss power access to players who are around the one that hits last (yes, once again fixed!)
+
+TIPS:
+* Ask admin to use commands or edit config server file directly to recover your power after the update in the server you're playing.
+* Recreate the file if you feel more comfortable and let the admin run the commands to give back players their powers before the update.
+
 ## 2.0.1
 
-* Fix for .cfg file (temporary) while solving sync-issues
+* Fix for .cfg file (temporary) while solving sync-issues (I will solve this I swear)
 
 ## 2.0.0
 
