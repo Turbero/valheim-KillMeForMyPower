@@ -16,7 +16,7 @@ namespace KillMeForMyPower
             
             foreach (BossNameEnum bossNameEnum in Enum.GetValues(typeof(BossNameEnum)))
             {
-                if (bossNameEnum.GetFightBossname() == value)
+                if (bossNameEnum.GetFightBossname() == value || bossNameEnum.ToString() == value)
                     return bossNameEnum;
             }
 
