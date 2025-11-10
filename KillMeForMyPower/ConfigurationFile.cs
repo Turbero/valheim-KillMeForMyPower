@@ -90,14 +90,14 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipNo = config("2 - Config", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
                 grantKillToNearbyPlayers = config("2 - Config", "GrantKillToNearbyPlayers", true, "Allows nearby players to grant the boss kill (default = true)");
                 
-                daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 10000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
-                daysBossElder    = config("3 - Days", "DaysBossElder", 10000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
-                daysBossBonemass = config("3 - Days", "DaysBossBonemass", 10000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");
-                daysBossModer    = config("3 - Days", "DaysBossModer", 10000, "Minimum number of days until the Moder power cannot be obtained without killing him (default = 10000)");
-                daysBossYagluth  = config("3 - Days", "DaysBossYagluth", 10000, "Minimum number of days until the Yagluth power cannot be obtained without killing him (default = 10000)");
-                daysBossQueen    = config("3 - Days", "DaysBossQueen", 10000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 10000)");
-                daysBossFader    = config("3 - Days", "DaysBossFader", 10000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 10000)");
-                daysBossModded   = config("3 - Days", "DaysBossModded", 10000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 10000)");
+                daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
+                daysBossElder    = config("3 - Days", "DaysBossElder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
+                daysBossBonemass = config("3 - Days", "DaysBossBonemass", 100000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");
+                daysBossModer    = config("3 - Days", "DaysBossModer", 100000, "Minimum number of days until the Moder power cannot be obtained without killing him (default = 10000)");
+                daysBossYagluth  = config("3 - Days", "DaysBossYagluth", 100000, "Minimum number of days until the Yagluth power cannot be obtained without killing him (default = 10000)");
+                daysBossQueen    = config("3 - Days", "DaysBossQueen", 100000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 10000)");
+                daysBossFader    = config("3 - Days", "DaysBossFader", 100000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 10000)");
+                daysBossModded   = config("3 - Days", "DaysBossModded", 100000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 10000)");
                 
                 maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100f, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
                 maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100f, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
