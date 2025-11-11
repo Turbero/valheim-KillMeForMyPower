@@ -71,8 +71,10 @@ namespace KillMeForMyPower.Restrictions
         public static void RPC_BossPowerGrantServer(long sender, string bossEnumStr, string playersToGrant)
         {
             //Message to the host to sync powers list
-            Logger.Log($"[RPC_BossPowerGrantServer] RPC sent from sender {sender} with {bossEnumStr} and {playersToGrant}");
-            BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossEnumStr);
+            BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossEnumStr, true);
+            if (bossNameEnum == BossNameEnum.None) return;
+            
+            Logger.Log($"[RPC_BossPowerGrantServer] RPC sent from sender {sender} with {bossEnumStr} ({bossNameEnum}) and {playersToGrant}");
             string[] players = playersToGrant.Split(',');
             foreach (string player in players)
             {
@@ -84,8 +86,10 @@ namespace KillMeForMyPower.Restrictions
         public static void RPC_BossPowerRemoveGrantServer(long sender, string bossEnumStr, string playersToRemoveGrant)
         {
             //Message to the host to sync powers list
-            Logger.Log($"[RPC_BossPowerRemoveGrantServer] RPC sent from sender {sender} with {bossEnumStr} and {playersToRemoveGrant}");
             BossNameEnum bossNameEnum = KillMeForMyPowerUtils.findBossNameByPrefabName(bossEnumStr);
+            if (bossNameEnum == BossNameEnum.None) return;
+            
+            Logger.Log($"[RPC_BossPowerRemoveGrantServer] RPC sent from sender {sender} with {bossEnumStr} ({bossNameEnum}) and {playersToRemoveGrant}");
             string[] players = playersToRemoveGrant.Split(',');
             foreach (string player in players)
             {

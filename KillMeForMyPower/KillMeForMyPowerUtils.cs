@@ -11,7 +11,7 @@ namespace KillMeForMyPower
             return (BossNameEnum) Enum.Parse(typeof(BossNameEnum), value, true);
         }
         
-        public static BossNameEnum findBossNameByPrefabName(string value) {
+        public static BossNameEnum findBossNameByPrefabName(string value, bool logSilent = false) {
             Logger.Log($"Parsing prefab bossName {value} into Enum");
             
             foreach (BossNameEnum bossNameEnum in Enum.GetValues(typeof(BossNameEnum)))
@@ -20,7 +20,8 @@ namespace KillMeForMyPower
                     return bossNameEnum;
             }
 
-            Logger.LogWarning($"{value} not a vanilla/monstrum boss name.");
+            if (!logSilent)
+                Logger.LogWarning($"{value} not a vanilla/monstrum boss name.");
             return BossNameEnum.None;
         }
 
