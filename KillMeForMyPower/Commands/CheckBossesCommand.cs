@@ -18,7 +18,8 @@ namespace KillMeForMyPower.Commands
                         continue;
                     
                     string playersList = enumValue.GetGrantedPlayerNamesList();
-                    if (playersList != null && playersList.Contains(playerName))
+                    if ((!string.IsNullOrEmpty(playersList) && playersList.Contains(playerName)) || 
+                        ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(enumValue.GetPowerKey()))
                     {
                         args.Context.AddString($"- {Localization.instance.Localize(enumValue.GetTranslationKey())}");
                         someKilled = true;
