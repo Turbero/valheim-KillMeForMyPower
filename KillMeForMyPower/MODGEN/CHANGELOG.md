@@ -1,5 +1,11 @@
 ### CHANGELOG
 
+## 2.1.1
+
+* Fixed RPC warning spam messages with wrong boss values 
+* Updated /bosses_permissions command to show bosses power names learned before installing the mod when config option "activateMidPlayDetection" is true
+* Increased minimum number of days default value to obtain power bosses without fighting them from 10000 to 100000
+
 ## 2.1.0
 
 * Re-done implementation to assign powers permissions once a boss is killed:
