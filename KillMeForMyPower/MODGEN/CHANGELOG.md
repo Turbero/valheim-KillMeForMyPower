@@ -1,5 +1,22 @@
 ### CHANGELOG
 
+## 2.2.0
+
+New additions!
+* Added new feature: now you cannot enter dungeons if you haven't defeated previous biome boss before:
+  * You must defeat Eikthyr to enter dungeons in the Black Forest
+  * You must defeat The Elder to enter dungeons in the Swamp, EVEN IF THEY WERE OPENED
+  * You must defeat Bonemass to enter dungeons in the Mountains
+  * You must defeat Yagluth to enter dungeons in the Mistlands, EVEN IF THE INFESTED CITADEL IS OPEN
+  * You must defeat the Seeker Queen to enter dungeons in the Ashlands
+* Added new feature for Queen battle:
+  * if you enter the infested citadel and queen is alerted, you will not be able to leave the dungeon!
+  * if you die, you can recover your tombstone but you better don't alert her again to exit or you will have to resume the battle!
+* Now you can't equip pickaxe antler without killing Eikthyr first
+* Changed: section "2 - Config" has been split into different subsections: 2.1, 2.2, etc. 
+
+TIP: Update your settings accordingly again after the update (delete file to re-create and override your settings if you prefer).
+
 ## 2.1.1
 
 * Fixed RPC warning spam messages with wrong boss values 
