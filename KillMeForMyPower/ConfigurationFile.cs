@@ -20,6 +20,11 @@ namespace KillMeForMyPower
         public static ConfigEntry<BossNameEnum> vendorBogWitchBossToKill;
         public static ConfigEntry<string> vendorBogWitchRestrictions;
         public static ConfigEntry<string> forbiddenVendorMessage;
+        public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBossesAdmins;
+        public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBosses;
+        public static ConfigEntry<string> restrictEnteringDungeonsBeforeKillingBossesMessage;
+        public static ConfigEntry<bool> restrictExitingQueenDungeonIfAlive;
+        public static ConfigEntry<string> restrictExitingQueenDungeonIfAliveMessage;
         public static ConfigEntry<bool> restrictUsingKeyItems;
         public static ConfigEntry<string> restrictUsingKeyItemsMessage;
         public static ConfigEntry<string> itemRestrictionAvailableTooltipMessage;
@@ -83,6 +88,11 @@ namespace KillMeForMyPower
                 vendorBogWitchBossToKill = config("2 - Config", "VendorBogWitchBossToKill", BossNameEnum.TheElder, "Boss to be killed before being able to talk to Haldor (default = TheElder). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
                 vendorBogWitchRestrictions = config("2 - Config", "VendorBogWitchRestrictions", "", "Restricted items for BogWitch split by comma. Ex: MeadTrollPheromones,TheElder;SpicePlains,Moder;SpiceAshlands,Queen. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader (empty = nothing to restrict)");
                 forbiddenVendorMessage = config("2 - Config", "ForbiddenVendorMessage", "You have not killed {0} yet to buy my stuff!", "Message to show when you cannot buy from a NPC");
+                restrictEnteringDungeonsBeforeKillingBossesAdmins = config("2 - Config", "Restrict Entering Dungeons Before Killing Bosses Admins", false, "Restricts accessing dungeons to admins if they haven't killed the boss of the previous biome. (default = false)");
+                restrictEnteringDungeonsBeforeKillingBosses = config("2 - Config", "Restrict Entering Dungeons Before Killing Bosses", true, "Restricts accessing dungeons in biomes if you haven't killed the boss of the previous biome. (default = true)");
+                restrictEnteringDungeonsBeforeKillingBossesMessage = config("2 - Config", "Restrict Entering Dungeons Before Killing Bosses Message", "You must defeat {0} to access this dungeon first!", "Message to show the access restriction to dungeons if previous biome boss has not been defeated.");
+                restrictExitingQueenDungeonIfAlive = config("2 - Config", "Restrict Exiting Queen Dungeon If Alive", true, "Blocks user the Queen room without killing her! (default = false)");
+                restrictExitingQueenDungeonIfAliveMessage = config("2 - Config", "Restrict Exiting Queen Dungeon If Alive Message", "A mystical force blocks you from running away!", "Message to show when the queen is still alive and you cannot leave the dungeon.");
                 restrictUsingKeyItems = config("2 - Config", "RestrictUsingKeyItems", true, "Restricts using crypt key, wishbone and wisplight until you kill the previous boss even if you get them from someone else. (default = true)");
                 restrictUsingKeyItemsMessage = config("2 - Config", "RestrictUsingKeyItemsMessage", "You must kill {0} before doing that action!", "Message to show when you cannot equip or do an action with an important key item");
                 itemRestrictionAvailableTooltipMessage = config("2 - Config", "ItemRestrictionAvailableTooltipMessage", "Available to use", "Message to show in item descriptions to know when you can start using them");
