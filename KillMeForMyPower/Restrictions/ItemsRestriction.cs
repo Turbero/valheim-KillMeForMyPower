@@ -27,6 +27,13 @@ namespace KillMeForMyPower.Restrictions
             
             if (__instance is Player)
             {
+                if (item.m_shared.m_name == "$item_pickaxe_antler" && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr))
+                {
+                    __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Eikthyr.GetTranslationKey()));
+                    Effects.scareEffect();
+                    __result = false;
+                    return false;
+                }
                 if (item.m_shared.m_name == "$item_wishbone" && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass))
                 {
                     __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Bonemass.GetTranslationKey()));
@@ -78,7 +85,9 @@ namespace KillMeForMyPower.Restrictions
                 Transform transform = Utils.FindChild(m_tooltip.transform, "Text");
                 if (transform != null && __instance.m_topic != null)
                 {
-                    if (__instance.m_topic == "$item_demister")
+                    if (__instance.m_topic == "$item_pickaxe_antler")
+                        updateTooltipText(__instance, transform, BossNameEnum.Eikthyr);
+                    else if (__instance.m_topic == "$item_demister")
                         updateTooltipText(__instance, transform, BossNameEnum.Yagluth);
                     else if (__instance.m_topic == "$item_wishbone")
                         updateTooltipText(__instance, transform, BossNameEnum.Bonemass);
@@ -90,7 +99,6 @@ namespace KillMeForMyPower.Restrictions
 
         private static void updateTooltipText(UITooltip __instance, Transform transform, BossNameEnum bossToCheck)
         {
-            Logger.Log("tooltip topic: "+__instance.m_topic);
             bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(bossToCheck);
             string text = ready 
                 ? ConfigurationFile.itemRestrictionAvailableTooltipYes.Value 
