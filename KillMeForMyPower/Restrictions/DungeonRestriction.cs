@@ -71,9 +71,9 @@ namespace KillMeForMyPower.Restrictions
                     return negateAccess(player, BossNameEnum.Queen);
             }
 
-            if (ConfigurationFile.restrictExitingQueenDungeonIfAlive.Value && targetEntranceName == "exteriorgateway" && IsQueenNearbyAndAlert(player))
+            if (ConfigurationFile.restrictExitingQueenDungeonIfAliveOrAlerted.Value && targetEntranceName == "exteriorgateway" && IsQueenNearbyAndAlert(player))
             {
-                player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictExitingQueenDungeonIfAliveMessage.Value);
+                player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictExitingQueenDungeonIfAliveOrAlertedMessage.Value);
                 Effects.scareEffect();
                 return false;
             }
