@@ -13,8 +13,11 @@ namespace KillMeForMyPower.Restrictions
         public static void scareEffect()
         {
             SEMan seMan = Player.m_localPlayer.GetSEMan();
-            StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
-            se.m_ttl = 3; 
+            if (seMan?.GetStatusEffect("Lightning".GetHashCode()) == null)
+            {
+                StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
+                se.m_ttl = 3;
+            }
         }
     }
     [HarmonyPatch(typeof(Humanoid), "EquipItem")]
