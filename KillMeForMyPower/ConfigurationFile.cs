@@ -5,6 +5,15 @@ using ServerSync;
 
 namespace KillMeForMyPower
 {
+    public enum Effects
+    {
+        None,
+        Burning,
+        Frost,
+        Lightning,
+        Poison
+    }
+    
     internal class ConfigurationFile
     {
         private static ConfigEntry<bool> _serverConfigLocked;
@@ -20,6 +29,8 @@ namespace KillMeForMyPower
         public static ConfigEntry<BossNameEnum> vendorBogWitchBossToKill;
         public static ConfigEntry<string> vendorBogWitchRestrictions;
         public static ConfigEntry<string> forbiddenVendorMessage;
+        public static ConfigEntry<Effects> scareEffect;
+        public static ConfigEntry<int> scareEffectDuration;
         public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBossesAdmins;
         public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBosses;
         public static ConfigEntry<string> restrictEnteringDungeonsBeforeKillingBossesMessage;
@@ -81,7 +92,9 @@ namespace KillMeForMyPower
                 
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 grantKillToNearbyPlayers = config("2 - Config", "GrantKillToNearbyPlayers", true, "Allows nearby players to grant the boss kill (default = true)");
-                
+                scareEffect = config("2 - Config", "Scare Effect", Effects.Lightning, "Set up the effect when trying to access restricted items or dungeons (default = Lightning)");
+                scareEffectDuration = config("2 - Config", "Scare Effect Duration", 3, "Duration in seconds of the scare effect (default = 3)");
+
                 vendorLocalRestrictions = config("2.1 - Vendor Restrictions", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
                 vendorHaldorBossToKill = config("2.1 - Vendor Restrictions", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
                 vendorHaldorRestrictions = config("2.1 - Vendor Restrictions", "VendorHaldorRestrictions", "BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth", "Restricted items for Haldor split by comma and semicolon. Ex: BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader (empty = nothing to restrict)");

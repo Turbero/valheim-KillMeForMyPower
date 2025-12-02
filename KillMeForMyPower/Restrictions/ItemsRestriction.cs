@@ -12,11 +12,15 @@ namespace KillMeForMyPower.Restrictions
     {
         public static void scareEffect()
         {
-            SEMan seMan = Player.m_localPlayer.GetSEMan();
-            if (seMan?.GetStatusEffect("Lightning".GetHashCode()) == null)
+            global::KillMeForMyPower.Effects effect = ConfigurationFile.scareEffect.Value;
+            if (effect != global::KillMeForMyPower.Effects.None)
             {
-                StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
-                se.m_ttl = 3;
+                SEMan seMan = Player.m_localPlayer.GetSEMan();
+                if (seMan?.GetStatusEffect(effect.ToString().GetHashCode()) == null)
+                {
+                    StatusEffect se = seMan?.AddStatusEffect(effect.ToString().GetHashCode(), resetTime: false);
+                    se.m_ttl = ConfigurationFile.scareEffectDuration.Value;
+                }
             }
         }
     }
