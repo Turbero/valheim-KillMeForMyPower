@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 2.2.2
+
+* Fixed log exception when boss restriction debuff effect applies on a player with existing same debuff effect
+
 ## 2.2.1
 
 * Added config option to change effect and duration of the forbidden access to items and dungeons (default as Lightning effect and 3 seconds) 
