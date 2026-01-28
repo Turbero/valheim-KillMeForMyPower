@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using System.Linq;
 using KillMeForMyPower.Restrictions.BossNameManagement;
 
 namespace KillMeForMyPower.Restrictions
@@ -53,58 +54,59 @@ namespace KillMeForMyPower.Restrictions
         private static void ApplyBlockedEffect(string bossName)
         {
             SEMan seMan = Player.m_localPlayer.GetSEMan();
+            string buffNames = string.Join(";", seMan.GetStatusEffects().Select(se => se.name));
             BossNameEnum parsedBossName = (BossNameEnum)Enum.Parse(typeof(BossNameEnum), bossName, true);
-            if (parsedBossName == BossNameEnum.Eikthyr)
+            if (parsedBossName == BossNameEnum.Eikthyr && !buffNames.Contains("Lightning"))
             {
                 StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
                 se.m_ttl = 5;
             }
-            else if (parsedBossName == BossNameEnum.TheElder)
+            else if (parsedBossName == BossNameEnum.TheElder && !buffNames.Contains("Burning"))
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.Bonemass)
+            else if (parsedBossName == BossNameEnum.Bonemass && !buffNames.Contains("Poison"))
             {
                 SE_Poison se = (SE_Poison)seMan?.AddStatusEffect("Poison".GetHashCode(), resetTime: false);
                 se.AddDamage(Math.Max(1, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.Moder)
+            else if (parsedBossName == BossNameEnum.Moder && !buffNames.Contains("Frost"))
             {
                 SE_Frost se = (SE_Frost)seMan?.AddStatusEffect("Frost".GetHashCode(), resetTime: false);
                 se.m_ttl = 5;
             }
-            else if (parsedBossName == BossNameEnum.Yagluth)
+            else if (parsedBossName == BossNameEnum.Yagluth && !buffNames.Contains("Burning"))
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.Queen)
+            else if (parsedBossName == BossNameEnum.Queen && !buffNames.Contains("Poison"))
             {
                 SE_Poison se = (SE_Poison)seMan?.AddStatusEffect("Poison".GetHashCode(), resetTime: false);
                 se.AddDamage(Math.Max(1, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.Fader)
+            else if (parsedBossName == BossNameEnum.Fader && !buffNames.Contains("Burning"))
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.SE_Boss_Gorr)
+            else if (parsedBossName == BossNameEnum.SE_Boss_Gorr && !buffNames.Contains("Frost"))
             {
                 SE_Frost se = (SE_Frost)seMan?.AddStatusEffect("Frost".GetHashCode(), resetTime: false);
                 se.m_ttl = 5;
             }
-            else if (parsedBossName == BossNameEnum.SE_Boss_Brutalis)
+            else if (parsedBossName == BossNameEnum.SE_Boss_Brutalis && !buffNames.Contains("Burning"))
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.SE_Boss_Sythrak)
+            else if (parsedBossName == BossNameEnum.SE_Boss_Sythrak && !buffNames.Contains("Burning"))
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
             }
-            else if (parsedBossName == BossNameEnum.SE_Boss_StormHerald)
+            else if (parsedBossName == BossNameEnum.SE_Boss_StormHerald && !buffNames.Contains("Lightning"))
             {
                 StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
                 se.m_ttl = 5;
