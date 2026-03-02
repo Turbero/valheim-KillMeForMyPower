@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 2.2.3
+
+* Added new option to force players to fight together with a minimum number of players around the altar to spawn a boss (default = 1, no worries!)
+
 ## 2.2.2
 
 * Fixed log exception when boss restriction debuff effect applies on a player with existing same debuff effect
