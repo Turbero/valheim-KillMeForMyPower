@@ -73,7 +73,7 @@ namespace KillMeForMyPower.Restrictions
 
             if (ConfigurationFile.restrictExitingQueenDungeonIfAliveOrAlerted.Value && targetEntranceName == "exteriorgateway" && IsQueenNearbyAndAlert(player))
             {
-                player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictExitingQueenDungeonIfAliveOrAlertedMessage.Value);
+                player.Message(MessageHud.MessageType.Center, Localization.instance.Localize("$msg_blockedbyboss"));
                 Effects.scareEffect();
                 return false;
             }
