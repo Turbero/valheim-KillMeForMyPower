@@ -1,5 +1,16 @@
 ### CHANGELOG
 
+## 2.3.0
+
+Added:
+* new category in .cfg file with options to decide the boss drops amounts behavior for items and trophies according to the players nearby:
+  * Default → same as vanilla (one key/wishbone per player connected, a s***)  
+  * One Player → a set of drops equivalent to a one player fight, even if several participated in the battle
+  * Drops For Each Player Nearby → a set of drops for each player nearby the boss when dying (1 trophy and n-items for each one)
+
+Changed:
+* Now when trying to run away from the Seeker Queen the vanilla message will be shown, as same as when you have "no portals with boss" game restriction enabled (removed old config message option)
+
 ## 2.2.3
 
 * Added new option to force players to fight together with a minimum number of players around the altar to spawn a boss (default = 1, no worries!)
