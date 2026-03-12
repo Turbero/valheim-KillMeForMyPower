@@ -44,6 +44,10 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> itemRestrictionAvailableTooltipYes;
         public static ConfigEntry<string> itemRestrictionAvailableTooltipNo;
         public static ConfigEntry<bool> grantKillToNearbyPlayers;
+
+        public static ConfigEntry<bool> dropsBossItems;
+        public static ConfigEntry<bool> dropsBossTrophies;
+            
         public static ConfigEntry<int> daysBossEikthyr;
         public static ConfigEntry<int> daysBossElder;
         public static ConfigEntry<int> daysBossBonemass;
@@ -52,6 +56,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<int> daysBossQueen;
         public static ConfigEntry<int> daysBossFader;
         public static ConfigEntry<int> daysBossModded;
+        
         public static ConfigEntry<float> maxLevelBeforeBoss1Eikthyr;
         public static ConfigEntry<float> maxLevelBeforeBoss2TheElder;
         public static ConfigEntry<float> maxLevelBeforeBoss3Bonemass;
@@ -59,6 +64,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<float> maxLevelBeforeBoss5Yagluth;
         public static ConfigEntry<float> maxLevelBeforeBoss6Queen;
         public static ConfigEntry<float> maxLevelBeforeBoss7Fader;
+        
         public static ConfigEntry<string> playerListForBoss1EikthyrPower;
         public static ConfigEntry<string> playerListForBoss2TheElderPower;
         public static ConfigEntry<string> playerListForBoss3BonemassPower;
@@ -119,6 +125,9 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipMessage = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessage", "Available to use", "Message to show in item descriptions to know when you can start using them");
                 itemRestrictionAvailableTooltipYes = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
                 itemRestrictionAvailableTooltipNo = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
+                
+                dropsBossItems    = config("2.4 - Boss drops rules", "Items drop for each player nearby", false, "If enabled, drops a set of boss item drops for each player nearby, not anyone and anywhere in the server");
+                dropsBossTrophies = config("2.4 - Boss drops rules", "Trophy drop for each player nearby", false, "If enabled, drops a trophy for each player nearby, not anyone and anywhere in the server");
                 
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
