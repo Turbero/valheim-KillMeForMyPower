@@ -10,8 +10,12 @@ namespace KillMeForMyPower.Restrictions
     {
         public static void Postfix(ref Character ___m_character, ref List<KeyValuePair<GameObject, int>> __result)
         {
-            if (!ConfigurationFile.dropsBossTrophies.Value && !ConfigurationFile.dropsBossItems.Value) return;
+            if (ConfigurationFile.dropsBossTrophies.Value == BossDropRule.Default &&
+                ConfigurationFile.dropsBossItems.Value == BossDropRule.Default)
+                return;
+            
             if (!___m_character.IsBoss()) return;
+            
             int countPlayersNearby = GetCountPlayersNearby(___m_character);
             
             Logger.Log("result distinct drops count: "+__result.Count);
@@ -27,20 +31,25 @@ namespace KillMeForMyPower.Restrictions
                 string name = dropGo.name.ToLowerInvariant();
                 Logger.Log($"Previous amount for {name}: {amount}");
                 // Items
-                if (ConfigurationFile.dropsBossItems.Value)
+                if (ConfigurationFile.dropsBossItems.Value != BossDropRule.Default)
                 {
+                    int count = ConfigurationFile.dropsBossItems.Value == BossDropRule.DropsForEachPlayerNearby
+                        ? countPlayersNearby
+                        : 1;
                     if (name.ToLowerInvariant().Contains("hardantler") || name.ToLowerInvariant().Contains("yagluthdrop"))
-                        amount = 3 * countPlayersNearby;
+                        amount = 3 * count;
                     else if (name.ToLowerInvariant().Contains("cryptkey") || name.ToLowerInvariant().Contains("wishbone"))
-                        amount = countPlayersNearby;
+                        amount = count;
                     else if (name.ToLowerInvariant().Contains("dragontear")) 
-                        amount = 10 * countPlayersNearby;
+                        amount = 10 * count;
                     else if (name.ToLowerInvariant().Contains("queendrop") || name.ToLowerInvariant().Contains("faderdrop"))
-                        amount = 5 * countPlayersNearby;
+                        amount = 5 * count;
                 }
                 //Trophies
-                if (ConfigurationFile.dropsBossTrophies.Value && name.ToLowerInvariant().Contains("trophy"))
-                    amount = countPlayersNearby;
+                if (name.ToLowerInvariant().Contains("trophy"))
+                    amount = ConfigurationFile.dropsBossItems.Value == BossDropRule.OnePlayer
+                        ? 1
+                        : countPlayersNearby;
                 
                 Logger.Log($"New amount for {name}: {amount}");
                 newResult.Add(new KeyValuePair<GameObject, int>(dropGo, amount));

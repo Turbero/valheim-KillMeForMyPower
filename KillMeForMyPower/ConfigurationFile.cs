@@ -13,6 +13,13 @@ namespace KillMeForMyPower
         Lightning,
         Poison
     }
+
+    public enum BossDropRule
+    {
+        Default,
+        OnePlayer,
+        DropsForEachPlayerNearby
+    }
     
     internal class ConfigurationFile
     {
@@ -45,8 +52,8 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> itemRestrictionAvailableTooltipNo;
         public static ConfigEntry<bool> grantKillToNearbyPlayers;
 
-        public static ConfigEntry<bool> dropsBossItems;
-        public static ConfigEntry<bool> dropsBossTrophies;
+        public static ConfigEntry<BossDropRule> dropsBossItems;
+        public static ConfigEntry<BossDropRule> dropsBossTrophies;
             
         public static ConfigEntry<int> daysBossEikthyr;
         public static ConfigEntry<int> daysBossElder;
@@ -126,8 +133,8 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipYes = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
                 itemRestrictionAvailableTooltipNo = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
                 
-                dropsBossItems    = config("2.4 - Boss drops rules", "Items drop for each player nearby", false, "If enabled, drops a set of boss item drops for each player nearby, not anyone and anywhere in the server");
-                dropsBossTrophies = config("2.4 - Boss drops rules", "Trophy drop for each player nearby", false, "If enabled, drops a trophy for each player nearby, not anyone and anywhere in the server");
+                dropsBossItems    = config("2.4 - Boss drops rules", "Item drops", BossDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
+                dropsBossTrophies = config("2.4 - Boss drops rules", "Trophy drops", BossDropRule.Default, "If not default, drops a number of trophies according to the selected rule");
                 
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
