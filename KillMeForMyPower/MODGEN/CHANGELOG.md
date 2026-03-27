@@ -1,10 +1,15 @@
 ### CHANGELOG
 
+## 2.3.1
+
+* Added integration with EpicMMO.
+* Added restriction in .cfg file to restrict the player spawn the boss when his level is not equal or bigger than the boss level (indicated in the alert message)
+
 ## 2.3.0
 
 Added:
 * new category in .cfg file with options to decide the boss drops amounts behavior for items and trophies according to the players nearby:
-  * Default → same as vanilla (one key/wishbone per player connected, a s***)  
+  * Default → same as vanilla (one key/wishbone per player connected, quite s**tty)  
   * One Player → a set of drops equivalent to a one player fight, even if several participated in the battle
   * Drops For Each Player Nearby → a set of drops for each player nearby the boss when dying (1 trophy and n-items for each one)
 
