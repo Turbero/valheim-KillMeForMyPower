@@ -36,6 +36,11 @@ Decide how many drops the bosses will drop to the fighters:
 * One Player → a set of drops equivalent to a one player fight, even if several participated in the battle
 * Drops For Each Player Nearby → a set of drops for each player nearby the boss when dying (1 trophy and n-items for each one)
 
+If EpicMMO is enabled:
+* avoid people spawning bosses that they cannot kill yet:
+
+![](https://i.imgur.com/8XOJhQK.jpeg)
+
 # About myself
 
 DISCORD: Turbero (Turbero#3465)
