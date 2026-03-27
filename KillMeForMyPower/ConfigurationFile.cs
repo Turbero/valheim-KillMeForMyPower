@@ -54,6 +54,9 @@ namespace KillMeForMyPower
 
         public static ConfigEntry<BossDropRule> dropsBossItems;
         public static ConfigEntry<BossDropRule> dropsBossTrophies;
+
+        public static ConfigEntry<bool> minLevelToSpawnBoss;
+        public static ConfigEntry<string> minLevelToSpawnBossNotMet; 
             
         public static ConfigEntry<int> daysBossEikthyr;
         public static ConfigEntry<int> daysBossElder;
@@ -136,6 +139,9 @@ namespace KillMeForMyPower
                 dropsBossItems    = config("2.4 - Boss drops rules", "Item drops", BossDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
                 dropsBossTrophies = config("2.4 - Boss drops rules", "Trophy drops", BossDropRule.Default, "If not default, drops a number of trophies according to the selected rule");
                 
+                minLevelToSpawnBoss       = config("2.5 - EpicMMO integration", "Minimum level required", true, "If true and epicMMO is enabled, the player needs to have the same level as the boss as minimum to spawn it (default = true)");
+                minLevelToSpawnBossNotMet = config("2.5 - EpicMMO integration", "Not minimum level message", "You need at least level {0} to start this battle", "Message to indicate the player doesn't have the minimum necessary level to spawn the boss");
+
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
                 daysBossBonemass = config("3 - Days", "DaysBossBonemass", 100000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");
