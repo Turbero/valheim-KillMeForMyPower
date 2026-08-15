@@ -56,6 +56,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<BossDropRule> dropsBossTrophies;
 
         public static ConfigEntry<bool> minLevelToSpawnBoss;
+        public static ConfigEntry<int> maxLevelGapBetweenBossAndPlayer;
         public static ConfigEntry<string> minLevelToSpawnBossNotMet; 
             
         public static ConfigEntry<int> daysBossEikthyr;
@@ -139,8 +140,9 @@ namespace KillMeForMyPower
                 dropsBossItems    = config("2.4 - Boss drops rules", "Item drops", BossDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
                 dropsBossTrophies = config("2.4 - Boss drops rules", "Trophy drops", BossDropRule.Default, "If not default, drops a number of trophies according to the selected rule");
                 
-                minLevelToSpawnBoss       = config("2.5 - EpicMMO integration", "Minimum level required", true, "If true and epicMMO is enabled, the player needs to have the same level as the boss as minimum to spawn it (default = true)");
-                minLevelToSpawnBossNotMet = config("2.5 - EpicMMO integration", "Not minimum level message", "You need at least level {0} to start this battle", "Message to indicate the player doesn't have the minimum necessary level to spawn the boss");
+                minLevelToSpawnBoss             = config("2.5 - EpicMMO integration", "Minimum level required", true, "If true and epicMMO is enabled, the player needs to have a minimum level required to spawn each boss (default = true)");
+                maxLevelGapBetweenBossAndPlayer = config("2.5 - EpicMMO integration", "Maximum Level Gap Between Boss And Player", 10, new ConfigDescription("Maximum difference in levels between the boss and the player who is going to spawn it (default = 5)", new AcceptableValueRange<int>(0, 10)));
+                minLevelToSpawnBossNotMet       = config("2.5 - EpicMMO integration", "Not minimum level message", "You need at least level {0} to start this battle", "Message to indicate the player doesn't have the minimum necessary level to spawn the boss");
 
                 daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
                 daysBossElder    = config("3 - Days", "DaysBossElder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");

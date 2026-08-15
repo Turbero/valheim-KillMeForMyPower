@@ -37,7 +37,9 @@ namespace KillMeForMyPower.Restrictions
                     object monsterData = GetMonsters()[bossName + "(Clone)"];
                     if (monsterData != null)
                     {
-                        int minLevel = GetMonsterLevel(monsterData);
+                        int monsterLevel = GetMonsterLevel(monsterData);
+                        int maxLevelGap = ConfigurationFile.maxLevelGapBetweenBossAndPlayer.Value;
+                        int minLevel = monsterLevel - maxLevelGap;
                         if (EpicMMOSystem_API.GetLevel() < minLevel)
                         {
                             Player.m_localPlayer.Message(MessageHud.MessageType.Center, ConfigurationFile.minLevelToSpawnBossNotMet.Value.Replace("{0}", minLevel.ToString()));
