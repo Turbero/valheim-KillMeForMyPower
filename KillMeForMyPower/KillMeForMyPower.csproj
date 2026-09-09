@@ -49,8 +49,7 @@
     <Reference Include="BepInEx">
       <HintPath>..\..\..\Libs\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="ServerSync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ServerSync">
       <HintPath>..\..\..\Libs\External\ServerSync.dll</HintPath>
     </Reference>
     <Reference Include="Splatform">
