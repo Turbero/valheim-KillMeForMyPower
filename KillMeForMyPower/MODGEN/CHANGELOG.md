@@ -1,6 +1,12 @@
 ### CHANGELOG
 
+## 2.3.3
+
+* Recompiled for compatibility with 1.0
+* ServerSync upgrade for compatibility with 1.0
+
 ## 2.3.2
+
 * Added option to spawn a boss with a small gap in levels from 0 to 10 between the boss and the player (default = 10)
   * If Eikthyr is level 15 and the gap is 10, then the player can only spawn from level 5 (15-10)
   * If Eikthyr is level 15 and the gap is 0, then the player can only spawn from level 15 (15-0)
