@@ -1,5 +1,14 @@
 ### CHANGELOG
 
+## 2.4.0
+
+* Additions to Deep North:
+  * Dungeons in Deep North added to the dungeons restrictions that you can't enter until you defeat previous biome boss (Fader, in this case)
+  * In the same way, you can't enter final boss dungeon until you defeat Fader
+  * New configuration so the player can't escape from final boss dungeon until you defeat it (disabled by default, activate at your own risk!)
+* Fixed:
+  * Option to not escape from Queen dungeon if alerted defaulted to false now (description said false, but the default value was true)
+
 ## 2.3.3
 
 * Recompiled for compatibility with 1.0
