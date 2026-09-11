@@ -30,6 +30,8 @@ namespace KillMeForMyPower.Restrictions
                     return true;
                 }
 
+                if (targetEntranceName.Contains("gateway") && !targetEntranceName.Equals("exteriorgateway"))
+                    targetEntranceName = "gateway";
                 return canCrossEntrance(targetEntranceName, player);
             }
         }
@@ -69,9 +71,19 @@ namespace KillMeForMyPower.Restrictions
                     return negateAccess(player, BossNameEnum.Yagluth);
                 if (player.GetCurrentBiome() == Heightmap.Biome.AshLands && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen))
                     return negateAccess(player, BossNameEnum.Queen);
+                if (player.GetCurrentBiome() == Heightmap.Biome.DeepNorth && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader))
+                    return negateAccess(player, BossNameEnum.Fader);
             }
 
-            if (ConfigurationFile.restrictExitingQueenDungeonIfAliveOrAlerted.Value && targetEntranceName == "exteriorgateway" && IsQueenNearbyAndAlert(player))
+            if (ConfigurationFile.restrictExitingQueenDungeonIfAliveOrAlerted.Value && targetEntranceName == "exteriorgateway" &&
+                IsBossNearbyAndAlert(player, "SeekerQueen"))
+            {
+                player.Message(MessageHud.MessageType.Center, Localization.instance.Localize("$msg_blockedbyboss"));
+                Effects.scareEffect();
+                return false;
+            }
+            if (ConfigurationFile.restrictExitingDeepNorthBossDungeonIfAliveOrAlerted.Value && targetEntranceName == "exteriorgateway" &&
+                IsBossNearbyAndAlert(player, "FrozenKing"))
             {
                 player.Message(MessageHud.MessageType.Center, Localization.instance.Localize("$msg_blockedbyboss"));
                 Effects.scareEffect();
@@ -89,26 +101,25 @@ namespace KillMeForMyPower.Restrictions
             return false;
         }
 
-        public static bool IsQueenNearbyAndAlert(Player player)
+        public static bool IsBossNearbyAndAlert(Player player, String bossName)
         {
             Vector3 playerPos = player.transform.position;
 
             foreach (Character c in Character.GetAllCharacters())
             {
-                if (c != null && !c.IsDead() &&
-                    c.name.StartsWith("SeekerQueen", StringComparison.OrdinalIgnoreCase))
+                if (c != null && !c.IsDead() && c.name.StartsWith(bossName, StringComparison.OrdinalIgnoreCase))
                 {
                     bool isAlerted = c.GetComponent<BaseAI>().IsAlerted();
                     bool isBossActive = Location.IsInsideActiveBossDungeon(playerPos);
                     Logger.Log($"isAlerted {isAlerted}, isBossActive {isBossActive}");
                     if (!isAlerted && !isBossActive)
                     {
-                        Logger.LogInfo("SeekerQueen is neither close nor active. Lucky!");
+                        Logger.LogInfo(bossName + " is neither close nor active. Lucky!");
                         return false;
                     }
 
                     float distance = Vector3.Distance(playerPos, c.transform.position);
-                    Logger.Log("SeekerQueen is " + distance + " meters away!");
+                    Logger.Log(bossName + " is " + distance + " meters away!");
                     if (distance <= 60f) //60 meters is the height of the infested citadel (approx.)
                         return true;
                 }

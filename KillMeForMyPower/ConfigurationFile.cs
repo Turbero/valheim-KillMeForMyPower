@@ -45,6 +45,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBosses;
         public static ConfigEntry<string> restrictEnteringDungeonsBeforeKillingBossesMessage;
         public static ConfigEntry<bool> restrictExitingQueenDungeonIfAliveOrAlerted;
+        public static ConfigEntry<bool> restrictExitingDeepNorthBossDungeonIfAliveOrAlerted;
         public static ConfigEntry<bool> restrictUsingKeyItems;
         public static ConfigEntry<string> restrictUsingKeyItemsMessage;
         public static ConfigEntry<string> itemRestrictionAvailableTooltipMessage;
@@ -129,8 +130,9 @@ namespace KillMeForMyPower
                 restrictEnteringDungeonsBeforeKillingBossesAdmins = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Admins", false, "Restricts accessing dungeons to admins as any regular player. (default = false)");
                 restrictEnteringDungeonsBeforeKillingBosses = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses", true, "Restricts accessing dungeons in biomes if you haven't killed the boss of the previous biome. (default = true)");
                 restrictEnteringDungeonsBeforeKillingBossesMessage = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Message", "You must defeat {0} to access this dungeon first!", "Message to show the access restriction to dungeons if previous biome boss has not been defeated.");
-                restrictExitingQueenDungeonIfAliveOrAlerted = config("2.2 - Dungeon Restrictions", "Restrict Exiting Queen Dungeon If Alive or Alerted", true, "Blocks user the Queen room without killing her! (default = false)");
-                
+                restrictExitingQueenDungeonIfAliveOrAlerted = config("2.2 - Dungeon Restrictions", "Restrict Exiting Queen Dungeon If Alive or Alerted", false, "Blocks user the Queen room without killing her! (default = false)");
+                restrictExitingDeepNorthBossDungeonIfAliveOrAlerted = config("2.2 - Dungeon Restrictions", "Restrict Exiting Deep North Boss Dungeon If Alive or Alerted", false, "Blocks user the Deep North boss room without killing him! (default = false)");
+
                 restrictUsingKeyItems = config("2.3 - Item Restrictions", "RestrictUsingKeyItems", true, "Restricts using pickaxe antler, crypt key, wishbone and wisplight until you kill the previous boss even if you get them from someone else. (default = true)");
                 restrictUsingKeyItemsMessage = config("2.3 - Item Restrictions", "RestrictUsingKeyItemsMessage", "You must kill {0} before doing that action!", "Message to show when you cannot equip or do an action with an important progression item");
                 itemRestrictionAvailableTooltipMessage = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessage", "Available to use", "Message to show in item descriptions to know when you can start using them");
