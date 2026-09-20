@@ -30,6 +30,8 @@ namespace KillMeForMyPower.Restrictions
         [HarmonyPrefix]
         public static bool EquipItemPrefix(Humanoid __instance, ItemDrop.ItemData item, bool triggerEquipEffects, ref bool __result)
         {
+            if (Player.m_localPlayer == null) return true; // Game is loading a character in title screen, not currently in game
+            
             if (!ConfigurationFile.restrictUsingKeyItems.Value) return true;
             
             if (__instance is Player)
