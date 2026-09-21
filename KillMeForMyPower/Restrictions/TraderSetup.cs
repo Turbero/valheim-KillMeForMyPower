@@ -53,11 +53,28 @@ namespace KillMeForMyPower.Restrictions
         [HarmonyPatch(typeof(Trader), "GetAvailableItems")]
         public class TraderGetAvailableItemsPatch
         {
-            [HarmonyPostfix]
-            public static void GetAvailableItemsPostfix(Trader __instance, ref List<Trader.TradeItem> __result)
+            [HarmonyPriority(Priority.VeryHigh)]
+            private static void Prefix(Trader __instance, out List<Trader.TradeItem> __state)
+            {
+                __state = new List<Trader.TradeItem>();
+                //Save items with required keys if restrictions are by player to decide them with custom restrictions
+                if (ConfigurationFile.vendorLocalRestrictions.Value)
+                {
+                    foreach (Trader.TradeItem tradeItem in __state)
+                    {
+                        if (!string.IsNullOrEmpty(tradeItem.m_requiredGlobalKey))
+                            __state.AddItem(tradeItem);
+                    }
+                }
+            }
+            
+            [HarmonyPriority(Priority.VeryLow)]
+            private static void Postfix(Trader __instance, List<Trader.TradeItem> __state, ref List<Trader.TradeItem> __result)
             {
                 Logger.Log("**Trader.GetAvailableItems called for "+__instance.gameObject.name);
                 if (!ConfigurationFile.vendorLocalRestrictions.Value) return;
+                
+                __result.AddRange(__state);
 
                 //Custom items to remove
                 List<Trader.TradeItem> customItemsToRemove = new List<Trader.TradeItem>();
@@ -86,16 +103,19 @@ namespace KillMeForMyPower.Restrictions
                     Logger.Log($"Checking vendor item {itemParts[0]} against {itemParts[1]}");
                     foreach (Trader.TradeItem tradeItem in __result)
                     {
-                        Logger.Log($"- Checking {tradeItem.m_prefab.gameObject.name} from the vendor list...");
-                        if (tradeItem.m_prefab.gameObject.name == itemParts[0])
+                        string tradeItemName = tradeItem.m_prefab != null
+                            ? tradeItem.m_prefab.gameObject.name
+                            : tradeItem.m_name; // items that won't generate a prefab (pocket expansions, mod effects, etc)
+                        Logger.Log($"- Checking {tradeItemName} from the vendor list...");
+                        if (tradeItemName == itemParts[0])
                         {
                             if (!KillMeForMyPowerUtils.bossIsKilled(itemParts[1]))
                             {
                                 customItemsToRemove.Add(tradeItem);
-                                Logger.Log($"{itemParts[1]} will be excluded.");
+                                Logger.Log($"{itemParts[0]} will be excluded.");
                             }
                             else
-                                Logger.Log($"{itemParts[1]} will NOT be excluded.");
+                                Logger.Log($"{itemParts[0]} will NOT be excluded.");
 
                             break;
                         }
