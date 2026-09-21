@@ -1,5 +1,21 @@
 ### CHANGELOG
 
+## 2.5.0
+
+* More additions to Deep North:
+  * New checklist to see who has killed the Deep North boss
+  * Blocked final action to trigger end credits if player has not killed the final boss before
+  * Blocked final offering trade at spawn if player has not killed the final boss before
+  * Added option with minimum number of days to end the game without defeating the final boss (default = 100000)
+* Added to VendorHaldorRestrictions config option default value the new pocket expansions as in vanilla
+* Changed:
+  * Reorganized some configuration options in subsections (no need to recreate .cfg file in theory, but if you feel more comfortable go for it)
+  * Removed outdated "Power Commands Admin Players List" configuration option
+  * Max skill level numbers before killing bosses forced to be integer values
+* Fixed:
+  * log warning in title screen that occurred sometimes
+  * some descriptions in configuration file
+
 ## 2.4.0
 
 * Additions to Deep North:
