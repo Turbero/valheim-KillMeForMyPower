@@ -21,15 +21,18 @@ namespace KillMeForMyPower.Restrictions
                 (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss4Moder.Value) ||
                 (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss5Yagluth.Value) ||
                 (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss6Queen.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss7Fader.Value)
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss7Fader.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Kall) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss8Kall.Value)
             );
             return decision;
         }
 
         private static float currentMaxSkillLevel()
         {
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Kall))
                 return float.MaxValue;
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader))
+                return ConfigurationFile.maxLevelBeforeBoss8Kall.Value;
             if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen))
                 return ConfigurationFile.maxLevelBeforeBoss7Fader.Value;
             if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth))

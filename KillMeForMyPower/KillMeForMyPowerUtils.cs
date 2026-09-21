@@ -72,20 +72,22 @@ namespace KillMeForMyPower
         {
             var parsedEnum = parseBossName(bossName);
             if (parsedEnum == BossNameEnum.Eikthyr)
-                return ConfigurationFile.daysBossEikthyr.Value;
+                return ConfigurationFile.daysBoss1Eikthyr.Value;
             if (parsedEnum == BossNameEnum.TheElder)
-                return ConfigurationFile.daysBossElder.Value;
+                return ConfigurationFile.daysBoss2Elder.Value;
             if (parsedEnum == BossNameEnum.Bonemass)
-                return ConfigurationFile.daysBossBonemass.Value;
+                return ConfigurationFile.daysBoss3Bonemass.Value;
             if (parsedEnum == BossNameEnum.Moder)
-                return ConfigurationFile.daysBossModer.Value;
+                return ConfigurationFile.daysBoss4Moder.Value;
             if (parsedEnum == BossNameEnum.Yagluth)
-                return ConfigurationFile.daysBossYagluth.Value;
+                return ConfigurationFile.daysBoss5Yagluth.Value;
             if (parsedEnum == BossNameEnum.Queen)
-                return ConfigurationFile.daysBossQueen.Value;
+                return ConfigurationFile.daysBos6Queen.Value;
             if (parsedEnum == BossNameEnum.Fader)
-                return ConfigurationFile.daysBossFader.Value;
-            return ConfigurationFile.daysBossModded.Value;
+                return ConfigurationFile.daysBoss7Fader.Value;
+            if (parsedEnum == BossNameEnum.Kall)
+                return ConfigurationFile.daysBoss8Kall.Value;
+            return ConfigurationFile.daysBoss9odded.Value;
         }
 
         public static bool bossIsKilled(string bossToCheck)

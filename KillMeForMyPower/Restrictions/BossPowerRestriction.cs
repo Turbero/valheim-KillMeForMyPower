@@ -50,6 +50,48 @@ namespace KillMeForMyPower.Restrictions
                 return true;
             }
         }
+        
+        [HarmonyPatch(typeof(ItemStand), "Interact")]
+        public static class ItemStandInteractFinalBossBloodPatch
+        {
+            public static bool Prefix(ItemStand __instance)
+            {
+                string itemStandName = __instance.m_netViewOverride.name.Replace("(Clone)", "");
+                if (itemStandName.Equals("StartPlatform"))
+                {
+                    Logger.Log("ItemStand StartPlatform Interact detected");
+                    string finalBossStr = nameof(BossNameEnum.Kall);
+                    if (!KillMeForMyPowerUtils.HasDefeatedBossNameStr(finalBossStr) &&
+                        KillMeForMyPowerUtils.GetCurrentDay() < KillMeForMyPowerUtils.GetBossMinimumDayForPower(finalBossStr))
+                    {
+                        Player.m_localPlayer.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenMessage.Value);
+                        ApplyBlockedEffect(finalBossStr);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(EndCredits), "Interact")]
+        public static class EndCreditsValkyrieInteract
+        {
+            public static bool Prefix(EndCredits __instance, Humanoid user, bool hold, bool alt, ref bool __result)
+            {
+                if (!KillMeForMyPowerUtils.HasDefeatedBossNameStr("Kall") && 
+                    KillMeForMyPowerUtils.GetCurrentDay() < KillMeForMyPowerUtils.GetBossMinimumDayForPower("Kall"))
+                {
+                    user.Message(MessageHud.MessageType.Center, ConfigurationFile.forbiddenMessage.Value);
+                    ApplyBlockedEffect("Kall");
+
+                    __result = false;
+                    return false;
+                }
+
+                return true;
+            }
+        }
 
         private static void ApplyBlockedEffect(string bossName)
         {
@@ -90,6 +132,11 @@ namespace KillMeForMyPower.Restrictions
             {
                 SE_Burning se = (SE_Burning)seMan?.AddStatusEffect("Burning".GetHashCode(), resetTime: false);
                 se.AddFireDamage(Math.Max(2, Player.m_localPlayer.GetHealth() - 10f));
+            }
+            else if (parsedBossName == BossNameEnum.Kall && !buffNames.Contains("Lightning"))
+            {
+                StatusEffect se = seMan?.AddStatusEffect("Lightning".GetHashCode(), resetTime: false);
+                se.m_ttl = 5;
             }
             else if (parsedBossName == BossNameEnum.SE_Boss_Gorr && !buffNames.Contains("Frost"))
             {

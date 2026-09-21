@@ -69,6 +69,9 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
                 case BossNameEnum.Fader:
                     ConfigurationFile.playerListForBoss7FaderPower.Value = result;
                     break;
+                case BossNameEnum.Kall:
+                    ConfigurationFile.playerListForBoss8KallPower.Value = result;
+                    break;
                 case BossNameEnum.SE_Boss_Gorr:
                     ConfigurationFile.playerListForBoss8TherzieGorrPower.Value = result;
                     break;

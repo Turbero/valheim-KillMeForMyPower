@@ -13,6 +13,7 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
         [BossNameAttr("GoblinKing",          "GP_Yagluth",          "$enemy_goblinking",  "playerListForBoss5YagluthPower")]            Yagluth,
         [BossNameAttr("SeekerQueen",         "GP_Queen",            "$enemy_seekerqueen", "playerListForBoss6QueenPower")]              Queen,
         [BossNameAttr("Fader",               "GP_Fader",            "$enemy_fader",       "playerListForBoss7FaderPower")]              Fader,
+        [BossNameAttr("FrozenKing_p3",       null,                  "$enemy_frozenking",  "playerListForBoss8KallPower")]               Kall,
         [BossNameAttr(null,                  null,                  null,                 null)]                                        None,
         [BossNameAttr("BossGorr_TW",         "SE_Boss_Gorr",        "Gorr",               "playerListForBoss8TherzieGorrPower")]        SE_Boss_Gorr,
         [BossNameAttr("BossBrutalis_TW",     "SE_Boss_Brutalis",    "Brutalis",           "playerListForBoss8TherzieBrutalisPower")]    SE_Boss_Brutalis,
