@@ -26,7 +26,6 @@ namespace KillMeForMyPower
         private static ConfigEntry<bool> _serverConfigLocked;
         public static ConfigEntry<bool> debug;
         public static ConfigEntry<bool> activateMidPlayDetection;
-        public static ConfigEntry<string> powerCommandsAdminPlayersList;
         public static ConfigEntry<string> forbiddenMessage;
         public static ConfigEntry<bool> vendorLocalRestrictions;
         public static ConfigEntry<BossNameEnum> vendorHaldorBossToKill;
@@ -60,22 +59,24 @@ namespace KillMeForMyPower
         public static ConfigEntry<int> maxLevelGapBetweenBossAndPlayer;
         public static ConfigEntry<string> minLevelToSpawnBossNotMet; 
             
-        public static ConfigEntry<int> daysBossEikthyr;
-        public static ConfigEntry<int> daysBossElder;
-        public static ConfigEntry<int> daysBossBonemass;
-        public static ConfigEntry<int> daysBossModer;
-        public static ConfigEntry<int> daysBossYagluth;
-        public static ConfigEntry<int> daysBossQueen;
-        public static ConfigEntry<int> daysBossFader;
-        public static ConfigEntry<int> daysBossModded;
+        public static ConfigEntry<int> daysBoss1Eikthyr;
+        public static ConfigEntry<int> daysBoss2Elder;
+        public static ConfigEntry<int> daysBoss3Bonemass;
+        public static ConfigEntry<int> daysBoss4Moder;
+        public static ConfigEntry<int> daysBoss5Yagluth;
+        public static ConfigEntry<int> daysBos6Queen;
+        public static ConfigEntry<int> daysBoss7Fader;
+        public static ConfigEntry<int> daysBoss8Kall;
+        public static ConfigEntry<int> daysBoss9odded;
         
-        public static ConfigEntry<float> maxLevelBeforeBoss1Eikthyr;
-        public static ConfigEntry<float> maxLevelBeforeBoss2TheElder;
-        public static ConfigEntry<float> maxLevelBeforeBoss3Bonemass;
-        public static ConfigEntry<float> maxLevelBeforeBoss4Moder;
-        public static ConfigEntry<float> maxLevelBeforeBoss5Yagluth;
-        public static ConfigEntry<float> maxLevelBeforeBoss6Queen;
-        public static ConfigEntry<float> maxLevelBeforeBoss7Fader;
+        public static ConfigEntry<int> maxLevelBeforeBoss1Eikthyr;
+        public static ConfigEntry<int> maxLevelBeforeBoss2TheElder;
+        public static ConfigEntry<int> maxLevelBeforeBoss3Bonemass;
+        public static ConfigEntry<int> maxLevelBeforeBoss4Moder;
+        public static ConfigEntry<int> maxLevelBeforeBoss5Yagluth;
+        public static ConfigEntry<int> maxLevelBeforeBoss6Queen;
+        public static ConfigEntry<int> maxLevelBeforeBoss7Fader;
+        public static ConfigEntry<int> maxLevelBeforeBoss8Kall;
         
         public static ConfigEntry<string> playerListForBoss1EikthyrPower;
         public static ConfigEntry<string> playerListForBoss2TheElderPower;
@@ -84,6 +85,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> playerListForBoss5YagluthPower;
         public static ConfigEntry<string> playerListForBoss6QueenPower;
         public static ConfigEntry<string> playerListForBoss7FaderPower;
+        public static ConfigEntry<string> playerListForBoss8KallPower;
         public static ConfigEntry<string> playerListForBoss8TherzieGorrPower;
         public static ConfigEntry<string> playerListForBoss8TherzieBrutalisPower;
         public static ConfigEntry<string> playerListForBoss8TherzieStormHeraldPower;
@@ -108,7 +110,6 @@ namespace KillMeForMyPower
 
                 debug = config("1 - General", "DebugMode", false, "Enabling/Disabling the debugging in the console (default = false)", false);
                 activateMidPlayDetection = config("1 - General", "ActivateMidPlayDetection", true, "Adds boss power detection to identify if the player had used the power before installing the mod in a mid-play (default = false)");
-                powerCommandsAdminPlayersList = config("1 - General", "Power Commands Admin Players List", "", "List of additional player names that can help admin servers to assign powers to other players or themselves using the mod commands.");
                 
                 forbiddenMessage = config("2 - Config", "ForbiddenMessage", "Kill the forsaken first!", "Message to show when you cannot obtain the forsaken power");
                 grantKillToNearbyPlayers = config("2 - Config", "GrantKillToNearbyPlayers", true, "Allows nearby players to grant the boss kill (default = true)");
@@ -119,19 +120,19 @@ namespace KillMeForMyPower
                 minimumPlayersAroundForbiddenMessage = config("2 - Config", "Minimum Players Around - Forbidden Message", "You need at least {0} people to spawn the boss!", "Message to show when you cannot spawn the boss due to insufficient people around");
                     
                 vendorLocalRestrictions = config("2.1 - Vendor Restrictions", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
-                vendorHaldorBossToKill = config("2.1 - Vendor Restrictions", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
-                vendorHaldorRestrictions = config("2.1 - Vendor Restrictions", "VendorHaldorRestrictions", "BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth", "Restricted items for Haldor split by comma and semicolon. Ex: BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader (empty = nothing to restrict)");
-                vendorHildirBossToKill = config("2.1 - Vendor Restrictions", "VendorHildirBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
-                vendorHildirRestrictions = config("2.1 - Vendor Restrictions", "VendorHildirRestrictions", "", "Restricted items for Hildir split by comma and semicolon. Ex: Ironpit,Moder. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader (empty = nothing to restrict)");
-                vendorBogWitchBossToKill = config("2.1 - Vendor Restrictions", "VendorBogWitchBossToKill", BossNameEnum.TheElder, "Boss to be killed before being able to talk to Haldor (default = TheElder). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,None");
-                vendorBogWitchRestrictions = config("2.1 - Vendor Restrictions", "VendorBogWitchRestrictions", "", "Restricted items for BogWitch split by comma. Ex: MeadTrollPheromones,TheElder;SpicePlains,Moder;SpiceAshlands,Queen. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader (empty = nothing to restrict)");
                 forbiddenVendorMessage = config("2.1 - Vendor Restrictions", "ForbiddenVendorMessage", "You have not killed {0} yet to buy my stuff!", "Message to show when you cannot buy from a NPC");
+                vendorHaldorBossToKill = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
+                vendorHaldorRestrictions = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictions", "BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth;$hud_extrainvslot1,Moder;$hud_extrainvslot2,Queen", "Restricted items for Haldor split by comma and semicolon. Ex: BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorHildirBossToKill = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
+                vendorHildirRestrictions = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictions", "", "Restricted items for Hildir split by comma and semicolon. Ex: Ironpit,Moder. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorBogWitchBossToKill = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchBossToKill", BossNameEnum.TheElder, "Boss to be killed before being able to talk to Haldor (default = TheElder). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
+                vendorBogWitchRestrictions = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictions", "", "Restricted items for BogWitch split by comma. Ex: MeadTrollPheromones,TheElder;SpicePlains,Moder;SpiceAshlands,Queen. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
                 
                 restrictEnteringDungeonsBeforeKillingBossesAdmins = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Admins", false, "Restricts accessing dungeons to admins as any regular player. (default = false)");
                 restrictEnteringDungeonsBeforeKillingBosses = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses", true, "Restricts accessing dungeons in biomes if you haven't killed the boss of the previous biome. (default = true)");
                 restrictEnteringDungeonsBeforeKillingBossesMessage = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Message", "You must defeat {0} to access this dungeon first!", "Message to show the access restriction to dungeons if previous biome boss has not been defeated.");
-                restrictExitingQueenDungeonIfAliveOrAlerted = config("2.2 - Dungeon Restrictions", "Restrict Exiting Queen Dungeon If Alive or Alerted", false, "Blocks user the Queen room without killing her! (default = false)");
-                restrictExitingDeepNorthBossDungeonIfAliveOrAlerted = config("2.2 - Dungeon Restrictions", "Restrict Exiting Deep North Boss Dungeon If Alive or Alerted", false, "Blocks user the Deep North boss room without killing him! (default = false)");
+                restrictExitingQueenDungeonIfAliveOrAlerted = config("2.2.1 - Dungeon Restrictions - Bosses", "Restrict Exiting Queen Dungeon If Alive or Alerted", false, "Blocks user the Queen room without killing her! (default = false)");
+                restrictExitingDeepNorthBossDungeonIfAliveOrAlerted = config("2.2.1 - Dungeon Restrictions - Bosses", "Restrict Exiting Deep North Boss Dungeon If Alive or Alerted", false, "Blocks user the Deep North boss room without killing him! (default = false)");
 
                 restrictUsingKeyItems = config("2.3 - Item Restrictions", "RestrictUsingKeyItems", true, "Restricts using pickaxe antler, crypt key, wishbone and wisplight until you kill the previous boss even if you get them from someone else. (default = true)");
                 restrictUsingKeyItemsMessage = config("2.3 - Item Restrictions", "RestrictUsingKeyItemsMessage", "You must kill {0} before doing that action!", "Message to show when you cannot equip or do an action with an important progression item");
@@ -146,23 +147,25 @@ namespace KillMeForMyPower
                 maxLevelGapBetweenBossAndPlayer = config("2.5 - EpicMMO integration", "Maximum Level Gap Between Boss And Player", 10, new ConfigDescription("Maximum difference in levels between the boss and the player who is going to spawn it (default = 5)", new AcceptableValueRange<int>(0, 10)));
                 minLevelToSpawnBossNotMet       = config("2.5 - EpicMMO integration", "Not minimum level message", "You need at least level {0} to start this battle", "Message to indicate the player doesn't have the minimum necessary level to spawn the boss");
 
-                daysBossEikthyr  = config("3 - Days", "DaysBossEikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 10000)");
-                daysBossElder    = config("3 - Days", "DaysBossElder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
-                daysBossBonemass = config("3 - Days", "DaysBossBonemass", 100000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 10000)");
-                daysBossModer    = config("3 - Days", "DaysBossModer", 100000, "Minimum number of days until the Moder power cannot be obtained without killing him (default = 10000)");
-                daysBossYagluth  = config("3 - Days", "DaysBossYagluth", 100000, "Minimum number of days until the Yagluth power cannot be obtained without killing him (default = 10000)");
-                daysBossQueen    = config("3 - Days", "DaysBossQueen", 100000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 10000)");
-                daysBossFader    = config("3 - Days", "DaysBossFader", 100000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 10000)");
-                daysBossModded   = config("3 - Days", "DaysBossModded", 100000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 10000)");
+                daysBoss1Eikthyr  = config("3 - Days", "Days Boss 1 - Eikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 100000)");
+                daysBoss2Elder    = config("3 - Days", "Days Boss 2 - Elder", 100000, "Minimum number of days until the Elder power cannot be obtained without killing him (default = 10000)");
+                daysBoss3Bonemass = config("3 - Days", "Days Boss 3 - Bonemass", 100000, "Minimum number of days until the Bonemass power cannot be obtained without killing him (default = 100000)");
+                daysBoss4Moder    = config("3 - Days", "Days Boss 4 - Moder", 100000, "Minimum number of days until the Moder power cannot be obtained without killing him (default = 100000)");
+                daysBoss5Yagluth  = config("3 - Days", "Days Boss 5 - Yagluth", 100000, "Minimum number of days until the Yagluth power cannot be obtained without killing him (default = 100000)");
+                daysBos6Queen    = config("3 - Days", "Days Boss 6 - Queen", 100000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 100000)");
+                daysBoss7Fader    = config("3 - Days", "Days Boss 7 - Fader", 100000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 100000)");
+                daysBoss8Kall     = config("3 - Days", "Days Boss 8 - Kall", 100000, "Minimum number of days until end credits cannot be watched without killing the final boss (default = 100000)");
+                daysBoss9odded   = config("3 - Days", "Days Boss 9 - Modded", 100000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 100000)");
                 
-                maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100f, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
-                maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100f, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
-                maxLevelBeforeBoss3Bonemass = config("4 - Max levels", "MaxLevelBeforeBoss3Bonemass", 100f, "Maximum skill level that player can level up skills before killing Bonemass (default = 100)");
-                maxLevelBeforeBoss4Moder    = config("4 - Max levels", "MaxLevelBeforeBoss4Moder", 100f, "Maximum skill level that player can level up skills before killing Moder (default = 100)");
-                maxLevelBeforeBoss5Yagluth  = config("4 - Max levels", "MaxLevelBeforeBoss5Yagluth", 100f, "Maximum skill level that player can level up skills before killing Yagluth (default = 100)");
-                maxLevelBeforeBoss6Queen    = config("4 - Max levels", "MaxLevelBeforeBoss6Queen", 100f, "Maximum skill level that player can level up skills before killing The Queen (default = 100)");
-                maxLevelBeforeBoss7Fader    = config("4 - Max levels", "MaxLevelBeforeBoss7Fader", 100f, "Maximum skill level that player can level up skills before killing Fader (default = 100)");
-                
+                maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
+                maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
+                maxLevelBeforeBoss3Bonemass = config("4 - Max levels", "MaxLevelBeforeBoss3Bonemass", 100, "Maximum skill level that player can level up skills before killing Bonemass (default = 100)");
+                maxLevelBeforeBoss4Moder    = config("4 - Max levels", "MaxLevelBeforeBoss4Moder", 100, "Maximum skill level that player can level up skills before killing Moder (default = 100)");
+                maxLevelBeforeBoss5Yagluth  = config("4 - Max levels", "MaxLevelBeforeBoss5Yagluth", 100, "Maximum skill level that player can level up skills before killing Yagluth (default = 100)");
+                maxLevelBeforeBoss6Queen    = config("4 - Max levels", "MaxLevelBeforeBoss6Queen", 100, "Maximum skill level that player can level up skills before killing The Queen (default = 100)");
+                maxLevelBeforeBoss7Fader    = config("4 - Max levels", "MaxLevelBeforeBoss7Fader", 100, "Maximum skill level that player can level up skills before killing Fader (default = 100)");
+                maxLevelBeforeBoss8Kall     = config("4 - Max levels", "MaxLevelBeforeBoss8Kall", 100, "Maximum skill level that player can level up skills before killing Kall (default = 100)");
+
                 playerListForBoss1EikthyrPower = config("5 - Power Granted player lists", "Player List for Boss 1 - Eikthyr power", "", "List of player names that can use Eikthyr power after defeating him");
                 playerListForBoss2TheElderPower = config("5 - Power Granted player lists", "Player List for Boss 2 - The Elder power", "", "List of player names that can use The Elder power after defeating him");
                 playerListForBoss3BonemassPower = config("5 - Power Granted player lists", "Player List for Boss 3 - Bonemass power", "", "List of player names that can use Bonemass power after defeating him");
@@ -170,6 +173,7 @@ namespace KillMeForMyPower
                 playerListForBoss5YagluthPower = config("5 - Power Granted player lists", "Player List for Boss 5 - Yagluth power", "", "List of player names that can use Yagluth power after defeating him");
                 playerListForBoss6QueenPower = config("5 - Power Granted player lists", "Player List for Boss 6 - Queen power", "", "List of player names that can use Queen power after defeating her");
                 playerListForBoss7FaderPower = config("5 - Power Granted player lists", "Player List for Boss 7 - Fader power", "", "List of player names that can use Fader power after defeating him");
+                playerListForBoss8KallPower = config("5 - Power Granted player lists", "Player List for Boss 8 - Kall", "", "List of player names that has defeated the final boss");
                 playerListForBoss8TherzieGorrPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Gorr power", "", "List of player names that can use Gorr power after defeating him");
                 playerListForBoss8TherzieBrutalisPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - Brutalis power", "", "List of player names that can use Brutalis power after defeating him");
                 playerListForBoss8TherzieStormHeraldPower = config("5 - Power Granted player lists", "Player List for Therzie Boss - StormHerald power", "", "List of player names that can use StormHerald power after defeating him");
