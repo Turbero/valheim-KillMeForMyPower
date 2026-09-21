@@ -24,9 +24,7 @@ namespace KillMeForMyPower.Managers
         {
             Logger.Log("[IsAdmin] Checking powerCommandsAdminPlayersList...");
             var playerName = player.GetPlayerName();
-            bool fileAdmin = ConfigurationFile.powerCommandsAdminPlayersList.Value.Contains(playerName);
-            if (fileAdmin) return true;
-
+            
             Logger.Log("[IsAdmin] Finding All PlayerInfo...");
             List<ZNet.PlayerInfo> result = ZNet.instance.GetPlayerList().FindAll(p => p.m_name == playerName);
             if (result.Count == 0) return false;
