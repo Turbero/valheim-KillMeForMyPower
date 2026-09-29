@@ -123,4 +123,38 @@ namespace KillMeForMyPower.Restrictions
             transform.GetComponent<TMP_Text>().text = string.Join("\n", parts, 0, parts.Length - 1);
         }
     }
+
+    [HarmonyPatch(typeof(Player), "TryPlacePiece")]
+    public class PlacePatch
+    {
+        [HarmonyPrefix]
+        public static bool PlacePatch_Prefix(Player __instance, Piece piece)
+        {
+            Logger.Log("TryPlacePiece | Prefix");
+            if (ConfigurationFile.noBuildAroundAltarsRange.Value == 0)
+                return true;
+            
+            if (piece == null)
+                return true;
+
+            OfferingBowl[] nearbyAltars = GameObject.FindObjectsByType<OfferingBowl>(FindObjectsSortMode.None);
+            Logger.Log($"nearbyAltars: {nearbyAltars.Length}");
+            foreach (OfferingBowl altar in nearbyAltars)
+            {
+                if (altar == null)
+                    continue;
+                
+                Logger.Log($"Altar nearby: {altar.name}");
+                float distance = Vector3.Distance(__instance.transform.position, altar.transform.position);
+                Logger.Log($"Altar distance from piece: {distance:F1}m, range allowed = {ConfigurationFile.noBuildAroundAltarsRange.Value}m");
+                if (distance < ConfigurationFile.noBuildAroundAltarsRange.Value)
+                {
+                    __instance.Message(MessageHud.MessageType.Center, "$msg_nobuildzone");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
 }

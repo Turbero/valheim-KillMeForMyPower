@@ -40,6 +40,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<float> minimumPlayersAroundRange;
         public static ConfigEntry<string> minimumPlayersAroundForbiddenMessage;
         public static ConfigEntry<int> minimumPlayersAroundAmount;
+        public static ConfigEntry<int> noBuildAroundAltarsRange;
         public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBossesAdmins;
         public static ConfigEntry<bool> restrictEnteringDungeonsBeforeKillingBosses;
         public static ConfigEntry<string> restrictEnteringDungeonsBeforeKillingBossesMessage;
@@ -118,7 +119,8 @@ namespace KillMeForMyPower
                 minimumPlayersAroundAmount = config("2 - Config", "Minimum Players Around - Amount", 1, new ConfigDescription("Minimum of players around an altar to spawn a boss, including yourself (default = 3)", new AcceptableValueRange<int>(1, 50)));
                 minimumPlayersAroundRange = config("2 - Config", "Minimum Players Around - Range", 10f, new ConfigDescription("Range to detect minimum of players around an altar to spawn a boss, including yourself (default = 10)", new AcceptableValueRange<float>(0f, 100f)));
                 minimumPlayersAroundForbiddenMessage = config("2 - Config", "Minimum Players Around - Forbidden Message", "You need at least {0} people to spawn the boss!", "Message to show when you cannot spawn the boss due to insufficient people around");
-                    
+                noBuildAroundAltarsRange = config("2 - Config", "No Build Around Altars Range", 0, new ConfigDescription("Range in meters around boss altars where the player cannot build. 0 = the player can build (default = 0)", new AcceptableValueRange<int>(0, 100)));
+
                 vendorLocalRestrictions = config("2.1 - Vendor Restrictions", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
                 forbiddenVendorMessage = config("2.1 - Vendor Restrictions", "ForbiddenVendorMessage", "You have not killed {0} yet to buy my stuff!", "Message to show when you cannot buy from a NPC");
                 vendorHaldorBossToKill = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
