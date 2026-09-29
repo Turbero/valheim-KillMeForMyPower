@@ -157,4 +157,41 @@ namespace KillMeForMyPower.Restrictions
             return true;
         }
     }
+    
+    [HarmonyPatch(typeof(Pickable), "Interact")]
+    public class GoblinTotemRestrictionPatch
+    {
+        [HarmonyPrefix]
+        public static bool GoblinTotemRestrictionPatch_Prefix(Pickable __instance, Humanoid character, bool repeat, bool alt)
+        {
+            Logger.Log("GoblinTotemRestrictionPatch_Interact_Prefix");
+            if (!ConfigurationFile.restrictUsingKeyItems.Value) return true;
+            
+            if (__instance.m_itemPrefab.name.Equals("GoblinTotem"))
+            {
+                Player player = Player.m_localPlayer;
+                if (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr)){
+                    player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Eikthyr.GetTranslatedName()));
+                    Effects.scareEffect();
+                    return false;
+                }
+                if (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder)){
+                    player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.TheElder.GetTranslatedName()));
+                    Effects.scareEffect();
+                    return false;
+                }
+                if (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass)){
+                    player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Bonemass.GetTranslatedName()));
+                    Effects.scareEffect();
+                    return false;
+                }
+                if (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder)){
+                    player.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Moder.GetTranslatedName()));
+                    Effects.scareEffect();
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
 }

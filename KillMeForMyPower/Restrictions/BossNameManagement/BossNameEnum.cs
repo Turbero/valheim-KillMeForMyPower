@@ -55,6 +55,12 @@ namespace KillMeForMyPower.Restrictions.BossNameManagement
             BossNameAttr attr = GetAttr(p);
             return attr.translationKey;
         }
+        
+        public static string GetTranslatedName(this BossNameEnum p)
+        {
+            BossNameAttr attr = GetAttr(p);
+            return Localization.instance.Localize(attr.translationKey);
+        }
 
         public static string GetPowerKey(this BossNameEnum p)
         {
