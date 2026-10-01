@@ -56,8 +56,9 @@ namespace KillMeForMyPower.Restrictions
         {
             public static bool Prefix(ItemStand __instance)
             {
+                if (__instance.m_netViewOverride == null) return true;
                 string itemStandName = __instance.m_netViewOverride.name.Replace("(Clone)", "");
-                if (itemStandName.Equals("StartPlatform"))
+                if ("StartPlatform".Equals(itemStandName))
                 {
                     Logger.Log("ItemStand StartPlatform Interact detected");
                     string finalBossStr = nameof(BossNameEnum.Kall);
