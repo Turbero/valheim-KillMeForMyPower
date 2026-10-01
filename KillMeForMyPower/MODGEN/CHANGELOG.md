@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 2.5.1
+
+* Now the option "RestrictUsingKeyItems" also blocks picking up Goblin totems in Plains if you haven't defeated all bosses until Moder
+* Added option to restrict range in meters to avoid placing pieces around boss altars (default = disabled, 0 meters)
+
 ## 2.5.0
 
 * More additions to Deep North:
