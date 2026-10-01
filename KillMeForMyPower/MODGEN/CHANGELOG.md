@@ -1,5 +1,9 @@
 ### CHANGELOG
 
+## 2.5.2
+
+* Fixed error when interacting with certain itemStands
+
 ## 2.5.1
 
 * Now the option "RestrictUsingKeyItems" also blocks picking up Goblin totems in Plains if you haven't defeated all bosses until Moder
