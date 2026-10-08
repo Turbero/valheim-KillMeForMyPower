@@ -1,5 +1,10 @@
 ### CHANGELOG
 
+## 2.5.3
+
+* Fixed error when it is not required to kill any boss to talk to any vendor or touch Hildir's map ("None" option in the config file)
+* Update readme info with all configuration options
+
 ## 2.5.2
 
 * Fixed error when interacting with certain itemStands
