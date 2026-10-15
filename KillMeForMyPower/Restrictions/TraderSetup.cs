@@ -6,6 +6,13 @@ namespace KillMeForMyPower.Restrictions
 {
     public class TraderSetup
     {
+        private enum RestrictionType
+        {
+            Boss,
+            GlobalKey,
+            PlayerKey
+        }
+    
         [HarmonyPatch(typeof(Trader), "Interact")]
         public class TraderInteractPatch
         {
@@ -76,15 +83,30 @@ namespace KillMeForMyPower.Restrictions
                 
                 __result.AddRange(__state);
 
+                Logger.Log("- Checking list:");
+                foreach (Trader.TradeItem tradeItem in __result)
+                {
+                    string tradeItemName = tradeItem.m_prefab != null
+                        ? tradeItem.m_prefab.gameObject.name
+                        : tradeItem.m_name; // items that won't generate a prefab (pocket expansions, mod effects, etc)
+                    Logger.Log($"- {tradeItemName}");
+                }
+
                 //Custom items to remove
                 List<Trader.TradeItem> customItemsToRemove = new List<Trader.TradeItem>();
-                if (__instance.name.Contains("Haldor"))
-                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictions.Value);
-                else if (__instance.name.Contains("Hildir"))
-                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictions.Value);
-                else if (__instance.name.Contains("BogWitch"))
-                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictions.Value);
-
+                if (__instance.name.Contains("Haldor")) {
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsGlobalKeys.Value, RestrictionType.GlobalKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsKeys.Value, RestrictionType.PlayerKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsBosses.Value, RestrictionType.Boss);
+                } else if (__instance.name.Contains("Hildir")) {
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsGlobalKeys.Value, RestrictionType.GlobalKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsKeys.Value, RestrictionType.PlayerKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsBosses.Value, RestrictionType.Boss);
+                } else if (__instance.name.Contains("BogWitch")) {
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsGlobalKeys.Value, RestrictionType.GlobalKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsKeys.Value, RestrictionType.PlayerKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsBosses.Value, RestrictionType.Boss);
+                }
                 foreach (Trader.TradeItem tradeItem in customItemsToRemove)
                     __result.Remove(tradeItem);
             }
@@ -92,11 +114,12 @@ namespace KillMeForMyPower.Restrictions
             private static void addCustomItemsToRemove(
                 List<Trader.TradeItem> __result,
                 List<Trader.TradeItem> customItemsToRemove,
-                string vendorRestrictions)
+                string restrictions, RestrictionType restrictionType)
             {
-                if (string.IsNullOrEmpty(vendorRestrictions)) return;
+                if (string.IsNullOrEmpty(restrictions)) return;
                 
-                string[] items = vendorRestrictions.Split(';');
+                Logger.Log("Checking restriction by " + restrictionType);
+                string[] items = restrictions.Split(';');
                 foreach (string item in items)
                 {
                     string[] itemParts = item.Split(',');
@@ -106,13 +129,15 @@ namespace KillMeForMyPower.Restrictions
                         string tradeItemName = tradeItem.m_prefab != null
                             ? tradeItem.m_prefab.gameObject.name
                             : tradeItem.m_name; // items that won't generate a prefab (pocket expansions, mod effects, etc)
-                        Logger.Log($"- Checking {tradeItemName} from the vendor list...");
                         if (tradeItemName == itemParts[0])
                         {
-                            if (!KillMeForMyPowerUtils.bossIsKilled(itemParts[1]))
+                            if ((restrictionType == RestrictionType.Boss && !KillMeForMyPowerUtils.bossIsKilled(itemParts[1])) ||
+                                (restrictionType == RestrictionType.GlobalKey && !ZoneSystem.instance.GetGlobalKeys().Contains(itemParts[1])) ||
+                                (restrictionType == RestrictionType.PlayerKey && !Player.m_localPlayer.HaveUniqueKey(itemParts[1]))
+                                )
                             {
                                 customItemsToRemove.Add(tradeItem);
-                                Logger.Log($"{itemParts[0]} will be excluded.");
+                                Logger.Log($"{itemParts[0]} will be excluded by missing {restrictionType} {itemParts[1]}.");
                             }
                             else
                                 Logger.Log($"{itemParts[0]} will NOT be excluded.");

@@ -29,11 +29,17 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> forbiddenMessage;
         public static ConfigEntry<bool> vendorLocalRestrictions;
         public static ConfigEntry<BossNameEnum> vendorHaldorBossToKill;
-        public static ConfigEntry<string> vendorHaldorRestrictions;
+        public static ConfigEntry<string> vendorHaldorRestrictionsBosses;
+        public static ConfigEntry<string> vendorHaldorRestrictionsGlobalKeys;
+        public static ConfigEntry<string> vendorHaldorRestrictionsKeys;
         public static ConfigEntry<BossNameEnum> vendorHildirBossToKill;
-        public static ConfigEntry<string> vendorHildirRestrictions;
+        public static ConfigEntry<string> vendorHildirRestrictionsBosses;
+        public static ConfigEntry<string> vendorHildirRestrictionsGlobalKeys;
+        public static ConfigEntry<string> vendorHildirRestrictionsKeys;
         public static ConfigEntry<BossNameEnum> vendorBogWitchBossToKill;
-        public static ConfigEntry<string> vendorBogWitchRestrictions;
+        public static ConfigEntry<string> vendorBogWitchRestrictionsBosses;
+        public static ConfigEntry<string> vendorBogWitchRestrictionsGlobalKeys;
+        public static ConfigEntry<string> vendorBogWitchRestrictionsKeys;
         public static ConfigEntry<string> forbiddenVendorMessage;
         public static ConfigEntry<Effects> scareEffect;
         public static ConfigEntry<int> scareEffectDuration;
@@ -55,6 +61,11 @@ namespace KillMeForMyPower
 
         public static ConfigEntry<BossDropRule> dropsBossItems;
         public static ConfigEntry<BossDropRule> dropsBossTrophies;
+
+        public static ConfigEntry<bool> despawnEnabled;
+        public static ConfigEntry<float> radius;
+        public static ConfigEntry<string> exceptionPrefabIdList;
+        public static ConfigEntry<int> despawnDelay;
 
         public static ConfigEntry<bool> minLevelToSpawnBoss;
         public static ConfigEntry<int> maxLevelGapBetweenBossAndPlayer;
@@ -124,12 +135,18 @@ namespace KillMeForMyPower
                 vendorLocalRestrictions = config("2.1 - Vendor Restrictions", "VendorLocalRestrictions", true, "Vendors allow buying items based on personal progress, not global (default = true)");
                 forbiddenVendorMessage = config("2.1 - Vendor Restrictions", "ForbiddenVendorMessage", "You have not killed {0} yet to buy my stuff!", "Message to show when you cannot buy from a NPC");
                 vendorHaldorBossToKill = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
-                vendorHaldorRestrictions = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictions", "BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth;$hud_extrainvslot1,Moder;$hud_extrainvslot2,Queen", "Restricted items for Haldor split by comma and semicolon. Ex: BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorHaldorRestrictionsBosses = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictions", "BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth;$hud_extrainvslot1,Moder;$hud_extrainvslot2,Queen", "Restricted items for Haldor split by comma and semicolon. Ex: BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorHaldorRestrictionsGlobalKeys = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictionsGlobalKeys", "", "Restricted items by global keys for Haldor split by comma and semicolon (empty = nothing to restrict)");
+                vendorHaldorRestrictionsKeys = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictionsKeys", "", "Restricted items by player keys for Haldor split by comma and semicolon (empty = nothing to restrict)");
                 vendorHildirBossToKill = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
-                vendorHildirRestrictions = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictions", "", "Restricted items for Hildir split by comma and semicolon. Ex: Ironpit,Moder. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorHildirRestrictionsBosses = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictions", "", "Restricted items for Hildir split by comma and semicolon. Ex: Ironpit,Moder. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorHildirRestrictionsGlobalKeys = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictionsGlobalKeys", "", "Restricted items by global keys for Hildir split by comma and semicolon (empty = nothing to restrict)");
+                vendorHildirRestrictionsKeys = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictionsKeys", "", "Restricted items by player keys for Hildir split by comma and semicolon (empty = nothing to restrict)");
                 vendorBogWitchBossToKill = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchBossToKill", BossNameEnum.TheElder, "Boss to be killed before being able to talk to Haldor (default = TheElder). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
-                vendorBogWitchRestrictions = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictions", "", "Restricted items for BogWitch split by comma. Ex: MeadTrollPheromones,TheElder;SpicePlains,Moder;SpiceAshlands,Queen. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
-                
+                vendorBogWitchRestrictionsBosses = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictions", "HelmetRootCrown,Bonemass;ScytheHandle,Moder;MushroomBzerker,Moder;FragrantBundle,Moder;SpiceForests,TheElder;SpiceMountains,Moder;SpicePlains,Yagluth;SpiceMistlands,Queen;SpiceAshlands,Fader;SpiceDeepNorth,Kall", "Restricted items for BogWitch split by comma. Ex: SpicePlains,Moder;SpiceAshlands,Queen. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
+                vendorBogWitchRestrictionsGlobalKeys = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictionsGlobalKeys", "", "Restricted items by global keys for BogWitch split by comma. Ex: SpiceOcean,defeated_serpent (empty = nothing to restrict)");
+                vendorBogWitchRestrictionsKeys = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictionsKeys", "SpiceOceans,defeated_serpent", "Restricted items by player keys for BogWitch split by comma. Ex: SpiceOcean,defeated_serpent (empty = nothing to restrict)");
+
                 restrictEnteringDungeonsBeforeKillingBossesAdmins = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Admins", false, "Restricts accessing dungeons to admins as any regular player. (default = false)");
                 restrictEnteringDungeonsBeforeKillingBosses = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses", true, "Restricts accessing dungeons in biomes if you haven't killed the boss of the previous biome. (default = true)");
                 restrictEnteringDungeonsBeforeKillingBossesMessage = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Message", "You must defeat {0} to access this dungeon first!", "Message to show the access restriction to dungeons if previous biome boss has not been defeated.");
@@ -142,8 +159,13 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipYes = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
                 itemRestrictionAvailableTooltipNo = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
                 
-                dropsBossItems    = config("2.4 - Boss drops rules", "Item drops", BossDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
-                dropsBossTrophies = config("2.4 - Boss drops rules", "Trophy drops", BossDropRule.Default, "If not default, drops a number of trophies according to the selected rule");
+                dropsBossItems    = config("2.4.1 - Boss drops rules", "Item drops", BossDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
+                dropsBossTrophies = config("2.4.1 - Boss drops rules", "Trophy drops", BossDropRule.Default, "If not default, drops a number of trophies according to the selected rule");
+
+                despawnEnabled = config("2.4.2 - Boss despawn rules", "Despawn enabled", false, new ConfigDescription(string.Empty));
+                radius = config("2.4.2 - Boss despawn rules", "Despawn radius", 110f, new ConfigDescription(string.Empty, new AcceptableValueRange<float>(25f, 250f)));
+                exceptionPrefabIdList = config("2.4.2 - Boss despawn rules", "Bosses excluded to despawn (prefab ids)", "", new ConfigDescription("The listed bosses will never disappear. List with \", \". Example: Eikthyr,Dragon,GoblinKing"));
+                despawnDelay = config("2.4.2 - Boss despawn rules", "Despawn delay (seconds)", 0, new ConfigDescription("At the moment when there is not a single player left around the boss, the timer starts for this time. After it expires, the boss will check if there are players around him, and if not, it will destroy itself."));
                 
                 minLevelToSpawnBoss             = config("2.5 - EpicMMO integration", "Minimum level required", true, "If true and epicMMO is enabled, the player needs to have a minimum level required to spawn each boss (default = true)");
                 maxLevelGapBetweenBossAndPlayer = config("2.5 - EpicMMO integration", "Maximum Level Gap Between Boss And Player", 10, new ConfigDescription("Maximum difference in levels between the boss and the player who is going to spawn it (default = 5)", new AcceptableValueRange<int>(0, 10)));
