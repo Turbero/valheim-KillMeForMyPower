@@ -47,6 +47,8 @@ namespace KillMeForMyPower
         
         public static bool HasDefeatedBossName(BossNameEnum bossNameEnum)
         {
+            if (bossNameEnum == BossNameEnum.None) return true;
+            
             bool hasDefeated = BossNameUtils.IsBossPowerGrantedForPlayer(bossNameEnum, Player.m_localPlayer);
             Logger.Log($"hasDefeated(1) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
             if (!hasDefeated)

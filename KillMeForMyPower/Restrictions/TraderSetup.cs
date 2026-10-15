@@ -44,7 +44,7 @@ namespace KillMeForMyPower.Restrictions
                 bool haldorOk = trader.gameObject.name.StartsWith("Haldor") && KillMeForMyPowerUtils.bossIsKilled(ConfigurationFile.vendorHaldorBossToKill.Value);
                 bool hildirOk = trader.gameObject.name.StartsWith("Hildir") && KillMeForMyPowerUtils.bossIsKilled(ConfigurationFile.vendorHildirBossToKill.Value);
                 bool bogWitchOk = trader.gameObject.name.StartsWith("BogWitch") && KillMeForMyPowerUtils.bossIsKilled(ConfigurationFile.vendorBogWitchBossToKill.Value);
-                
+
                 return haldorOk || hildirOk || bogWitchOk;
             }
         }
