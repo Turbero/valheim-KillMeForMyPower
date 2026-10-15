@@ -56,6 +56,13 @@ Decide how many drops the bosses will drop to the fighters:
 * One Player → a set of drops equivalent to a one player fight, even if several participated in the battle
 * Drops For Each Player Nearby → a set of drops for each player nearby the boss when dying (1 trophy and n-items for each one)
 
+## Bosses Despawn rules
+
+Make bosses despawn if players are too weak and abandon them to force them repop him and avoid roaming around:
+* choose the radius area to detect players around and despawn if none are found (default = 110)
+* decide how long they need to despawn after they are left alone
+* have an exception list of bosses names who will NEVER disappear even with the despawn option enabled
+
 ## EpicMMO integration
 
 If EpicMMO mod is enabled:

@@ -44,10 +44,10 @@ Change the necessary boss to your choice before showing up in the vending list. 
 ## Item restrictions
 
 * Important items obtained with materials from bosses are locked to use until you don't defeat them:
-    * Antler Pickaxe cannot be equipped until you defeat Eikthyr
-    * Crypt Key cannot be used until you defeat The Elder
-    * Wishbone cannot be equipped until you defeat Bonemass
-    * Wisplight cannot be equipped until you defeat Yagluth
+  * Antler Pickaxe cannot be equipped until you defeat Eikthyr
+  * Crypt Key cannot be used until you defeat The Elder
+  * Wishbone cannot be equipped until you defeat Bonemass
+  * Wisplight cannot be equipped until you defeat Yagluth
 
 ## Bosses Loot drops
 
@@ -55,6 +55,13 @@ Decide how many drops the bosses will drop to the fighters:
 * Default → same as vanilla (one key/wishbone per player connected, a s***)
 * One Player → a set of drops equivalent to a one player fight, even if several participated in the battle
 * Drops For Each Player Nearby → a set of drops for each player nearby the boss when dying (1 trophy and n-items for each one)
+
+## Bosses Despawn rules
+
+Make bosses despawn if players are too weak and abandon them to force them repop him and avoid roaming around:
+* choose the radius area to detect players around and despawn if none are found (default = 110)
+* decide how long they need to despawn after they are left alone
+* have an exception list of bosses names who will NEVER disappear even with the despawn option enabled
 
 ## EpicMMO integration
 
