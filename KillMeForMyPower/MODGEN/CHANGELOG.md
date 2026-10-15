@@ -1,5 +1,19 @@
 ### CHANGELOG
 
+## 2.6.0
+
+New:
+* Added ability to despawn a boss when there is no player around him in the configuration file (new section 2.4.2):
+  * Despawn enabled check (default = false, activate this manually)
+  * radius: value of the boss radius area to detect players around and despawn if none are found (default = 110) 
+  * exception list: comma-separated list of bosses names who will NEVER disappear even with the despawn option enabled
+  * despawnDelay: time in seconds for despawning after all players have left the boss area with the given radius (default = 0)
+* Boss drop rules moved to section 2.4.1
+
+Vendors:
+* Added new options to all vendors to block objects by defeated boss, global key and personal keys
+* Hildir and BogWitch default restrictions updated to match vanilla
+
 ## 2.5.3
 
 * Fixed error when it is not required to kill any boss to talk to any vendor or touch Hildir's map ("None" option in the config file)
