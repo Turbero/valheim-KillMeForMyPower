@@ -96,15 +96,15 @@ namespace KillMeForMyPower.Restrictions
                 List<Trader.TradeItem> customItemsToRemove = new List<Trader.TradeItem>();
                 if (__instance.name.Contains("Haldor")) {
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsGlobalKeys.Value, RestrictionType.GlobalKey);
-                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsKeys.Value, RestrictionType.PlayerKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsPlayerKeys.Value, RestrictionType.PlayerKey);
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHaldorRestrictionsBosses.Value, RestrictionType.Boss);
                 } else if (__instance.name.Contains("Hildir")) {
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsGlobalKeys.Value, RestrictionType.GlobalKey);
-                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsKeys.Value, RestrictionType.PlayerKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsPlayerKeys.Value, RestrictionType.PlayerKey);
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorHildirRestrictionsBosses.Value, RestrictionType.Boss);
                 } else if (__instance.name.Contains("BogWitch")) {
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsGlobalKeys.Value, RestrictionType.GlobalKey);
-                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsKeys.Value, RestrictionType.PlayerKey);
+                    addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsPlayerKeys.Value, RestrictionType.PlayerKey);
                     addCustomItemsToRemove(__result, customItemsToRemove, ConfigurationFile.vendorBogWitchRestrictionsBosses.Value, RestrictionType.Boss);
                 }
                 foreach (Trader.TradeItem tradeItem in customItemsToRemove)

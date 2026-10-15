@@ -31,15 +31,15 @@ namespace KillMeForMyPower
         public static ConfigEntry<BossNameEnum> vendorHaldorBossToKill;
         public static ConfigEntry<string> vendorHaldorRestrictionsBosses;
         public static ConfigEntry<string> vendorHaldorRestrictionsGlobalKeys;
-        public static ConfigEntry<string> vendorHaldorRestrictionsKeys;
+        public static ConfigEntry<string> vendorHaldorRestrictionsPlayerKeys;
         public static ConfigEntry<BossNameEnum> vendorHildirBossToKill;
         public static ConfigEntry<string> vendorHildirRestrictionsBosses;
         public static ConfigEntry<string> vendorHildirRestrictionsGlobalKeys;
-        public static ConfigEntry<string> vendorHildirRestrictionsKeys;
+        public static ConfigEntry<string> vendorHildirRestrictionsPlayerKeys;
         public static ConfigEntry<BossNameEnum> vendorBogWitchBossToKill;
         public static ConfigEntry<string> vendorBogWitchRestrictionsBosses;
         public static ConfigEntry<string> vendorBogWitchRestrictionsGlobalKeys;
-        public static ConfigEntry<string> vendorBogWitchRestrictionsKeys;
+        public static ConfigEntry<string> vendorBogWitchRestrictionsPlayerKeys;
         public static ConfigEntry<string> forbiddenVendorMessage;
         public static ConfigEntry<Effects> scareEffect;
         public static ConfigEntry<int> scareEffectDuration;
@@ -137,15 +137,15 @@ namespace KillMeForMyPower
                 vendorHaldorBossToKill = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
                 vendorHaldorRestrictionsBosses = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictions", "BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth;$hud_extrainvslot1,Moder;$hud_extrainvslot2,Queen", "Restricted items for Haldor split by comma and semicolon. Ex: BeltStrength,Eikthyr;YmirRemains,TheElder;Thunderstone,TheElder;ChickenEgg,Yagluth. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
                 vendorHaldorRestrictionsGlobalKeys = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictionsGlobalKeys", "", "Restricted items by global keys for Haldor split by comma and semicolon (empty = nothing to restrict)");
-                vendorHaldorRestrictionsKeys = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictionsKeys", "", "Restricted items by player keys for Haldor split by comma and semicolon (empty = nothing to restrict)");
+                vendorHaldorRestrictionsPlayerKeys = config("2.1.1 - Vendor Restrictions - Haldor", "VendorHaldorRestrictionsPlayerKeys", "", "Restricted items by player keys for Haldor split by comma and semicolon (empty = nothing to restrict)");
                 vendorHildirBossToKill = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirBossToKill", BossNameEnum.Eikthyr, "Boss to be killed before being able to talk to Haldor (default = Eikthyr). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
                 vendorHildirRestrictionsBosses = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictions", "", "Restricted items for Hildir split by comma and semicolon. Ex: Ironpit,Moder. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
                 vendorHildirRestrictionsGlobalKeys = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictionsGlobalKeys", "", "Restricted items by global keys for Hildir split by comma and semicolon (empty = nothing to restrict)");
-                vendorHildirRestrictionsKeys = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictionsKeys", "", "Restricted items by player keys for Hildir split by comma and semicolon (empty = nothing to restrict)");
+                vendorHildirRestrictionsPlayerKeys = config("2.1.2 - Vendor Restrictions - Hildir", "VendorHildirRestrictionsPlayerKeys", "", "Restricted items by player keys for Hildir split by comma and semicolon (empty = nothing to restrict)");
                 vendorBogWitchBossToKill = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchBossToKill", BossNameEnum.TheElder, "Boss to be killed before being able to talk to Haldor (default = TheElder). Set to 'None' to remove this restriction. Possible values: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall,None");
                 vendorBogWitchRestrictionsBosses = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictions", "HelmetRootCrown,Bonemass;ScytheHandle,Moder;MushroomBzerker,Moder;FragrantBundle,Moder;SpiceForests,TheElder;SpiceMountains,Moder;SpicePlains,Yagluth;SpiceMistlands,Queen;SpiceAshlands,Fader;SpiceDeepNorth,Kall", "Restricted items for BogWitch split by comma. Ex: SpicePlains,Moder;SpiceAshlands,Queen. Available boss names: Eikthyr,TheElder,Bonemass,Moder,Yagluth,Queen,Fader,Kall (empty = nothing to restrict)");
                 vendorBogWitchRestrictionsGlobalKeys = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictionsGlobalKeys", "", "Restricted items by global keys for BogWitch split by comma. Ex: SpiceOcean,defeated_serpent (empty = nothing to restrict)");
-                vendorBogWitchRestrictionsKeys = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictionsKeys", "SpiceOceans,defeated_serpent", "Restricted items by player keys for BogWitch split by comma. Ex: SpiceOcean,defeated_serpent (empty = nothing to restrict)");
+                vendorBogWitchRestrictionsPlayerKeys = config("2.1.3 - Vendor Restrictions - BogWitch", "VendorBogWitchRestrictionsPlayerKeys", "SpiceOceans,defeated_serpent", "Restricted items by player keys for BogWitch split by comma. Ex: SpiceOcean,defeated_serpent (empty = nothing to restrict)");
 
                 restrictEnteringDungeonsBeforeKillingBossesAdmins = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses Admins", false, "Restricts accessing dungeons to admins as any regular player. (default = false)");
                 restrictEnteringDungeonsBeforeKillingBosses = config("2.2 - Dungeon Restrictions", "Restrict Entering Dungeons Before Killing Bosses", true, "Restricts accessing dungeons in biomes if you haven't killed the boss of the previous biome. (default = true)");
