@@ -10,8 +10,8 @@ namespace KillMeForMyPower.Restrictions
     {
         public static void Postfix(ref Character ___m_character, ref List<KeyValuePair<GameObject, int>> __result)
         {
-            if (ConfigurationFile.dropsBossTrophies.Value == BossDropRule.Default &&
-                ConfigurationFile.dropsBossItems.Value == BossDropRule.Default)
+            if (ConfigurationFile.dropsBossTrophies.Value == BossTrophyDropRule.Default &&
+                ConfigurationFile.dropsBossItems.Value == BossItemDropRule.Default)
                 return;
             
             if (!___m_character.IsBoss()) return;
@@ -31,9 +31,9 @@ namespace KillMeForMyPower.Restrictions
                 string name = dropGo.name.ToLowerInvariant();
                 Logger.Log($"Previous amount for {name}: {amount}");
                 // Items
-                if (ConfigurationFile.dropsBossItems.Value != BossDropRule.Default)
+                if (ConfigurationFile.dropsBossItems.Value != BossItemDropRule.Default)
                 {
-                    int count = ConfigurationFile.dropsBossItems.Value == BossDropRule.DropsForEachPlayerNearby
+                    int count = ConfigurationFile.dropsBossItems.Value == BossItemDropRule.DropsForEachPlayerNearby
                         ? countPlayersNearby
                         : 1;
                     if (name.ToLowerInvariant().Contains("hardantler") || name.ToLowerInvariant().Contains("yagluthdrop"))
@@ -47,7 +47,7 @@ namespace KillMeForMyPower.Restrictions
                 }
                 //Trophies
                 if (name.ToLowerInvariant().Contains("trophy"))
-                    amount = ConfigurationFile.dropsBossItems.Value == BossDropRule.OnePlayer
+                    amount = ConfigurationFile.dropsBossTrophies.Value == BossTrophyDropRule.Default
                         ? 1
                         : countPlayersNearby;
                 

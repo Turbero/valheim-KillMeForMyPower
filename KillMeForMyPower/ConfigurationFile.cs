@@ -14,10 +14,16 @@ namespace KillMeForMyPower
         Poison
     }
 
-    public enum BossDropRule
+    public enum BossItemDropRule
     {
         Default,
         OnePlayer,
+        DropsForEachPlayerNearby
+    }
+    
+    public enum BossTrophyDropRule
+    {
+        Default,
         DropsForEachPlayerNearby
     }
     
@@ -59,8 +65,8 @@ namespace KillMeForMyPower
         public static ConfigEntry<string> itemRestrictionAvailableTooltipNo;
         public static ConfigEntry<bool> grantKillToNearbyPlayers;
 
-        public static ConfigEntry<BossDropRule> dropsBossItems;
-        public static ConfigEntry<BossDropRule> dropsBossTrophies;
+        public static ConfigEntry<BossItemDropRule> dropsBossItems;
+        public static ConfigEntry<BossTrophyDropRule> dropsBossTrophies;
 
         public static ConfigEntry<bool> despawnEnabled;
         public static ConfigEntry<float> radius;
@@ -159,8 +165,8 @@ namespace KillMeForMyPower
                 itemRestrictionAvailableTooltipYes = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageYes", "YES", "Message to show in item descriptions confirming when you can use them");
                 itemRestrictionAvailableTooltipNo = config("2.3 - Item Restrictions", "ItemRestrictionAvailableTooltipMessageNo", "NO", "Message to show in item descriptions confirming when you cannot use them");
                 
-                dropsBossItems    = config("2.4.1 - Boss drops rules", "Item drops", BossDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
-                dropsBossTrophies = config("2.4.1 - Boss drops rules", "Trophy drops", BossDropRule.Default, "If not default, drops a number of trophies according to the selected rule");
+                dropsBossItems    = config("2.4.1 - Boss drops rules", "Item drops", BossItemDropRule.Default, "If not default, drops a number of boss items according to the selected rule");
+                dropsBossTrophies = config("2.4.1 - Boss drops rules", "Trophy drops", BossTrophyDropRule.Default, "If not default, drops a number of trophies according to the number of players nearby");
 
                 despawnEnabled = config("2.4.2 - Boss despawn rules", "Despawn enabled", false, new ConfigDescription(string.Empty));
                 radius = config("2.4.2 - Boss despawn rules", "Despawn radius", 110f, new ConfigDescription(string.Empty, new AcceptableValueRange<float>(25f, 250f)));
