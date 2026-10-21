@@ -1,5 +1,11 @@
 ### CHANGELOG
 
+## 2.6.1
+
+* Reworked boss despawn logic to work in dedicated servers as well 
+* Removed despawn delay option temporarily
+* Fixed boss trophy drop rules (it was using boss item drop rule by mistake)
+
 ## 2.6.0
 
 New:
