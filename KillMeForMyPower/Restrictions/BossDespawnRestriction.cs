@@ -52,7 +52,8 @@ namespace KillMeForMyPower.Restrictions
 					return;
 				
 				bossesOkayToDestroyAndWaiting_spawnPositions.Add(spawnPoint);
-				var totalMilliseconds = TimeSpan.FromMinutes(ConfigurationFile.despawnDelay.Value).TotalMilliseconds;
+				bossesReadyToDestroy_spawnPositions.Add(spawnPoint); //TODO Remove this line when despawnDelay works again
+				/*var totalMilliseconds = TimeSpan.FromMinutes(ConfigurationFile.despawnDelay.Value).TotalMilliseconds;
 				
 				if (totalMilliseconds > 0.0)
 				{
@@ -68,17 +69,17 @@ namespace KillMeForMyPower.Restrictions
 				{
 					OnTimerElapsed(null, spawnPoint);
 					Logger.LogInfo($"Despawning timer stopped for {bossName}");
-				}
+				}*/
 			}
 		}
 
-		private static void OnTimerElapsed(System.Timers.Timer timer, Vector3 spawnPoint)
+		/*private static void OnTimerElapsed(System.Timers.Timer timer, Vector3 spawnPoint)
 		{
 			bossesReadyToDestroy_spawnPositions.Add(spawnPoint);
 			if (timer == null) return;
 			timer.Stop();
 			timer.Dispose();
-		}
+		}*/
 
 		private static bool IsOkayToDestroy(Humanoid humanoid)
 		{

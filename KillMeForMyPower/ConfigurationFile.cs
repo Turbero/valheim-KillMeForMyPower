@@ -71,7 +71,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<bool> despawnEnabled;
         public static ConfigEntry<float> radius;
         public static ConfigEntry<string> exceptionPrefabIdList;
-        public static ConfigEntry<int> despawnDelay;
+        //public static ConfigEntry<int> despawnDelay;
 
         public static ConfigEntry<bool> minLevelToSpawnBoss;
         public static ConfigEntry<int> maxLevelGapBetweenBossAndPlayer;
@@ -171,7 +171,7 @@ namespace KillMeForMyPower
                 despawnEnabled = config("2.4.2 - Boss despawn rules", "Despawn enabled", false, new ConfigDescription(string.Empty));
                 radius = config("2.4.2 - Boss despawn rules", "Despawn radius", 110f, new ConfigDescription(string.Empty, new AcceptableValueRange<float>(25f, 250f)));
                 exceptionPrefabIdList = config("2.4.2 - Boss despawn rules", "Bosses excluded to despawn (prefab ids)", "", new ConfigDescription("The listed bosses will never disappear. List with \", \". Example: Eikthyr,Dragon,GoblinKing"));
-                despawnDelay = config("2.4.2 - Boss despawn rules", "Despawn delay (seconds)", 0, new ConfigDescription("At the moment when there is not a single player left around the boss, the timer starts for this time. After it expires, the boss will check if there are players around him, and if not, it will destroy itself."));
+                //despawnDelay = config("2.4.2 - Boss despawn rules", "Despawn delay (seconds)", 0, new ConfigDescription("At the moment when there is not a single player left around the boss, the timer starts for this time. After it expires, the boss will check if there are players around him, and if not, it will destroy itself."));
                 
                 minLevelToSpawnBoss             = config("2.5 - EpicMMO integration", "Minimum level required", true, "If true and epicMMO is enabled, the player needs to have a minimum level required to spawn each boss (default = true)");
                 maxLevelGapBetweenBossAndPlayer = config("2.5 - EpicMMO integration", "Maximum Level Gap Between Boss And Player", 10, new ConfigDescription("Maximum difference in levels between the boss and the player who is going to spawn it (default = 5)", new AcceptableValueRange<int>(0, 10)));
