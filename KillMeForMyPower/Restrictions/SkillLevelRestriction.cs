@@ -15,35 +15,35 @@ namespace KillMeForMyPower.Restrictions
         public static bool canSkillUp(float skillLevelValue)
         {
             bool decision = !(
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss1Eikthyr.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss2TheElder.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss3Bonemass.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss4Moder.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss5Yagluth.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss6Queen.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss7Fader.Value) ||
-                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Kall) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss8Kall.Value)
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss1Eikthyr.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss2TheElder.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss3Bonemass.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss4Moder.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss5Yagluth.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss6Queen.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss7Fader.Value) ||
+                (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Kall, false) && skillLevelValue >= ConfigurationFile.maxLevelBeforeBoss8Kall.Value)
             );
             return decision;
         }
 
         private static float currentMaxSkillLevel()
         {
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Kall))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Kall, false))
                 return float.MaxValue;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader, false))
                 return ConfigurationFile.maxLevelBeforeBoss8Kall.Value;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Queen, false))
                 return ConfigurationFile.maxLevelBeforeBoss7Fader.Value;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth, false))
                 return ConfigurationFile.maxLevelBeforeBoss6Queen.Value;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Moder, false))
                 return ConfigurationFile.maxLevelBeforeBoss5Yagluth.Value;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Bonemass, false))
                 return ConfigurationFile.maxLevelBeforeBoss4Moder.Value;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder, false))
                 return ConfigurationFile.maxLevelBeforeBoss3Bonemass.Value;
-            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr))
+            if (KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Eikthyr, false))
                 return ConfigurationFile.maxLevelBeforeBoss2TheElder.Value;
             return ConfigurationFile.maxLevelBeforeBoss1Eikthyr.Value;
         }
@@ -58,9 +58,9 @@ namespace KillMeForMyPower.Restrictions
                 
             float maxSkillLevel = currentMaxSkillLevel();
             bool skillUpAllowed = currentLevel < maxSkillLevel;
-            Logger.Log($"Decision with skill {skillType}, skillLevel {skillLevel}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: {skillUpAllowed}");
             if (!skillUpAllowed)
             {
+                Logger.Log($"Decision with skill {skillType}, skillLevel {skillLevel}, percentage {playerSkill.GetLevelPercentage()} and currentLevel {currentLevel}: false");
                 playerSkill.m_level = Math.Min(skillLevel, maxSkillLevel);
                 playerSkill.m_accumulator = 0;
                 Logger.Log($"{skillType} rounded to max allowed value: {playerSkill.m_level}");
@@ -90,7 +90,6 @@ namespace KillMeForMyPower.Restrictions
             if (__instance != null)
             {
                 float levelBeforeAddingSkillUp = __instance.GetSkills().GetSkillLevel(skill);
-                Logger.Log($"Checking skill level availability {skill} with {levelBeforeAddingSkillUp}...");
                 if (levelBeforeAddingSkillUp < Skills.c_MaxSkillLevel)
                 {
                     return LevelCalculation.reviewAndUpdateSkill(__instance, skill, $"$skill_{skill.ToString().ToLower()}");

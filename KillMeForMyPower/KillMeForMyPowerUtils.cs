@@ -45,16 +45,16 @@ namespace KillMeForMyPower
             return HasDefeatedBossName(parsedEnum);
         }
         
-        public static bool HasDefeatedBossName(BossNameEnum bossNameEnum)
+        public static bool HasDefeatedBossName(BossNameEnum bossNameEnum, bool printLog = true)
         {
             if (bossNameEnum == BossNameEnum.None) return true;
             
             bool hasDefeated = BossNameUtils.IsBossPowerGrantedForPlayer(bossNameEnum, Player.m_localPlayer);
-            Logger.Log($"hasDefeated(1) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
+            if (printLog) Logger.Log($"hasDefeated(1) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
             if (!hasDefeated)
             {
                 hasDefeated = ConfigurationFile.activateMidPlayDetection.Value && Player.m_localPlayer.HaveUniqueKey(bossNameEnum.GetPowerKey());
-                Logger.Log($"hasDefeated(2) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
+                if (printLog) Logger.Log($"hasDefeated(2) for player {Player.m_localPlayer.GetPlayerName()}: {hasDefeated}");
                 if (hasDefeated)
                 {
                     Logger.Log("Learned the power before. Granting!");
@@ -89,7 +89,7 @@ namespace KillMeForMyPower
                 return ConfigurationFile.daysBoss7Fader.Value;
             if (parsedEnum == BossNameEnum.Kall)
                 return ConfigurationFile.daysBoss8Kall.Value;
-            return ConfigurationFile.daysBoss9odded.Value;
+            return ConfigurationFile.daysBoss9Modded.Value;
         }
 
         public static bool bossIsKilled(string bossToCheck)

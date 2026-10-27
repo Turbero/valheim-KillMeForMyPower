@@ -86,10 +86,12 @@ namespace KillMeForMyPower.Restrictions
 			if (humanoid == null)
 				return false;
 			
-			Logger.Log("humanoid.name: " + humanoid.name);
 			var prefabName = humanoid.name.Replace("(Clone)", "");
 			var arePlayerNearby = Player.IsPlayerInRange(humanoid.transform.position, ConfigurationFile.radius.Value);
 			var isInExceptionList = ConfigurationFile.exceptionPrefabIdList.Value.Contains(prefabName);
+			bool isOk = humanoid.IsBoss() && !arePlayerNearby && !isInExceptionList;
+			if (isOk)
+				Logger.Log("humanoid.name: " + humanoid.name + " to be destroyed.");
 			return humanoid.IsBoss() && !arePlayerNearby && !isInExceptionList;
 		}
 	}
