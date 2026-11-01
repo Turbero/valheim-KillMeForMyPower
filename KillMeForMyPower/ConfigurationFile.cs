@@ -85,7 +85,7 @@ namespace KillMeForMyPower
         public static ConfigEntry<int> daysBos6Queen;
         public static ConfigEntry<int> daysBoss7Fader;
         public static ConfigEntry<int> daysBoss8Kall;
-        public static ConfigEntry<int> daysBoss9odded;
+        public static ConfigEntry<int> daysBoss9Modded;
         
         public static ConfigEntry<int> maxLevelBeforeBoss1Eikthyr;
         public static ConfigEntry<int> maxLevelBeforeBoss2TheElder;
@@ -174,7 +174,7 @@ namespace KillMeForMyPower
                 //despawnDelay = config("2.4.2 - Boss despawn rules", "Despawn delay (seconds)", 0, new ConfigDescription("At the moment when there is not a single player left around the boss, the timer starts for this time. After it expires, the boss will check if there are players around him, and if not, it will destroy itself."));
                 
                 minLevelToSpawnBoss             = config("2.5 - EpicMMO integration", "Minimum level required", true, "If true and epicMMO is enabled, the player needs to have a minimum level required to spawn each boss (default = true)");
-                maxLevelGapBetweenBossAndPlayer = config("2.5 - EpicMMO integration", "Maximum Level Gap Between Boss And Player", 10, new ConfigDescription("Maximum difference in levels between the boss and the player who is going to spawn it (default = 5)", new AcceptableValueRange<int>(0, 10)));
+                maxLevelGapBetweenBossAndPlayer = config("2.5 - EpicMMO integration", "Maximum Level Gap Between Boss And Player", 10, new ConfigDescription("Maximum difference in levels between the boss and the player who is going to spawn it (default = 10)", new AcceptableValueRange<int>(0, 100)));
                 minLevelToSpawnBossNotMet       = config("2.5 - EpicMMO integration", "Not minimum level message", "You need at least level {0} to start this battle", "Message to indicate the player doesn't have the minimum necessary level to spawn the boss");
 
                 daysBoss1Eikthyr  = config("3 - Days", "Days Boss 1 - Eikthyr", 100000, "Minimum number of days until the Eikthyr power cannot be obtained without killing him (default = 100000)");
@@ -185,7 +185,7 @@ namespace KillMeForMyPower
                 daysBos6Queen    = config("3 - Days", "Days Boss 6 - Queen", 100000, "Minimum number of days until the Queen power cannot be obtained without killing him (default = 100000)");
                 daysBoss7Fader    = config("3 - Days", "Days Boss 7 - Fader", 100000, "Minimum number of days until the Fader power cannot be obtained without killing him (default = 100000)");
                 daysBoss8Kall     = config("3 - Days", "Days Boss 8 - Kall", 100000, "Minimum number of days until end credits cannot be watched without killing the final boss (default = 100000)");
-                daysBoss9odded   = config("3 - Days", "Days Boss 9 - Modded", 100000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 100000)");
+                daysBoss9Modded   = config("3 - Days", "Days Boss 9 - Modded", 100000, "Minimum number of days until any modded boss power cannot be obtained without killing him (default = 100000)");
                 
                 maxLevelBeforeBoss1Eikthyr  = config("4 - Max levels", "MaxLevelBeforeBoss1Eikthyr", 100, "Maximum skill level that player can level up skills before killing Eikthyr (default = 100)");
                 maxLevelBeforeBoss2TheElder = config("4 - Max levels", "MaxLevelBeforeBoss2TheElder", 100, "Maximum skill level that player can level up skills before killing The Elder (default = 100)");
