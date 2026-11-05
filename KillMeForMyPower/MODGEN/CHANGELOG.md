@@ -1,5 +1,11 @@
 ### CHANGELOG
 
+## 2.6.2
+
+* Shovel cannot be used unless you have defeated Fader before.
+* Lifted the limit in levels eligible to pop a boss up to 100 (for epicMMO)
+* Reduced some debug logs
+
 ## 2.6.1
 
 * Reworked boss despawn logic to work in dedicated servers as well 
