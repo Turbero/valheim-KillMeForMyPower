@@ -57,6 +57,13 @@ namespace KillMeForMyPower.Restrictions
                     __result = false;
                     return false;
                 }
+                if (item.m_shared.m_name == "$item_snowshovel" && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader))
+                {
+                    __instance.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Fader.GetTranslationKey()));
+                    Effects.scareEffect();
+                    __result = false;
+                    return false;
+                }
             }
 
             return true;
@@ -96,19 +103,21 @@ namespace KillMeForMyPower.Restrictions
                 {
                     if (__instance.m_topic == "$item_pickaxe_antler")
                         updateTooltipText(__instance, transform, BossNameEnum.Eikthyr);
-                    else if (__instance.m_topic == "$item_demister")
-                        updateTooltipText(__instance, transform, BossNameEnum.Yagluth);
-                    else if (__instance.m_topic == "$item_wishbone")
-                        updateTooltipText(__instance, transform, BossNameEnum.Bonemass);
                     else if (__instance.m_topic == "$item_cryptkey")
                         updateTooltipText(__instance, transform, BossNameEnum.TheElder);
+                    else if (__instance.m_topic == "$item_wishbone")
+                        updateTooltipText(__instance, transform, BossNameEnum.Bonemass);
+                    else if (__instance.m_topic == "$item_demister")
+                        updateTooltipText(__instance, transform, BossNameEnum.Yagluth);
+                    else if (__instance.m_topic == "$item_snowshovel")
+                        updateTooltipText(__instance, transform, BossNameEnum.Fader);
                 }
             }
         }
 
         private static void updateTooltipText(UITooltip __instance, Transform transform, BossNameEnum bossToCheck)
         {
-            bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(bossToCheck);
+            bool ready = KillMeForMyPowerUtils.HasDefeatedBossName(bossToCheck, false);
             string text = ready 
                 ? ConfigurationFile.itemRestrictionAvailableTooltipYes.Value 
                 : ConfigurationFile.itemRestrictionAvailableTooltipNo.Value;
