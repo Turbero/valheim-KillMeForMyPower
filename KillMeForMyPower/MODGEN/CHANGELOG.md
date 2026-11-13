@@ -1,5 +1,12 @@
 ### CHANGELOG
 
+## 2.6.3
+
+* Final boss option to avoid escaping during battle now works for all his forms and minions, not only the first one
+* Added new restrictions to the config option to restrict using key items without killing previous bosses:
+  * Cannot use Intricate Keys or entering Mörkhallas without killing Fader first
+  * Cannot use SealBreaker to access the Queen dungeon without the minimum level required (only if EpicMMO installed)
+
 ## 2.6.2
 
 * Shovel cannot be used unless you have defeated Fader before.
