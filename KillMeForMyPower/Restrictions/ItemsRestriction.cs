@@ -85,6 +85,19 @@ namespace KillMeForMyPower.Restrictions
                 __result = false;
                 return false;
             } 
+            if (__instance.name.ToLower().Contains("dungeon_queen_door") && character is Player) {
+                if (!KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Yagluth)) {
+                    character.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Yagluth.GetTranslationKey()));
+                    Effects.scareEffect();
+                    __result = false;
+                    return false;
+                }
+                if (EpicMMOSystem_API.IsLoaded() && !EpicMMOSystem_API.HasEnoughLevelToSpawn("SeekerQueen")) {
+                    Effects.scareEffect();
+                    __result = false;
+                    return false;
+                }
+            }
             if (__instance.name.ToLower().Contains("morkhalla_jotun_gate") && character is Player && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader)) {
                 character.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Fader.GetTranslationKey()));
                 Effects.scareEffect();
@@ -96,6 +109,7 @@ namespace KillMeForMyPower.Restrictions
     }
 
     [HarmonyPatch(typeof(UITooltip), "UpdateTextElements")]
+    [HarmonyPriority(Priority.Last)]
     public class UITooltipPatch
     {
         public static void Postfix(UITooltip __instance)
