@@ -83,7 +83,7 @@ namespace KillMeForMyPower.Restrictions
                 return false;
             }
             if (ConfigurationFile.restrictExitingDeepNorthBossDungeonIfAliveOrAlerted.Value && targetEntranceName == "exteriorgateway" &&
-                IsBossNearbyAndAlert(player, "FrozenKing"))
+                IsBossNearbyAndAlertDeepNorthBoss(player))
             {
                 player.Message(MessageHud.MessageType.Center, Localization.instance.Localize("$msg_blockedbyboss"));
                 Effects.scareEffect();
@@ -99,6 +99,20 @@ namespace KillMeForMyPower.Restrictions
                 .Replace("{0}", Localization.instance.Localize(bossName.GetTranslationKey())));
             Effects.scareEffect();
             return false;
+        }
+
+        public static bool IsBossNearbyAndAlertDeepNorthBoss(Player player)
+        {
+            return IsBossNearbyAndAlert(player, "FrozenKing") ||
+                   IsBossNearbyAndAlert(player, "FrozenKing_p2") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Eikthyr") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Elder") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Bonemass") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Moder") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Yagluth") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Moder") ||
+                   IsBossNearbyAndAlert(player, "Aspect_Fader") ||
+                   IsBossNearbyAndAlert(player, "FrozenKing_p3");
         }
 
         public static bool IsBossNearbyAndAlert(Player player, String bossName)
