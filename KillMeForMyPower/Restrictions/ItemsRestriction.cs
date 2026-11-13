@@ -78,14 +78,19 @@ namespace KillMeForMyPower.Restrictions
         {
             if (!ConfigurationFile.restrictUsingKeyItems.Value) return true;
             
-            if (__instance.name.Contains("sunken_crypt_gate") && character is Player && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder))
+            if (__instance.name.ToLower().Contains("sunken_crypt_gate") && character is Player && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.TheElder))
             {
                 character.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.TheElder.GetTranslationKey()));
                 Effects.scareEffect();
                 __result = false;
                 return false;
+            } 
+            if (__instance.name.ToLower().Contains("morkhalla_jotun_gate") && character is Player && !KillMeForMyPowerUtils.HasDefeatedBossName(BossNameEnum.Fader)) {
+                character.Message(MessageHud.MessageType.Center, ConfigurationFile.restrictUsingKeyItemsMessage.Value.Replace("{0}", BossNameEnum.Fader.GetTranslationKey()));
+                Effects.scareEffect();
+                __result = false;
+                return false;
             }
-
             return true;
         }
     }
