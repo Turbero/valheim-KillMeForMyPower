@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace KillMeForMyPower.Managers
@@ -91,6 +93,56 @@ namespace KillMeForMyPower.Managers
             eGetAttribute = actionsMO?.GetMethod("GetAttribute", BindingFlags.Public | BindingFlags.Static);
             eGetAttributeRusty = actionsMO?.GetMethod("GetAttribute", BindingFlags.Public | BindingFlags.Static);
             eSetSingleRate = actionsMO?.GetMethod("SetSingleRate", BindingFlags.Public | BindingFlags.Static);
+        }
+        
+        public static IDictionary GetMonsters()
+        {
+            Init();
+            var type = Type.GetType("EpicMMOSystem.DataMonsters, EpicMMOSystem");
+            if (type == null) return new Dictionary<string, object>();
+
+            var field = type.GetField("dictionary", BindingFlags.Static | BindingFlags.NonPublic);
+            return field?.GetValue(null) as IDictionary;
+        }
+        
+        public static int GetMonsterLevel(object monster)
+        {
+            Init();
+            var field = monster.GetType().GetField("level", BindingFlags.Public | BindingFlags.Instance);
+            if (field != null)
+            {
+                return (int)field.GetValue(monster);
+            }
+
+            return 0;
+        }
+
+        public static bool HasEnoughLevelToSpawn(string bossPrefabName)
+        {
+            Init();
+            try
+            {
+                object monsterData = GetMonsters()[bossPrefabName + "(Clone)"];
+                if (monsterData != null)
+                {
+                    int monsterLevel = GetMonsterLevel(monsterData);
+                    int maxLevelGap = ConfigurationFile.maxLevelGapBetweenBossAndPlayer.Value;
+                    int minLevel = monsterLevel - maxLevelGap;
+                    if (GetLevel() < minLevel)
+                    {
+                        Player.m_localPlayer.Message(MessageHud.MessageType.Center, ConfigurationFile.minLevelToSpawnBossNotMet.Value.Replace("{0}", minLevel.ToString()));
+                        return false;
+                    }
+
+                    Logger.Log("Level enough to spawn.");
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning("Error when calculating monster level. Ignoring restriction. Error: "+ex);
+                return true; //in case of exception or bad configuration we let it spawn to avoid stopping the game progression
+            }
         }
     }
 
